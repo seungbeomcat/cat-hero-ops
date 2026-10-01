@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.1</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.2</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -593,7 +593,7 @@
 
 
 
-    /* V0.2.1 — current boss command panel + destroyed boss history */
+    /* V0.2.2 — current boss command panel + destroyed boss history */
     .boss-dashboard-card{padding:10px!important}
     .current-boss-panel{display:grid;grid-template-columns:148px minmax(0,1fr);gap:9px;align-items:stretch}
     .current-boss-image-card,.current-boss-info{border:0;font:inherit;text-align:left;-webkit-tap-highlight-color:transparent}
@@ -655,7 +655,7 @@
 
 
 
-    /* V0.2.1 — current boss layout repair + compact empty history */
+    /* V0.2.2 — current boss layout repair + compact empty history */
     #currentBossSlot.current-boss-panel{
       width:100%!important;
       min-width:0!important;
@@ -878,7 +878,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.1</b>
+        <b>Created by 돗돔 · V0.2.2</b>
       </div>
     </main>
   </div>
@@ -964,7 +964,7 @@
       "데이다라":{base:93,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "XIGN":{base:84,z1:0,z2:5,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "뱅수띠":{base:64,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
-      "승부왕":{base:60.1,z1:0,z2:0,z3:0,field:{wolf:0,pirate:1,cat:0,food:1,galaxy:0}},
+      "승부왕":{base:60.2,z1:0,z2:0,z3:0,field:{wolf:0,pirate:1,cat:0,food:1,galaxy:0}},
       "진니":{base:57.5,z1:0,z2:5,z3:0,field:{wolf:7,pirate:6,cat:6,food:6,galaxy:0}},
       "토시살":{base:60,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "페르시안":{base:57,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
@@ -1096,8 +1096,9 @@
     const meta=BOSS_META[b.area]||{name:b.area};
     const joined=participantCount(b), missing=Math.max(0,MEMBER_ORDER.length-joined), score=bossScore(b);
     const rank=Number(b.rank)>0?`${Number(b.rank)}위`:'-';
-    return `<button type="button" class="history-card" data-boss-id="${b.id}" aria-label="최근 ${historyIndex}번째 소멸 ${meta.name} 초대형 상세보기">
-      <div class="history-image-wrap"><span class="history-seq">${historyIndex}</span>${bossImageMarkup(b.area,"history-boss-image")}</div>
+    const popupOrder=Number(b.order)||historyIndex;
+    return `<button type="button" class="history-card" data-boss-id="${b.id}" aria-label="#${popupOrder} 소멸 ${meta.name} 초대형 상세보기">
+      <div class="history-image-wrap"><span class="history-seq">${popupOrder}</span>${bossImageMarkup(b.area,"history-boss-image")}</div>
       <div class="history-title"><strong>${meta.name}</strong><span>${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"}</span></div>
       <div class="history-stats">
         <div><span>참여</span><b>${joined}명</b></div>
@@ -1122,8 +1123,10 @@
     const history=(state.round?.bosses||[])
       .filter(b=>b.id!==state.round.currentBossId && (b.status==="ended" || b.endedAt))
       .sort((a,b)=>{
+        const byOrder=(Number(b.order)||0)-(Number(a.order)||0);
+        if(byOrder) return byOrder;
         const ad=toDateSafe(a.endedAt)?.getTime()||0, bd=toDateSafe(b.endedAt)?.getTime()||0;
-        return bd-ad || (Number(b.order)||0)-(Number(a.order)||0);
+        return bd-ad;
       });
     const rail=document.getElementById("historyBossRail");
     rail.innerHTML=history.length?history.map((b,i)=>historyBossCardMarkup(b,i+1)).join(""):`<div class="history-empty">아직 소멸된 초대형 기록이 없습니다.</div>`;
