@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.1.9</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.0</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -591,6 +591,68 @@
 
     .member-table th:nth-child(2) span{display:inline-block;text-align:center}
 
+
+
+    /* V0.2.0 — current boss command panel + destroyed boss history */
+    .boss-dashboard-card{padding:10px!important}
+    .current-boss-panel{display:grid;grid-template-columns:148px minmax(0,1fr);gap:9px;align-items:stretch}
+    .current-boss-image-card,.current-boss-info{border:0;font:inherit;text-align:left;-webkit-tap-highlight-color:transparent}
+    .current-boss-image-card{position:relative;height:148px;padding:5px;border:2px solid #7555ca;border-radius:14px;background:linear-gradient(180deg,#fff,#f6f1ff);box-shadow:0 0 0 2px rgba(117,85,202,.08),0 6px 17px rgba(83,59,145,.12);overflow:hidden}
+    .current-main-image{width:100%;height:100%;display:block;object-fit:cover;border-radius:9px;border:1px solid rgba(105,77,177,.12);background:#f1ecff}
+    .current-main-badge{top:9px!important;left:9px!important;height:22px!important;line-height:22px!important;padding:0 8px!important;border-radius:7px!important;font-size:10px!important;white-space:nowrap}
+    .empty-current{display:flex;align-items:center;justify-content:center;border-style:dashed;background:#faf8ff}
+    .empty-current-mark{text-align:center;color:#9489aa;font-size:12px;font-weight:900;line-height:1.35}
+    .current-boss-info{height:148px;border:1px solid #ded6ef;border-radius:14px;background:linear-gradient(180deg,#fff,#fbf9ff);padding:10px;box-shadow:0 4px 13px rgba(84,62,139,.06);color:#342953}
+    .current-boss-info:active,.current-boss-image-card:active{transform:scale(.992)}
+    .current-boss-identity{display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid #eee8f5}
+    .current-boss-identity strong{font-size:20px;line-height:1;font-weight:950;letter-spacing:-.45px;color:#2f2547}
+    .current-level{display:inline-flex;align-items:center;justify-content:center;height:25px;min-width:54px;padding:0 8px;border-radius:999px;background:#eee7ff;color:#684db4;font-size:11px;font-weight:950;font-variant-numeric:tabular-nums}
+    .current-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+    .current-info-box{min-width:0;height:38px;border:1px solid #e2dced;border-radius:9px;background:#faf9fd;padding:5px 7px;display:flex;align-items:center;justify-content:space-between;gap:5px}
+    .current-info-box span{font-size:8.8px;font-weight:850;color:#81778f;white-space:nowrap}
+    .current-info-box b{font-size:12px;line-height:1;font-weight:950;color:#342953;white-space:nowrap;font-variant-numeric:tabular-nums}
+    .current-info-box.join{background:#ecf9f2;border-color:#a8e1c5}
+    .current-info-box.join span,.current-info-box.join b{color:#168553}
+    .current-info-box.missing{background:#fff1f4;border-color:#f1b3c0}
+    .current-info-box.missing span,.current-info-box.missing b{color:#cd455c}
+    .current-info-box.score{grid-column:1/-1;background:#f5f1ff;border-color:#d9cdf1;height:42px}
+    .current-info-box.score span{font-size:9.3px;color:#71648a}
+    .current-info-box.score b{font-size:16px;color:#493477;letter-spacing:-.25px}
+    .empty-current-info{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;color:#8d839f}
+    .empty-current-info b{font-size:12px}.empty-current-info span{font-size:9px;line-height:1.35}
+
+    .history-zone{margin-top:10px;padding-top:9px;border-top:2px solid #e3dcef}
+    .history-zone-head{font-size:10px;font-weight:950;color:#6b5c88;margin:0 0 7px 2px;letter-spacing:-.1px}
+    .history-wrap{position:relative!important;min-width:0!important;overflow:hidden!important}
+    .history-scroll{display:flex!important;gap:7px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-behavior:smooth!important;scroll-snap-type:x proximity!important;overscroll-behavior-inline:contain!important;padding:0 22px 2px 0!important;scrollbar-width:none!important}
+    .history-scroll::-webkit-scrollbar{display:none!important}
+    .history-card{position:relative;flex:0 0 118px;width:118px;height:190px;padding:6px;border:1px solid #ddd6eb;border-radius:12px;background:#fff;text-align:center;box-shadow:0 3px 10px rgba(70,50,123,.06);scroll-snap-align:start;color:#342953;overflow:hidden;-webkit-tap-highlight-color:transparent}
+    .history-card:active{transform:scale(.988);background:#fbf9ff}
+    .history-image-wrap{position:relative;height:83px}
+    .history-boss-image{display:block;width:83px;height:83px;object-fit:cover;border-radius:9px;margin:0 auto;border:1px solid rgba(104,77,173,.12);background:#f1ecff}
+    .history-seq{position:absolute;z-index:2;left:2px;top:2px;min-width:20px;height:20px;line-height:20px;padding:0 5px;border-radius:7px;background:#5b478e;color:#fff;font-size:10px;font-weight:950;box-shadow:0 2px 5px rgba(48,35,85,.2)}
+    .history-title{height:30px;display:flex;align-items:center;justify-content:center;gap:5px;border-bottom:1px solid #eee9f4}
+    .history-title strong{font-size:11.5px;font-weight:950;white-space:nowrap}
+    .history-title span{height:17px;line-height:17px;padding:0 5px;border-radius:999px;background:#eee8ff;color:#7157b5;font-size:8.2px;font-weight:950;white-space:nowrap}
+    .history-stats{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding-top:5px}
+    .history-stats>div{min-width:0;border-radius:6px;background:#faf9fd;padding:4px 3px;display:flex;flex-direction:column;gap:1px;align-items:center;justify-content:center}
+    .history-stats span{font-size:7.5px;color:#857b95;font-weight:850;line-height:1}
+    .history-stats b{font-size:9.4px;color:#3f3262;font-weight:950;line-height:1.05;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+    .history-stats .missing span,.history-stats .missing b{color:#d64b60}
+    .history-stats .score{grid-column:1/-1;background:#f6f2ff}
+    .history-stats .score b{font-size:10.2px}
+    .history-stats .rank{position:absolute;right:7px;top:7px;width:41px;height:23px;padding:3px;background:#fff5db;border:1px solid #f0cf80;z-index:3}
+    .history-stats .rank span{display:none}
+    .history-stats .rank b{font-size:9.3px;color:#a16e0d}
+    .history-empty{flex:1 0 100%;height:96px;border:1px dashed #ddd5eb;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#9b92aa;font-size:10px;font-weight:850;background:#fbfaff}
+    .history-next-btn{position:absolute!important;z-index:6!important;right:0!important;top:0!important;width:24px!important;height:190px!important;border:0!important;padding:0!important;display:none;align-items:center!important;justify-content:center!important;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.96) 50%,#fff 100%)!important;color:#7657ca!important}
+    .history-next-btn.show{display:flex!important}
+    .history-chevron{width:9px!important;height:9px!important}
+    .ended-rank-editor{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px;padding:8px 9px;border:1px solid #e1daec;border-radius:10px;background:#faf8ff;color:#5c4d7b;font-size:10px;font-weight:900}
+    .ended-rank-editor>div{display:flex;align-items:center;gap:4px}
+    .ended-rank-editor input{width:70px;height:34px;border:1px solid #d8ceed;border-radius:8px;background:#fff;padding:0 8px;text-align:center;font-size:16px;font-weight:950;color:#3e3062}
+    .ended-rank-editor em{font-style:normal;color:#6f6282;font-size:10px;font-weight:900}
+
 </style>
 </head>
 <body>
@@ -614,20 +676,16 @@
 
       <div class="boot-loader" id="bootLoader"><span class="boot-spinner"></span><b>현재 회차 데이터를 불러오는 중</b></div>
 
-      <section class="section-card">
-        <div class="boss-rail">
-          <div id="currentBossSlot"></div>
+      <section class="section-card boss-dashboard-card">
+        <div class="current-boss-panel" id="currentBossSlot"></div>
+        <div class="history-zone">
+          <div class="history-zone-head">소멸 초대형 기록</div>
           <div class="history-wrap">
             <div class="history-scroll" id="historyBossRail"></div>
-            <button type="button" class="history-next-btn" id="historyNextBtn" aria-label="더 이전 초대형 보스 보기">
+            <button type="button" class="history-next-btn" id="historyNextBtn" aria-label="더 이전 소멸 초대형 보기">
               <span class="history-chevron"></span><span class="history-chevron"></span>
             </button>
           </div>
-        </div>
-        <div class="quick-summary">
-          <div class="sum-box join-summary"><div class="sum-label">현재 참여</div><div class="sum-value" id="currentJoinSummary">-</div></div>
-          <div class="sum-box score-summary"><div class="sum-label">현재 길드 합계</div><div class="sum-value" id="currentScoreSummary">-</div></div>
-          <div class="sum-box missing-summary"><div class="sum-label">현재 미참여</div><div class="sum-value" id="currentMissingSummary">-</div></div>
         </div>
       </section>
 
@@ -649,7 +707,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.1.9</b>
+        <b>Created by 돗돔 · V0.2.0</b>
       </div>
     </main>
   </div>
@@ -846,13 +904,36 @@
     return `<img class="${cls}" src="${meta.asset}" alt="${meta.name} 초대형 보스">`;
   }
 
-  function bossCardMarkup(b,isCurrent=false){
-    if(!b) return `<div class="boss-card ${isCurrent?"current":""}"><div class="empty-boss">${isCurrent?"현재 보스<br>등록 전":"이전 보스<br>없음"}</div></div>`;
+  function currentBossPanelMarkup(b){
+    if(!b){
+      return `<div class="current-boss-image-card empty-current"><div class="empty-current-mark">현재 초대형<br>등록 전</div></div><div class="current-boss-info empty-current-info"><b>현재 진행 중인 초대형 보스가 없습니다.</b><span>보스 추가에서 실제 팝업된 보스를 등록해주세요.</span></div>`;
+    }
     const meta=BOSS_META[b.area]||{name:b.area};
-    return `<button class="boss-card ${isCurrent?"current":""}" data-boss-id="${b.id}" aria-label="#${b.order} ${meta.name} 상세보기">
-      <div class="boss-image-area">${isCurrent?`<span class="current-badge">현재</span>`:""}${bossImageMarkup(b.area)}</div>
-      <div class="boss-title-area"><div class="boss-title-line">#${b.order} ${meta.name}</div><span class="boss-level-badge">${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"}</span></div>
-      <div class="boss-summary-area"><div class="boss-summary-row"><span>참여</span><b>${participantCount(b)}명</b></div><div class="boss-summary-row missing-row"><span>미참여</span><b>${Math.max(0,MEMBER_ORDER.length-participantCount(b))}명</b></div><div class="boss-summary-row score-row"><span>점수합계</span><b>${fmtNum(bossScore(b))}</b></div></div>
+    const joined=participantCount(b), missing=Math.max(0,MEMBER_ORDER.length-joined), score=bossScore(b);
+    return `<button type="button" class="current-boss-image-card" data-boss-id="${b.id}" aria-label="현재 ${meta.name} 초대형 상세보기"><span class="current-badge current-main-badge">현재 초대형</span>${bossImageMarkup(b.area,"current-main-image")}</button>
+      <button type="button" class="current-boss-info" data-boss-id="${b.id}" aria-label="현재 ${meta.name} 초대형 상세보기">
+        <div class="current-boss-identity"><span class="current-level">${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"}</span><strong>${meta.name}</strong></div>
+        <div class="current-info-grid">
+          <div class="current-info-box join"><span>현재 참여인원</span><b>${joined}명</b></div>
+          <div class="current-info-box missing"><span>현재 불참인원</span><b>${missing}명</b></div>
+          <div class="current-info-box score"><span>길드원 점수 합계</span><b>${fmtNum(score)}</b></div>
+        </div>
+      </button>`;
+  }
+
+  function historyBossCardMarkup(b,historyIndex){
+    const meta=BOSS_META[b.area]||{name:b.area};
+    const joined=participantCount(b), missing=Math.max(0,MEMBER_ORDER.length-joined), score=bossScore(b);
+    const rank=Number(b.rank)>0?`${Number(b.rank)}위`:'-';
+    return `<button type="button" class="history-card" data-boss-id="${b.id}" aria-label="최근 ${historyIndex}번째 소멸 ${meta.name} 초대형 상세보기">
+      <div class="history-image-wrap"><span class="history-seq">${historyIndex}</span>${bossImageMarkup(b.area,"history-boss-image")}</div>
+      <div class="history-title"><strong>${meta.name}</strong><span>${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"}</span></div>
+      <div class="history-stats">
+        <div><span>참여</span><b>${joined}명</b></div>
+        <div class="missing"><span>불참</span><b>${missing}명</b></div>
+        <div class="score"><span>총합계</span><b>${fmtNum(score)}</b></div>
+        <div class="rank"><span>등수</span><b>${rank}</b></div>
+      </div>
     </button>`;
   }
 
@@ -866,22 +947,16 @@
 
   function renderBossRail(){
     const cur=currentBoss();
-    document.getElementById("currentBossSlot").innerHTML=bossCardMarkup(cur,true);
+    document.getElementById("currentBossSlot").innerHTML=currentBossPanelMarkup(cur);
     const history=(state.round?.bosses||[])
-      .filter(b=>b.id!==state.round.currentBossId)
-      .sort((a,b)=>(Number(b.order)||0)-(Number(a.order)||0));
-    const historyCards=history.map(b=>bossCardMarkup(b,false));
-    const visibleHistorySlots=3;
-    while(historyCards.length<visibleHistorySlots){
-      historyCards.push(`<div class="boss-card"><div class="empty-boss">${history.length?"등록 전":"이전 보스<br>없음"}</div></div>`);
-    }
+      .filter(b=>b.id!==state.round.currentBossId && (b.status==="ended" || b.endedAt))
+      .sort((a,b)=>{
+        const ad=toDateSafe(a.endedAt)?.getTime()||0, bd=toDateSafe(b.endedAt)?.getTime()||0;
+        return bd-ad || (Number(b.order)||0)-(Number(a.order)||0);
+      });
     const rail=document.getElementById("historyBossRail");
-    rail.innerHTML=historyCards.join("");
+    rail.innerHTML=history.length?history.map((b,i)=>historyBossCardMarkup(b,i+1)).join(""):`<div class="history-empty">아직 소멸된 초대형 기록이 없습니다.</div>`;
     rail.scrollLeft=0;
-    const join=participantCount(cur), score=bossScore(cur), missing=cur?Math.max(0,MEMBER_ORDER.length-join):0;
-    document.getElementById("currentJoinSummary").textContent=cur?`${join} / ${MEMBER_ORDER.length}`:"-";
-    document.getElementById("currentScoreSummary").textContent=cur?fmtNum(score):"-";
-    document.getElementById("currentMissingSummary").textContent=cur?`${missing}명`:"-";
     document.querySelectorAll("[data-boss-id]").forEach(el=>el.onclick=()=>openBossModal(el.dataset.bossId,false));
     requestAnimationFrame(updateHistoryNextButton);
   }
@@ -1158,7 +1233,8 @@
     const meta=BOSS_META[b.area];
     document.getElementById("bossModalTitle").textContent=`#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel} `:""}보스`;
     const body=document.getElementById("bossModalBody"), actions=document.getElementById("bossModalActions");
-    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">팝업<b>${isoToLocal(b.startedAt)}</b></div><div class="detail-stat">상태<b>${b.status==="current"?"진행 중":"종료"}</b></div></div></div></div>`;
+    const rankText=b.status==="current"?"진행 중":(Number(b.rank)>0?`${Number(b.rank)}위`:"미입력");
+    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">불참인원<b>${Math.max(0,MEMBER_ORDER.length-participantCount(b))}명</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">${b.status==="current"?"상태":"등수"}<b>${rankText}</b></div></div></div></div>`;
     if(!edit){
       const parts=MEMBER_ORDER.filter(n=>b.participants?.[n]);
       const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>참여 길드원</div><div>사용시간</div><div>스코어</div></div>${parts.map(n=>{const p=b.participants[n];return `<div class="participant-row"><div class="pname">${n}</div><div class="ptime">${fmtTime(p.usedSeconds)}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
@@ -1167,7 +1243,8 @@
       actions.querySelector("[data-boss-close]").onclick=()=>closeModal("bossModal");
       document.getElementById("editBossBtn").onclick=()=>openBossModal(id,true);
     }else{
-      body.innerHTML=hero+`<div class="help" style="margin:0 0 7px">참여 체크 자체가 <b>1칼 사용</b>입니다. 같은 보스에는 개인당 1칼만 사용할 수 있으며, 실제 사용시간과 스코어만 입력합니다.</div><div class="edit-list"><div class="edit-head"><div>참여</div><div>길드원</div><div>시간</div><div>스코어</div></div>${MEMBER_ORDER.map(n=>{const p=b.participants?.[n],on=!!p;return `<div class="edit-row ${on?"":"disabled"}" data-edit-member="${n}"><input type="checkbox" ${on?"checked":""}><div class="ename">${n}</div><button type="button" class="etime-picker" data-seconds="${on?Number(p.usedSeconds)||0:0}" ${on?"":"disabled"}>${on?fmtTime(p.usedSeconds):"00:00"}</button><input class="escore" type="number" inputmode="numeric" min="0" value="${on?Number(p.score)||0:0}" ${on?"":"disabled"}></div>`;}).join("")}</div>`;
+      const rankEditor=b.status==="current"?"":`<div class="ended-rank-editor"><span>최종 길드 순위</span><div><input id="bossRankInput" type="number" inputmode="numeric" min="1" max="999" placeholder="순위" value="${Number(b.rank)>0?Number(b.rank):""}"><em>위</em></div></div>`;
+      body.innerHTML=hero+rankEditor+`<div class="help" style="margin:0 0 7px">참여 체크 자체가 <b>1칼 사용</b>입니다. 같은 보스에는 개인당 1칼만 사용할 수 있으며, 실제 사용시간과 스코어만 입력합니다.</div><div class="edit-list"><div class="edit-head"><div>참여</div><div>길드원</div><div>시간</div><div>스코어</div></div>${MEMBER_ORDER.map(n=>{const p=b.participants?.[n],on=!!p;return `<div class="edit-row ${on?"":"disabled"}" data-edit-member="${n}"><input type="checkbox" ${on?"checked":""}><div class="ename">${n}</div><button type="button" class="etime-picker" data-seconds="${on?Number(p.usedSeconds)||0:0}" ${on?"":"disabled"}>${on?fmtTime(p.usedSeconds):"00:00"}</button><input class="escore" type="number" inputmode="numeric" min="0" value="${on?Number(p.score)||0:0}" ${on?"":"disabled"}></div>`;}).join("")}</div>`;
       body.querySelectorAll("[data-edit-member]").forEach(row=>{
         const cb=row.querySelector('input[type="checkbox"]'), timeBtn=row.querySelector(".etime-picker");
         cb.onchange=()=>{row.classList.toggle("disabled",!cb.checked);timeBtn.disabled=!cb.checked;row.querySelector(".escore").disabled=!cb.checked;};
@@ -1198,6 +1275,11 @@
     });
     if(invalid){showToast(invalid);return;}
     b.participants=next;
+    const rankInput=document.getElementById("bossRankInput");
+    if(b.status!=="current" && rankInput){
+      const rankVal=Number(rankInput.value);
+      b.rank=Number.isFinite(rankVal)&&rankVal>0?Math.min(999,Math.floor(rankVal)):null;
+    }
     if(await persistRound(r)){showToast("보스 참여 기록을 저장했습니다.");openBossModal(b.id,false);}
   }
 
@@ -1231,7 +1313,7 @@
     historyNextBtn.addEventListener("click",()=>{
       const rail=document.getElementById("historyBossRail");
       if(!rail) return;
-      const card=rail.querySelector(".boss-card");
+      const card=rail.querySelector(".history-card");
       const step=card?card.getBoundingClientRect().width+4:rail.clientWidth*.86;
       rail.scrollBy({left:step*2,behavior:"smooth"});
       setTimeout(updateHistoryNextButton,420);
