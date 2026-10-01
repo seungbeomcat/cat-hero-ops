@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.1.1</title>
+  <title>균열 · 은하 길드 운영현황 V0.1.3</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -50,15 +50,25 @@
         linear-gradient(180deg,#f7f4ff 0,#f2eefb 34%,#f4f1fb 100%);
       padding:12px 12px 30px;
     }
-    .topbar{display:block;margin-bottom:7px;padding:1px 1px 0}
+    .topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:7px;padding:1px 1px 0}
+    .topbar-copy{min-width:0;flex:1}
+    .calculator-back-link{flex:0 0 auto;height:30px;display:inline-flex;align-items:center;justify-content:center;padding:0 10px;border:1px solid #cfc3ee;border-radius:9px;background:rgba(255,255,255,.86);color:#5a4690;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:-.15px;box-shadow:0 2px 8px rgba(91,65,156,.06);white-space:nowrap}
+    .calculator-back-link:active{background:#f3effc;border-color:#ab98df}
     h1{margin:0;font-size:21px;line-height:1.16;letter-spacing:-.55px;font-weight:900}
     .subhead{font-size:11px;color:var(--muted);font-weight:760;margin-top:5px;line-height:1.25}
     .admin-bar{height:38px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(255,255,255,.78);border:1px solid #e1daef;border-radius:11px;padding:0 6px 0 9px;margin-bottom:8px;box-shadow:0 3px 11px rgba(78,55,139,.05)}
+
+    .booting .section-card,.booting .footer{display:none}
+    .boot-loader{display:none;height:180px;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#72658d;font-size:11px;font-weight:850}
+    .booting .boot-loader{display:flex}
+    .boot-spinner{width:24px;height:24px;border-radius:50%;border:3px solid #ded6f0;border-top-color:#7354c7;animation:bootSpin .8s linear infinite}
+    @keyframes bootSpin{to{transform:rotate(360deg)}}
     .sync-state{display:flex;align-items:center;gap:6px;min-width:0;color:#7a718e;font-size:10px;font-weight:800}
     #syncText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .top-actions{display:flex;gap:5px;flex:0 0 auto}
     .mini-btn{height:27px;padding:0 9px;border:1px solid #cfc3ee;border-radius:8px;background:#fff;color:#56438f;font-size:10.5px;font-weight:850;box-shadow:0 2px 7px rgba(91,65,156,.06)}
     .mini-btn.primary{background:linear-gradient(180deg,#8264d4,#6f50c2);border-color:#6c4dbd;color:#fff}
+    .mini-btn:disabled{opacity:.48;cursor:default}
 
     .status-left{display:flex;align-items:center;gap:6px;min-width:0}
     .dot{width:7px;height:7px;border-radius:50%;background:#b9afc9;box-shadow:0 0 0 3px rgba(185,175,201,.18);flex:0 0 auto}
@@ -83,7 +93,8 @@
     .current .boss-img{width:69px;height:69px}
     .boss-index{font-size:8.5px;color:#948aa9;font-weight:800;line-height:1.1;margin-bottom:1px}
     .boss-name{font-size:11px;color:#382d55;font-weight:950;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .boss-metrics{margin-top:5px;border-top:1px solid #ece7f4;padding-top:4px;display:grid;gap:2px}
+    .boss-level{font-size:8.5px;color:#7d6aa8;font-weight:900;line-height:1.15;margin-top:2px;font-variant-numeric:tabular-nums}
+    .boss-metrics{margin-top:4px;border-top:1px solid #ece7f4;padding-top:4px;display:grid;gap:2px}
     .metric-line{font-size:8.5px;color:#837b93;font-weight:750;line-height:1.12}
     .metric-line b{display:block;color:#4b3a7b;font-size:9.5px;font-weight:950;margin-top:1px;white-space:nowrap;letter-spacing:-.2px}
     .empty-boss{display:flex;align-items:center;justify-content:center;height:100%;font-size:9px;color:#9b92aa;font-weight:800;padding:4px;line-height:1.35}
@@ -93,18 +104,34 @@
     .sum-label{font-size:9px;color:#8b829e;font-weight:800}
     .sum-value{font-size:13px;color:#4d3a80;font-weight:950;margin-top:1px;line-height:1.2}
 
-    .members-card{padding:10px 8px 8px}
+    .members-card{padding:10px 7px 8px}
     .member-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;border:1px solid #ddd5eb;border-radius:11px;overflow:hidden;background:#fff}
-    .member-table col:nth-child(1){width:34%}.member-table col:nth-child(2){width:17%}.member-table col:nth-child(3){width:25%}.member-table col:nth-child(4){width:24%}
-    .member-table th{height:31px;background:#ece6fa;color:#57467f;font-size:10.5px;font-weight:950;border-bottom:1px solid #d8cfea;text-align:center}
+    .member-table col:nth-child(1){width:22%}.member-table col:nth-child(2){width:16%}.member-table col:nth-child(3){width:20%}.member-table col:nth-child(4){width:26%}.member-table col:nth-child(5){width:16%}
+    .member-table th{height:34px;background:#ece6fa;color:#57467f;font-size:9.5px;font-weight:950;border-bottom:1px solid #d8cfea;text-align:center;line-height:1.08;padding:0 2px}
     .member-table th+th,.member-table td+td{border-left:1px solid #eee9f5}
-    .member-table td{height:42px;border-bottom:1px solid #eeeaf4;text-align:center;font-size:11.5px;font-weight:800;background:#fff;padding:0 4px}
+    .member-table td{height:52px;border-bottom:1px solid #eeeaf4;text-align:center;font-size:10.5px;font-weight:800;background:#fff;padding:3px 3px}
     .member-table tr:last-child td{border-bottom:none}
     .member-table tbody tr{cursor:pointer}
     .member-table tbody tr:active td{background:#faf8ff}
-    .member-name{text-align:left!important;padding-left:10px!important;color:#302746;font-weight:900!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .resource-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;color:#3e3260;font-weight:950!important}
-    .resource-num.low{color:#c77a28}.resource-num.empty{color:#d4576a}
+    .member-name{text-align:left!important;padding-left:8px!important;color:#302746;font-weight:900!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10.7px!important}
+    .participation-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+    .participation-count{font-size:10.5px;font-weight:950;color:#4b3a7b;font-variant-numeric:tabular-nums}
+    .participation-track{width:34px;height:4px;border-radius:999px;background:#eee9f6;overflow:hidden}
+    .participation-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#8b6ede,#6547bb)}
+    .sword-cell{display:flex;flex-direction:column;align-items:center;gap:3px}
+    .sword-value{font-size:10.5px;font-weight:950;color:#3f3262;font-variant-numeric:tabular-nums;line-height:1}
+    .sword-segments{display:grid;grid-template-columns:repeat(10,1fr);gap:1px;width:49px}
+    .sword-segments i{display:block;height:4px;border-radius:2px;background:#ece7f3}
+    .sword-segments i.on{background:linear-gradient(90deg,#8568d6,#684abd)}
+    .sword-cell.low .sword-value{color:#c17826}.sword-cell.low .sword-segments i.on{background:#e2a13b}
+    .sword-cell.empty .sword-value{color:#d4576a}.sword-cell.empty .sword-segments i.on{background:#d65b6d}
+    .time-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+    .time-value{font-size:10.5px;font-weight:950;color:#3f3262;font-variant-numeric:tabular-nums;line-height:1.05}
+    .time-used{font-size:7.5px;color:#968da6;font-weight:800;line-height:1}
+    .time-track{width:58px;height:5px;border-radius:999px;background:#eee9f5;overflow:hidden;margin-top:1px}
+    .time-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#8a6ddd,#6748bb)}
+    .time-cell.low .time-value{color:#c17826}.time-cell.low .time-fill{background:#e2a13b}
+    .time-cell.empty .time-value{color:#d4576a}.time-cell.empty .time-fill{background:#d65b6d}
     .status-pill{display:inline-flex;align-items:center;justify-content:center;min-width:53px;height:23px;padding:0 7px;border-radius:999px;font-size:10px;font-weight:950;border:1px solid transparent}
     .status-pill.joined{color:#237e55;background:var(--greenBg);border-color:#bfe8d4}
     .status-pill.waiting{color:#c24f63;background:var(--redBg);border-color:#f4cad2}
@@ -117,9 +144,10 @@
     .legend .g{background:#3aaa75}.legend .r{background:#d96678}
     .member-head{align-items:flex-start;margin-bottom:5px}
     .member-subrow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 7px}
-    .update-stamp{flex:0 0 auto;min-width:108px;border:1px solid #e2dbef;background:#f9f7ff;border-radius:9px;padding:4px 7px;text-align:right;line-height:1.1}
-    .update-stamp span{display:block;font-size:8px;color:#968da8;font-weight:800}
-    .update-stamp b{display:block;margin-top:2px;font-size:9.5px;color:#5c488f;font-weight:900;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .resource-updated{flex:0 0 auto;display:flex;align-items:center;gap:6px;min-height:28px;padding-left:9px;border-left:2px solid #d9cff0;text-align:right;line-height:1.08}
+    .resource-updated::before{content:"";width:7px;height:7px;border-radius:50%;background:#6e52c4;box-shadow:0 0 0 3px rgba(110,82,196,.10)}
+    .resource-updated span{font-size:7.8px;color:#978eaa;font-weight:850;white-space:nowrap}
+    .resource-updated b{display:block;font-size:9.4px;color:#5b468c;font-weight:950;font-variant-numeric:tabular-nums;white-space:nowrap}
 
     .footer{text-align:center;color:#9a91ab;font-size:9.5px;font-weight:700;margin-top:16px;line-height:1.6}
     .footer b{color:#7156b8}
@@ -141,19 +169,30 @@
     .action-btn.danger{background:#fff3f5;border-color:#f2c9d0;color:#c95163}
 
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .round-start-grid{grid-template-columns:1.1fr 1fr .72fr}
+    .boss-register-grid{grid-template-columns:1fr 1fr}
     .field{display:grid;gap:4px}
     .field.full{grid-column:1/-1}
     .field label{font-size:10px;color:#7f7692;font-weight:850}
-    .field input,.field select{width:100%;height:37px;border:1px solid #d8cfeb;background:#fff;color:#3b3152;border-radius:9px;padding:0 9px;font-size:16px;font-weight:750;outline:none}
+    .field input,.field select{width:100%;height:37px;border:1px solid #d8cfeb;background:#fff;color:#3b3152;border-radius:9px;padding:0 9px;font-size:16px;font-weight:780;outline:none;appearance:none;-webkit-appearance:none}
     .field input:focus,.field select:focus{border-color:#8d73d8;box-shadow:0 0 0 3px rgba(141,115,216,.10)}
+    .field select{background-image:linear-gradient(45deg,transparent 50%,#6d5796 50%),linear-gradient(135deg,#6d5796 50%,transparent 50%);background-position:calc(100% - 14px) 15px,calc(100% - 9px) 15px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:26px}
+    .level-stepper{height:37px;display:grid;grid-template-columns:31px 1fr 31px;align-items:center;border:1px solid #d8cfeb;background:#fff;border-radius:9px;overflow:hidden}
+    .level-stepper b{text-align:center;color:#493d68;font-size:13px;font-weight:950;font-variant-numeric:tabular-nums}
+    .step-btn{height:35px;border:0;background:#f7f4fd;color:#654e9f;font-size:18px;font-weight:900;line-height:1}
+    .step-btn:active{background:#eee8fa}
     .help{font-size:9.5px;line-height:1.45;color:#8c849b;font-weight:700;margin-top:4px}
 
     .setup-list{margin-top:10px;border:1px solid #ded6ec;border-radius:11px;overflow:hidden;background:#fff}
-    .setup-row{display:grid;grid-template-columns:1.15fr .55fr 1fr;align-items:center;min-height:39px;border-bottom:1px solid #eeeaf4;padding:0 7px;gap:5px}
+    .setup-row{display:grid;grid-template-columns:1.05fr .52fr 1.18fr;align-items:center;min-height:40px;border-bottom:1px solid #eeeaf4;padding:0 7px;gap:5px}
     .setup-row:last-child{border-bottom:none}
     .setup-row.head{min-height:30px;background:#eee8fa;color:#68558f;font-size:9.5px;font-weight:950;text-align:center}
-    .setup-name{font-size:11px;font-weight:900;color:#332a49;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .setup-row input,.setup-row select{height:30px;border:1px solid #ddd5ea;border-radius:7px;background:#fff;text-align:center;font-size:16px;font-weight:800;color:#493d68;min-width:0}
+    .setup-name{font-size:10.7px;font-weight:900;color:#332a49;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .setup-sword-fixed{height:29px;border:1px solid #e1d9ee;border-radius:7px;background:#f8f6fc;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:950;color:#54456f}
+    .setup-time-stepper{height:29px;display:grid;grid-template-columns:27px 1fr 27px;border:1px solid #ddd5ea;border-radius:7px;background:#fff;overflow:hidden}
+    .setup-time-stepper button{border:0;background:#f8f6fd;color:#66509e;font-size:15px;font-weight:900}
+    .setup-time-stepper button:active{background:#eee8fa}
+    .setup-time-value{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#493d68;font-variant-numeric:tabular-nums}
 
     .boss-detail-hero{display:grid;grid-template-columns:82px 1fr;gap:9px;align-items:center;background:#fff;border:1px solid #dfd7ec;border-radius:12px;padding:8px;margin-bottom:9px}
     .boss-detail-hero img{width:82px;height:82px;object-fit:cover;border-radius:10px;border:1px solid #dfd6ed}
@@ -191,19 +230,24 @@
 </head>
 <body>
   <div id="shell">
-    <main id="app">
+    <main id="app" class="booting">
       <div class="topbar">
-        <h1 id="pageTitle">균열의 격전지</h1>
-        <div class="subhead" id="periodText">운영기간 · 토요일 09:00 ~ 월요일 08:45</div>
+        <div class="topbar-copy">
+          <h1 id="pageTitle">균열의 격전지</h1>
+          <div class="subhead" id="periodText">운영기간 · 토요일 09:00 ~ 월요일 08:45</div>
+        </div>
+        <a class="calculator-back-link" href="https://seungbeomcat.github.io/dosalja/" aria-label="도살자 격전지 계산기로 돌아가기">계산기로 돌아가기</a>
       </div>
 
       <div class="admin-bar">
-        <div class="sync-state"><span id="syncDot" class="dot preview"></span><span id="syncText">미리보기 데이터 · 실제 회차 미설정</span></div>
+        <div class="sync-state"><span id="syncDot" class="dot preview"></span><span id="syncText">데이터 불러오는 중</span></div>
         <div class="top-actions">
           <button class="mini-btn" id="roundSetupBtn">회차 설정</button>
           <button class="mini-btn primary" id="addBossBtn">보스 추가</button>
         </div>
       </div>
+
+      <div class="boot-loader" id="bootLoader"><span class="boot-spinner"></span><b>현재 회차 데이터를 불러오는 중</b></div>
 
       <section class="section-card">
         <div class="section-head">
@@ -225,22 +269,22 @@
       <section class="section-card members-card">
         <div class="section-head member-head">
           <div class="section-title">길드원 현재 자원</div>
-          <div class="update-stamp"><span>최종 업데이트</span><b id="updatedAt">-</b></div>
+          <div class="resource-updated"><span>자원 업데이트</span><b id="updatedAt">-</b></div>
         </div>
         <div class="member-subrow">
           <div class="section-note">보스 참여 = 1칼 자동 차감 · 일반몹 사용량 포함</div>
           <div class="legend"><span><i class="g"></i>참여</span><span><i class="r"></i>미참여</span></div>
         </div>
         <table class="member-table" aria-label="길드원 현재 자원 현황">
-          <colgroup><col><col><col><col></colgroup>
-          <thead><tr><th>길드원</th><th>남은 칼</th><th>남은 시간</th><th>현재 보스</th></tr></thead>
+          <colgroup><col><col><col><col><col></colgroup>
+          <thead><tr><th>길드원</th><th>보스 참여</th><th>칼(기회)</th><th>잔여 시간</th><th>현재 보스</th></tr></thead>
           <tbody id="memberRows"></tbody>
         </table>
         <div class="table-foot"><span>길드원을 누르면 <strong>일반몹 사용량</strong>을 관리할 수 있습니다.</span></div>
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.1.1</b>
+        <b>Created by 돗돔 · V0.1.3</b>
       </div>
     </main>
   </div>
@@ -249,9 +293,10 @@
     <div class="modal tall">
       <div class="modal-head"><div class="modal-title">회차 시작 설정</div><button class="close-btn" data-close="roundModal">×</button></div>
       <div class="modal-body">
-        <div class="form-grid">
+        <div class="form-grid round-start-grid">
           <div class="field"><label>콘텐츠</label><select id="setupMode"><option value="rift">균열의 격전지</option><option value="galaxy">은하의 격전지</option></select></div>
-          <div class="field"><label>시작 시각</label><input type="datetime-local" id="setupStart" /></div>
+          <div class="field"><label>시작 날짜</label><input type="text" id="setupStartDate" inputmode="numeric" autocomplete="off" maxlength="11" placeholder="2026.10.03." /></div>
+          <div class="field"><label>시작 시각</label><input type="text" id="setupStartTime" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="09:00" /></div>
         </div>
         <div class="help">기본 10칼 / 20분. 차공 시간 확장자는 20:20 ~ 22:00 범위에서 길드원별로 설정합니다. 새 회차 시작 시 이전 회차 운영기록은 별도 문서로 남습니다.</div>
         <div class="setup-list" id="setupMemberList"></div>
@@ -268,9 +313,11 @@
     <div class="modal">
       <div class="modal-head"><div class="modal-title">새 초대형 보스 등록</div><button class="close-btn" data-close="addBossModal">×</button></div>
       <div class="modal-body">
-        <div class="form-grid">
+        <div class="form-grid boss-register-grid">
           <div class="field"><label>지역</label><select id="newBossArea"><option value="wolf">늑대</option><option value="pirate">해적</option><option value="cat">고양이</option><option value="food">음식</option><option value="galaxy">은하</option></select></div>
-          <div class="field"><label>팝업 시각</label><input type="datetime-local" id="newBossStart" /></div>
+          <div class="field"><label>보스 레벨</label><div class="level-stepper"><button type="button" class="step-btn" id="bossLevelMinus" aria-label="레벨 낮추기">−</button><b id="newBossLevelText">Lv.20</b><button type="button" class="step-btn" id="bossLevelPlus" aria-label="레벨 높이기">+</button></div><input type="hidden" id="newBossLevel" value="20"></div>
+          <div class="field"><label>팝업 날짜</label><input type="text" id="newBossStartDate" inputmode="numeric" autocomplete="off" maxlength="11" placeholder="2026.10.03." /></div>
+          <div class="field"><label>팝업 시각</label><input type="text" id="newBossStartTime" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="09:00" /></div>
         </div>
         <div class="help">다음 보스 지역은 예측하지 않습니다. 실제 등장한 보스만 등록하며, 새 보스를 등록하면 직전 현재 보스는 이전 보스로 이동합니다.</div>
       </div>
@@ -302,7 +349,7 @@
   const LOGICAL_WIDTH = 430;
   const WRITE_PIN = "154100";
   const VALID_TIME_BONUSES = [0,20,40,60,80,100,120];
-  const MEMBER_ORDER = ["돗돔","매콤갈비","사마엘","혀녕","데이다라","XIGN","뱅수띠","승부왕","진니","토시살","페르시안","하니엘","별제븝","바포메트","옥돔"];
+  const MEMBER_ORDER = ["돗돔","매콤갈비","사마엘","혀녕","데이다라","XIGN","뱅수띠","승부왕","진니","토시살","페르시안","하니엘","벨제붑","바포메트","옥돔"];
 
   // Existing calculator reference data is kept internally for future calculations/links, but not exposed as duplicate lookup UI.
   const INTERNAL_REFERENCE = Object.freeze({
@@ -317,10 +364,10 @@
       "뱅수띠":{base:64,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "승부왕":{base:60.1,z1:0,z2:0,z3:0,field:{wolf:0,pirate:1,cat:0,food:1,galaxy:0}},
       "진니":{base:57.5,z1:0,z2:5,z3:0,field:{wolf:7,pirate:6,cat:6,food:6,galaxy:0}},
-      "토시살":{base:57,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "토시살":{base:60,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "페르시안":{base:57,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "하니엘":{base:45,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
-      "별제븝":{base:38,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "벨제붑":{base:38,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "바포메트":{base:35.5,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "옥돔":{base:34.5,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}}
     }
@@ -337,9 +384,7 @@
   const deepClone = obj => JSON.parse(JSON.stringify(obj));
   const makeMemberState = (initialSeconds=1200) => ({initialSwords:10,initialSeconds,normalSwords:0,normalSeconds:0});
   const makeMembers = () => Object.fromEntries(MEMBER_ORDER.map(n => [n,makeMemberState()]));
-  const nowLocalInput = () => {
-    const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16);
-  };
+  const nowParts = () => { const d=new Date(); return {date:`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}.`,time:`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`}; };
   const fmtNum = n => Number(n||0).toLocaleString("ko-KR");
   const fmtTime = s => { s=Math.max(0,Math.round(Number(s)||0)); return `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`; };
   const parseTime = v => {
@@ -364,54 +409,63 @@
     const f=d=>`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")} (${days[d.getDay()]}) ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
     return `운영기간 · ${f(a)} ~ ${f(b)}`;
   };
-  const fmtUpdate = value => {
+  const fmtResourceUpdate = value => {
     const d=toDateSafe(value); if(!d) return "-";
-    return `${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+    return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}. ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   };
-  const localInputToIso = v => v ? new Date(v).toISOString() : new Date().toISOString();
+  const formatDateField = value => { const d=toDateSafe(value)||new Date(); return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}.`; };
+  const formatTimeField = value => { const d=toDateSafe(value)||new Date(); return `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`; };
+  const parseLocalDateTimeFields = (dateText,timeText) => {
+    const dm=String(dateText||"").trim().match(/^(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})\.?$/);
+    const tm=String(timeText||"").trim().match(/^(\d{1,2}):(\d{2})$/);
+    if(!dm||!tm) return null;
+    const y=Number(dm[1]),mo=Number(dm[2]),da=Number(dm[3]),h=Number(tm[1]),mi=Number(tm[2]);
+    if(mo<1||mo>12||da<1||da>31||h<0||h>23||mi<0||mi>59) return null;
+    const d=new Date(y,mo-1,da,h,mi,0,0);
+    if(d.getFullYear()!==y||d.getMonth()!==mo-1||d.getDate()!==da) return null;
+    return d.toISOString();
+  };
   const uniqueId = p => `${p}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,7)}`;
-
-  function sampleParticipants(count, offset=0){
-    const out={};
-    for(let i=0;i<count;i++){
-      const n=MEMBER_ORDER[(i+offset)%MEMBER_ORDER.length];
-      out[n]={usedSeconds:45+((i*19+offset*7)%91),score:115000+((i*73841+offset*91021)%580000)};
-    }
-    return out;
+  function makeDraftRound(){
+    return {id:null,mode:"rift",startAt:null,endAt:null,members:makeMembers(),bosses:[],currentBossId:null,isDraft:true,resourceUpdatedAt:null};
   }
-  function makePreviewRound(){
-    const members=makeMembers();
-    members["돗돔"].initialSeconds=1320;
-    members["혀녕"].initialSeconds=1260;
-    members["승부왕"].initialSeconds=1220;
-    members["진니"].normalSwords=1; members["진니"].normalSeconds=74;
-    members["XIGN"].normalSwords=2; members["XIGN"].normalSeconds=132;
-    const bosses=[
-      {id:"demo1",order:1,area:"wolf",status:"ended",startedAt:new Date(Date.now()-42*3600000).toISOString(),endedAt:new Date(Date.now()-34*3600000).toISOString(),participants:sampleParticipants(13,0)},
-      {id:"demo2",order:2,area:"pirate",status:"ended",startedAt:new Date(Date.now()-32*3600000).toISOString(),endedAt:new Date(Date.now()-25*3600000).toISOString(),participants:sampleParticipants(14,1)},
-      {id:"demo3",order:3,area:"food",status:"ended",startedAt:new Date(Date.now()-23*3600000).toISOString(),endedAt:new Date(Date.now()-16*3600000).toISOString(),participants:sampleParticipants(12,2)},
-      {id:"demo4",order:4,area:"cat",status:"ended",startedAt:new Date(Date.now()-14*3600000).toISOString(),endedAt:new Date(Date.now()-7*3600000).toISOString(),participants:sampleParticipants(15,0)},
-      {id:"demo5",order:5,area:"wolf",status:"current",startedAt:new Date(Date.now()-3*3600000).toISOString(),endedAt:null,participants:sampleParticipants(9,0)}
-    ];
-    return {id:"preview",mode:"rift",startAt:new Date(Date.now()-44*3600000).toISOString(),endAt:new Date(Date.now()+4*3600000).toISOString(),members,bosses,currentBossId:"demo5",preview:true,updatedAt:new Date().toISOString()};
+  function normalizeRound(raw,id){
+    const r=deepClone(raw||{}); r.id=id||r.id||null; r.mode=r.mode||"rift"; r.members=r.members||{}; r.bosses=Array.isArray(r.bosses)?r.bosses:[];
+    if(r.members["별제븝"]&&!r.members["벨제붑"]) r.members["벨제붑"]=r.members["별제븝"];
+    delete r.members["별제븝"];
+    for(const name of MEMBER_ORDER) r.members[name]={...makeMemberState(),...(r.members[name]||{})};
+    r.bosses=r.bosses.map((b,i)=>{
+      const x={...b,order:Number(b.order)||i+1,participants:{...(b.participants||{})}};
+      if(x.participants["별제븝"]&&!x.participants["벨제붑"]) x.participants["벨제붑"]=x.participants["별제븝"];
+      delete x.participants["별제븝"];
+      x.bossLevel=Number.isFinite(Number(x.bossLevel))?Math.max(20,Math.min(50,Number(x.bossLevel))):null;
+      return x;
+    });
+    r.isDraft=!r.id; return r;
   }
 
-  let state={round:makePreviewRound(),firebase:null,firebaseError:null,connected:false,adminUnlocked:false,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null};
+  let state={round:null,firebase:null,firebaseError:null,connected:false,loading:true,adminUnlocked:false,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null};
   let firebaseReadyPromise=null;
 
   function bossById(id){ return state.round?.bosses?.find(b=>b.id===id)||null; }
   function currentBoss(){ return bossById(state.round?.currentBossId); }
   function participantCount(b){ return b ? Object.keys(b.participants||{}).length : 0; }
   function bossScore(b){ return b ? Object.values(b.participants||{}).reduce((a,p)=>a+(Number(p.score)||0),0) : 0; }
-  function bossParticipationCount(name){ return (state.round?.bosses||[]).reduce((a,b)=>a+(b.participants&&b.participants[name]?1:0),0); }
-  function bossUsedSeconds(name){ return (state.round?.bosses||[]).reduce((a,b)=>a+(Number(b.participants?.[name]?.usedSeconds)||0),0); }
-  function memberRemaining(name){
-    const m=state.round?.members?.[name]||makeMemberState();
-    const usedBoss= bossParticipationCount(name);
-    const swords=Math.max(0,(Number(m.initialSwords)||10)-usedBoss-(Number(m.normalSwords)||0));
-    const seconds=Math.max(0,(Number(m.initialSeconds)||1200)-bossUsedSeconds(name)-(Number(m.normalSeconds)||0));
-    return {swords,seconds,usedBoss,usedSeconds:bossUsedSeconds(name)};
+  function bossParticipationCountForRound(round,name){ return (round?.bosses||[]).reduce((a,b)=>a+(b.participants&&b.participants[name]?1:0),0); }
+  function bossUsedSecondsForRound(round,name){ return (round?.bosses||[]).reduce((a,b)=>a+(Number(b.participants?.[name]?.usedSeconds)||0),0); }
+  function memberRemainingForRound(round,name){
+    const m=round?.members?.[name]||makeMemberState();
+    const usedBoss=bossParticipationCountForRound(round,name);
+    const usedBossSeconds=bossUsedSecondsForRound(round,name);
+    const initialSwords=Number(m.initialSwords)||10, initialSeconds=Number(m.initialSeconds)||1200;
+    const swords=Math.max(0,initialSwords-usedBoss-(Number(m.normalSwords)||0));
+    const seconds=Math.max(0,initialSeconds-usedBossSeconds-(Number(m.normalSeconds)||0));
+    return {swords,seconds,usedBoss,usedSeconds:usedBossSeconds,initialSwords,initialSeconds,usedSwords:initialSwords-swords,totalUsedSeconds:initialSeconds-seconds};
   }
+  function bossParticipationCount(name){ return bossParticipationCountForRound(state.round,name); }
+  function bossUsedSeconds(name){ return bossUsedSecondsForRound(state.round,name); }
+  function memberRemaining(name){ return memberRemainingForRound(state.round,name); }
+  function resourceSignature(round){ return MEMBER_ORDER.map(n=>{const r=memberRemainingForRound(round,n);return `${n}:${r.swords}:${r.seconds}`;}).join("|"); }
 
   function bossImageMarkup(area,cls="boss-img"){
     const meta=BOSS_META[area]||BOSS_META.wolf;
@@ -425,7 +479,7 @@
     return `<button class="boss-card ${isCurrent?"current":""}" data-boss-id="${b.id}" aria-label="#${b.order} ${meta.name} 상세보기">
       ${isCurrent?`<span class="current-badge">현재</span>`:""}
       ${bossImageMarkup(b.area)}
-      <div class="boss-index">#${b.order}</div><div class="boss-name">${meta.name}</div>
+      <div class="boss-index">#${b.order}</div><div class="boss-name">${meta.name}</div><div class="boss-level">${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"}</div>
       <div class="boss-metrics"><div class="metric-line">참여<b>${participantCount(b)}명</b></div><div class="metric-line">길드 합계<b>${fmtNum(bossScore(b))}</b></div></div>
     </button>`;
   }
@@ -443,14 +497,23 @@
   }
 
   function renderMembers(){
-    const cur=currentBoss();
+    const cur=currentBoss(), totalBosses=(state.round?.bosses||[]).length;
     const rows=MEMBER_ORDER.map(name=>{
-      const r=memberRemaining(name);
+      const r=memberRemaining(name), m=state.round?.members?.[name]||makeMemberState();
       const joined=!!cur?.participants?.[name];
-      const swordCls=r.swords===0?"empty":r.swords<=2?"low":"";
-      const timeCls=r.seconds===0?"empty":r.seconds<=180?"low":"";
+      const swordState=r.swords===0?"empty":r.swords<=2?"low":"";
+      const timeState=r.seconds===0?"empty":r.seconds<=180?"low":"";
       const status=cur?(joined?`<span class="status-pill joined">참여</span>`:`<span class="status-pill waiting">미참여</span>`):`<span class="status-pill no-boss">대기</span>`;
-      return `<tr data-member="${name}"><td class="member-name">${name}</td><td class="resource-num ${swordCls}">${r.swords}칼</td><td class="resource-num ${timeCls}">${fmtTime(r.seconds)}</td><td>${status}</td></tr>`;
+      const participationPct=totalBosses?Math.min(100,(r.usedBoss/totalBosses)*100):0;
+      const swordSegs=Array.from({length:10},(_,i)=>`<i class="${i<r.swords?"on":""}"></i>`).join("");
+      const usedPct=r.initialSeconds?Math.min(100,Math.max(0,(r.totalUsedSeconds/r.initialSeconds)*100)):0;
+      return `<tr data-member="${name}">
+        <td class="member-name">${name}</td>
+        <td><div class="participation-cell"><div class="participation-count">${r.usedBoss}/${totalBosses}</div><div class="participation-track"><div class="participation-fill" style="width:${participationPct}%"></div></div></div></td>
+        <td><div class="sword-cell ${swordState}"><div class="sword-value">${r.swords}/10</div><div class="sword-segments">${swordSegs}</div></div></td>
+        <td><div class="time-cell ${timeState}"><div class="time-value">${fmtTime(r.seconds)}</div><div class="time-used">${fmtTime(r.totalUsedSeconds)} 사용</div><div class="time-track"><div class="time-fill" style="width:${usedPct}%"></div></div></div></td>
+        <td>${status}</td>
+      </tr>`;
     }).join("");
     document.getElementById("memberRows").innerHTML=rows;
     document.querySelectorAll("#memberRows tr").forEach(tr=>tr.onclick=()=>openMemberModal(tr.dataset.member));
@@ -459,16 +522,20 @@
   function renderHeader(){
     const r=state.round;
     const dot=document.getElementById("syncDot");
-    dot.className=`dot ${state.connected&&!r?.preview?"online":"preview"}`;
+    dot.className=`dot ${state.loading?"preview":state.connected&&r&&!r.isDraft?"online":"preview"}`;
     document.getElementById("pageTitle").textContent=r?.mode==="galaxy"?"은하의 격전지":"균열의 격전지";
-    document.getElementById("periodText").textContent=r?.preview?"운영기간 · 토요일 09:00 ~ 월요일 08:45":fmtPeriod(r?.startAt,r?.endAt);
+    document.getElementById("periodText").textContent=r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"운영기간 · 토요일 09:00 ~ 월요일 08:45";
     const syncText=document.getElementById("syncText");
-    if(r?.preview) syncText.textContent="미리보기 데이터 · 실제 회차 미설정";
+    if(state.loading) syncText.textContent="데이터 불러오는 중";
+    else if(r?.isDraft) syncText.textContent="실제 회차 미설정";
     else if(state.connected) syncText.textContent="실시간 동기화";
     else if(state.firebaseError) syncText.textContent="Firebase 연결 오류";
     else syncText.textContent="연결 대기";
-    const updated=r?.updatedAtServer||r?.updatedAt;
-    document.getElementById("updatedAt").textContent=fmtUpdate(updated);
+    const updated=r?.resourceUpdatedAtServer||r?.resourceUpdatedAt;
+    document.getElementById("updatedAt").textContent=fmtResourceUpdate(updated);
+    document.getElementById("app").classList.toggle("booting",!!state.loading);
+    document.getElementById("roundSetupBtn").disabled=!!state.loading;
+    document.getElementById("addBossBtn").disabled=!!state.loading;
   }
 
   function renderAll(){ renderHeader(); renderBossRail(); renderMembers(); syncCanvasScale(); }
@@ -480,22 +547,31 @@
   document.querySelectorAll(".modal-backdrop").forEach(m=>m.addEventListener("click",e=>{if(e.target===m) closeModal(m.id);}));
 
   function fillRoundSetup(){
-    const r=state.round||makePreviewRound();
+    const r=state.round||makeDraftRound();
     document.getElementById("setupMode").value=r.mode||"rift";
-    const d=new Date(r.startAt||Date.now()); d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
-    document.getElementById("setupStart").value=d.toISOString().slice(0,16);
+    const base=r.startAt?toDateSafe(r.startAt):new Date();
+    document.getElementById("setupStartDate").value=formatDateField(base);
+    document.getElementById("setupStartTime").value=formatTimeField(base);
     document.getElementById("setupMemberList").innerHTML=`<div class="setup-row head"><div>길드원</div><div>시작 칼</div><div>시작 시간</div></div>`+MEMBER_ORDER.map(name=>{
       const m=r.members?.[name]||makeMemberState();
-      const options=VALID_TIME_BONUSES.map(b=>`<option value="${1200+b}" ${Number(m.initialSeconds)===1200+b?"selected":""}>${fmtTime(1200+b)}</option>`).join("");
-      return `<div class="setup-row" data-setup-member="${name}"><div class="setup-name">${name}</div><input class="setup-swords" type="number" inputmode="numeric" min="0" max="10" value="${Math.min(10,Number(m.initialSwords)||10)}"><select class="setup-time">${options}</select></div>`;
+      const idx=Math.max(0,VALID_TIME_BONUSES.indexOf(Math.max(0,(Number(m.initialSeconds)||1200)-1200)));
+      return `<div class="setup-row" data-setup-member="${name}" data-time-index="${idx}"><div class="setup-name">${name}</div><div class="setup-sword-fixed">10</div><div class="setup-time-stepper"><button type="button" class="setup-time-minus" aria-label="${name} 시간 줄이기">−</button><div class="setup-time-value">${fmtTime(1200+VALID_TIME_BONUSES[idx])}</div><button type="button" class="setup-time-plus" aria-label="${name} 시간 늘리기">+</button></div></div>`;
     }).join("");
+    document.querySelectorAll("[data-setup-member]").forEach(row=>{
+      const update=delta=>{
+        let idx=Number(row.dataset.timeIndex)||0; idx=Math.max(0,Math.min(VALID_TIME_BONUSES.length-1,idx+delta)); row.dataset.timeIndex=String(idx); row.querySelector(".setup-time-value").textContent=fmtTime(1200+VALID_TIME_BONUSES[idx]);
+      };
+      row.querySelector(".setup-time-minus").onclick=()=>update(-1);
+      row.querySelector(".setup-time-plus").onclick=()=>update(1);
+    });
   }
 
   function gatherSetupMembers(preserveUsage=true){
     const out={};
     document.querySelectorAll("[data-setup-member]").forEach(row=>{
       const name=row.dataset.setupMember, prev=state.round?.members?.[name]||makeMemberState();
-      out[name]={initialSwords:Math.min(10,Math.max(0,Number(row.querySelector(".setup-swords").value)||10)),initialSeconds:Number(row.querySelector(".setup-time").value)||1200,normalSwords:preserveUsage?(Number(prev.normalSwords)||0):0,normalSeconds:preserveUsage?(Number(prev.normalSeconds)||0):0};
+      const idx=Math.max(0,Math.min(VALID_TIME_BONUSES.length-1,Number(row.dataset.timeIndex)||0));
+      out[name]={initialSwords:10,initialSeconds:1200+VALID_TIME_BONUSES[idx],normalSwords:preserveUsage?(Number(prev.normalSwords)||0):0,normalSeconds:preserveUsage?(Number(prev.normalSeconds)||0):0};
     });
     return out;
   }
@@ -524,58 +600,77 @@
   async function persistRound(round){
     if(!(await ensureFirebaseReady())) return false;
     if(!(await ensureAdmin())) return false;
+    const resourceChanged=resourceSignature(state.round)!==resourceSignature(round);
     round.updatedAt=new Date().toISOString();
-    try{ await state.firebase.saveRound(round); return true; }
+    if(resourceChanged) round.resourceUpdatedAt=new Date().toISOString();
+    else if(state.round?.resourceUpdatedAt) round.resourceUpdatedAt=state.round.resourceUpdatedAt;
+    try{
+      await state.firebase.saveRound(round,resourceChanged);
+      state.round=normalizeRound(round,round.id); state.connected=true; state.loading=false; renderAll();
+      return true;
+    }
     catch(err){ console.error(err); state.firebaseError=err; showToast(firebaseErrorMessage(err)); return false; }
   }
 
   document.getElementById("roundSetupBtn").onclick=()=>{fillRoundSetup();openModal("roundModal");};
   document.getElementById("saveRoundSetupBtn").onclick=async()=>{
-    if(state.round?.preview){showToast("미리보기 상태입니다. ‘새 회차 시작’을 사용하세요.");return;}
-    const r=deepClone(state.round); r.mode=document.getElementById("setupMode").value; r.members=gatherSetupMembers(true);
-    if(await persistRound(r)){closeModal("roundModal");showToast("기준값을 저장했습니다.");}
+    if(!state.round?.id){showToast("실제 회차가 없습니다. ‘새 회차 시작’을 사용하세요.");return;}
+    const startIso=parseLocalDateTimeFields(document.getElementById("setupStartDate").value,document.getElementById("setupStartTime").value);
+    if(!startIso){showToast("시작 날짜와 시각을 확인하세요.");return;}
+    const r=deepClone(state.round); r.mode=document.getElementById("setupMode").value; r.members=gatherSetupMembers(true); r.startAt=startIso; r.endAt=new Date(new Date(startIso).getTime()+(47*60+45)*60000).toISOString();
+    if(await persistRound(r)){closeModal("roundModal");showToast("현재 회차 기준값을 저장했습니다.");}
   };
   document.getElementById("startNewRoundBtn").onclick=async()=>{
     const btn=document.getElementById("startNewRoundBtn");
     if(!(await ensureFirebaseReady())) return;
     if(!(await ensureAdmin())) return;
-    const startIso=localInputToIso(document.getElementById("setupStart").value||nowLocalInput());
+    const startIso=parseLocalDateTimeFields(document.getElementById("setupStartDate").value,document.getElementById("setupStartTime").value);
+    if(!startIso){showToast("시작 날짜와 시각을 확인하세요.");return;}
     const end=new Date(new Date(startIso).getTime()+(47*60+45)*60000).toISOString();
-    const round={id:`round_${startIso.slice(0,10)}_${Date.now().toString(36)}`,mode:document.getElementById("setupMode").value,startAt:startIso,endAt:end,members:gatherSetupMembers(false),bosses:[],currentBossId:null,preview:false,updatedAt:new Date().toISOString()};
+    const nowIso=new Date().toISOString();
+    const round={id:`round_${startIso.slice(0,10)}_${Date.now().toString(36)}`,mode:document.getElementById("setupMode").value,startAt:startIso,endAt:end,members:gatherSetupMembers(false),bosses:[],currentBossId:null,isDraft:false,updatedAt:nowIso,resourceUpdatedAt:nowIso};
     const oldText=btn.textContent; btn.disabled=true; btn.textContent="시작 중…";
     try{
       await state.firebase.createRound(round);
-      state.round=round; state.connected=true; state.firebaseError=null; renderAll();
+      state.round=round; state.connected=true; state.loading=false; state.firebaseError=null; renderAll();
       closeModal("roundModal"); showToast("새 회차를 시작했습니다.");
     }catch(err){
       console.error(err); state.firebaseError=err; renderHeader(); showToast(firebaseErrorMessage(err));
     }finally{btn.disabled=false;btn.textContent=oldText;}
   };
 
+  let bossLevelValue=20;
+  function renderBossLevelStepper(){ bossLevelValue=Math.max(20,Math.min(50,Number(bossLevelValue)||20)); document.getElementById("newBossLevel").value=String(bossLevelValue); document.getElementById("newBossLevelText").textContent=`Lv.${bossLevelValue}`; }
+  document.getElementById("bossLevelMinus").onclick=()=>{bossLevelValue=Math.max(20,bossLevelValue-1);renderBossLevelStepper();};
+  document.getElementById("bossLevelPlus").onclick=()=>{bossLevelValue=Math.min(50,bossLevelValue+1);renderBossLevelStepper();};
+
   document.getElementById("addBossBtn").onclick=()=>{
-    if(state.round?.preview){showToast("먼저 실제 회차를 시작하세요.");return;}
-    document.getElementById("newBossStart").value=nowLocalInput();
+    if(!state.round?.id){showToast("먼저 실제 회차를 시작하세요.");return;}
+    const np=nowParts(); document.getElementById("newBossStartDate").value=np.date; document.getElementById("newBossStartTime").value=np.time;
+    bossLevelValue=20; renderBossLevelStepper();
     const galaxyOpt=document.querySelector('#newBossArea option[value="galaxy"]'); galaxyOpt.disabled=state.round?.mode!=="galaxy";
     if(galaxyOpt.disabled && document.getElementById("newBossArea").value==="galaxy") document.getElementById("newBossArea").value="wolf";
     openModal("addBossModal");
   };
   document.getElementById("confirmAddBossBtn").onclick=async()=>{
     if(!(await ensureAdmin())) return;
-    const r=deepClone(state.round); const nowIso=new Date().toISOString();
-    const old=r.bosses.find(b=>b.id===r.currentBossId); if(old){old.status="ended"; old.endedAt=old.endedAt||nowIso;}
+    const startIso=parseLocalDateTimeFields(document.getElementById("newBossStartDate").value,document.getElementById("newBossStartTime").value);
+    if(!startIso){showToast("팝업 날짜와 시각을 확인하세요.");return;}
+    const r=deepClone(state.round);
+    const old=r.bosses.find(b=>b.id===r.currentBossId); if(old){old.status="ended"; old.endedAt=old.endedAt||startIso;}
     const order=Math.max(0,...r.bosses.map(b=>Number(b.order)||0))+1;
     const id=uniqueId("boss");
-    r.bosses.push({id,order,area:document.getElementById("newBossArea").value,status:"current",startedAt:localInputToIso(document.getElementById("newBossStart").value),endedAt:null,participants:{}});
+    r.bosses.push({id,order,area:document.getElementById("newBossArea").value,bossLevel:bossLevelValue,status:"current",startedAt:startIso,endedAt:null,participants:{}});
     r.currentBossId=id;
-    if(await persistRound(r)){closeModal("addBossModal");showToast(`#${order} 보스를 등록했습니다.`);}
+    if(await persistRound(r)){closeModal("addBossModal");showToast(`#${order} Lv.${bossLevelValue} 보스를 등록했습니다.`);}
   };
 
   function openBossModal(id,edit=false){
     const b=bossById(id); if(!b)return; state.selectedBossId=id; state.editingBoss=edit;
     const meta=BOSS_META[b.area];
-    document.getElementById("bossModalTitle").textContent=`#${b.order} ${meta.name} 초대형 보스`;
+    document.getElementById("bossModalTitle").textContent=`#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel} `:""}초대형 보스`;
     const body=document.getElementById("bossModalBody"), actions=document.getElementById("bossModalActions");
-    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${meta.name} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">팝업<b>${isoToLocal(b.startedAt)}</b></div><div class="detail-stat">상태<b>${b.status==="current"?"진행 중":"종료"}</b></div></div></div></div>`;
+    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">팝업<b>${isoToLocal(b.startedAt)}</b></div><div class="detail-stat">상태<b>${b.status==="current"?"진행 중":"종료"}</b></div></div></div></div>`;
     if(!edit){
       const parts=MEMBER_ORDER.filter(n=>b.participants?.[n]);
       const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>참여 길드원</div><div>사용시간</div><div>스코어</div></div>${parts.map(n=>{const p=b.participants[n];return `<div class="participant-row"><div class="pname">${n}</div><div class="ptime">${fmtTime(p.usedSeconds)}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
@@ -617,7 +712,7 @@
   function openMemberModal(name){
     state.selectedMember=name; const m=state.round?.members?.[name]||makeMemberState(), r=memberRemaining(name);
     const currentJoined=!!currentBoss()?.participants?.[name];
-    document.getElementById("memberModalBody").innerHTML=`<div class="member-detail-card"><div class="member-detail-name">${name}</div><div class="resource-cards"><div class="resource-card"><span>현재 남은 칼</span><b>${r.swords}칼</b></div><div class="resource-card"><span>현재 남은 시간</span><b>${fmtTime(r.seconds)}</b></div></div><div class="calc-note">초대형 보스 참여 ${r.usedBoss}회 = ${r.usedBoss}칼 자동 차감 · 현재 보스 ${currentJoined?"참여 완료":"미참여"}</div></div><div class="form-grid"><div class="field"><label>일반몹 사용 칼</label><input id="normalSwordsInput" type="number" inputmode="numeric" min="0" max="10" value="${Number(m.normalSwords)||0}"></div><div class="field"><label>일반몹 사용 시간 (mm:ss)</label><input id="normalTimeInput" type="text" inputmode="numeric" value="${fmtTime(m.normalSeconds)}"></div></div><div class="help">일반몹은 개별 몹당 1칼 사용 규칙을 전제로 총 사용 칼만 집계합니다. 초대형 보스에서 사용한 칼은 참여기록으로 자동 계산되므로 여기서 다시 입력하지 않습니다.</div>`;
+    document.getElementById("memberModalBody").innerHTML=`<div class="member-detail-card"><div class="member-detail-name">${name}</div><div class="resource-cards"><div class="resource-card"><span>현재 칼(기회)</span><b>${r.swords}/10</b></div><div class="resource-card"><span>현재 잔여 시간</span><b>${fmtTime(r.seconds)}</b></div></div><div class="calc-note">초대형 보스 참여 ${r.usedBoss}회 = ${r.usedBoss}칼 자동 차감 · 현재 보스 ${currentJoined?"참여 완료":"미참여"}</div></div><div class="form-grid"><div class="field"><label>일반몹 사용 칼</label><input id="normalSwordsInput" type="number" inputmode="numeric" min="0" max="10" value="${Number(m.normalSwords)||0}"></div><div class="field"><label>일반몹 사용 시간 (mm:ss)</label><input id="normalTimeInput" type="text" inputmode="numeric" value="${fmtTime(m.normalSeconds)}"></div></div><div class="help">일반몹은 개별 몹당 1칼 사용 규칙을 전제로 총 사용 칼만 집계합니다. 초대형 보스에서 사용한 칼은 참여기록으로 자동 계산되므로 여기서 다시 입력하지 않습니다.</div>`;
     openModal("memberModal");
   }
 
@@ -655,26 +750,45 @@
       const app=appMod.initializeApp(firebaseConfig), auth=authMod.getAuth(app), db=fsMod.getFirestore(app);
       if(!auth.currentUser) await authMod.signInAnonymously(auth);
       const activeRef=fsMod.doc(db,"riftGalaxyOps","active");
-      let unsubActive=null;
+      const finishLoad=(round)=>{state.round=round;state.connected=true;state.loading=false;state.firebaseError=null;renderAll();};
       const subscribeRound=(roundId)=>{
         if(state.unsubscribeRound){state.unsubscribeRound();state.unsubscribeRound=null;}
-        if(!roundId){state.connected=true;renderAll();return;}
+        if(!roundId){finishLoad(makeDraftRound());return;}
         state.unsubscribeRound=fsMod.onSnapshot(fsMod.doc(db,"riftGalaxyRounds",roundId),snap=>{
-          if(snap.exists()){state.round={id:snap.id,...snap.data(),preview:false};state.connected=true;renderAll();}
-        },err=>{console.error(err);state.connected=false;renderHeader();});
+          if(snap.exists()) finishLoad(normalizeRound(snap.data(),snap.id));
+          else finishLoad(makeDraftRound());
+        },err=>{
+          console.error(err);state.firebaseError=err;state.connected=false;state.loading=false;
+          if(!state.round) state.round=makeDraftRound(); renderAll();
+        });
       };
-      unsubActive=fsMod.onSnapshot(activeRef,snap=>{state.connected=true;const id=snap.exists()?snap.data().roundId:null; if(id) subscribeRound(id); else renderAll();},err=>{console.error(err);state.connected=false;renderHeader();});
+      fsMod.onSnapshot(activeRef,snap=>{
+        const id=snap.exists()?snap.data().roundId:null;
+        subscribeRound(id||null);
+      },err=>{
+        console.error(err);state.firebaseError=err;state.connected=false;state.loading=false;
+        if(!state.round) state.round=makeDraftRound(); renderAll();
+      });
       state.firebase={
-        async saveRound(round){
-          const payload=deepClone(round); delete payload.updatedAtServer;
+        async saveRound(round,resourceChanged=false){
+          const payload=deepClone(round); delete payload.updatedAtServer; delete payload.resourceUpdatedAtServer; delete payload.isDraft;
           payload.updatedAt=new Date().toISOString();
           payload.updatedAtServer=fsMod.serverTimestamp();
+          if(resourceChanged){
+            payload.resourceUpdatedAt=new Date().toISOString();
+            payload.resourceUpdatedAtServer=fsMod.serverTimestamp();
+          }else{
+            const oldResourceDate=toDateSafe(round.resourceUpdatedAtServer||round.resourceUpdatedAt);
+            if(oldResourceDate) payload.resourceUpdatedAtServer=fsMod.Timestamp.fromDate(oldResourceDate);
+          }
           await fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false});
         },
         async createRound(round){
-          const payload=deepClone(round); delete payload.updatedAtServer;
+          const payload=deepClone(round); delete payload.updatedAtServer; delete payload.resourceUpdatedAtServer; delete payload.isDraft;
           payload.updatedAt=new Date().toISOString();
           payload.updatedAtServer=fsMod.serverTimestamp();
+          payload.resourceUpdatedAt=payload.resourceUpdatedAt||payload.updatedAt;
+          payload.resourceUpdatedAtServer=fsMod.serverTimestamp();
           const batch=fsMod.writeBatch(db);
           batch.set(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false});
           batch.set(activeRef,{roundId:round.id,updatedAt:new Date().toISOString(),updatedAtServer:fsMod.serverTimestamp()},{merge:false});
@@ -683,12 +797,15 @@
       };
       state.firebaseError=null;
       renderHeader();
-    }catch(err){ console.warn("Firebase offline preview",err); state.firebaseError=err; state.connected=false; renderHeader(); }
+    }catch(err){
+      console.warn("Firebase connection error",err);state.firebaseError=err;state.connected=false;state.loading=false;
+      if(!state.round) state.round=makeDraftRound(); renderAll();
+    }
   }
 
-  document.getElementById("setupStart").value=nowLocalInput();
   renderAll();
   if(location.protocol!=="file:") firebaseReadyPromise=initFirebase();
+  else { state.round=makeDraftRound(); state.loading=false; renderAll(); }
   window.__guildOps={getState:()=>deepClone(state.round),reference:INTERNAL_REFERENCE};
 })();
 </script>
