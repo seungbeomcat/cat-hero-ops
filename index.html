@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#6f52c8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
+  <title>균열 · 은하 길드 운영현황 V0.1.0</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    :root{
+      --canvas:430px;
+      --ui-scale:1;
+      --bg:#f3effc;
+      --panel:#ffffff;
+      --panel2:#f8f6ff;
+      --ink:#261f3b;
+      --muted:#7f7796;
+      --line:#ddd5f0;
+      --purple:#7354c7;
+      --purple2:#8f73df;
+      --purple3:#efe9ff;
+      --gold:#f0b64c;
+      --green:#2c9b67;
+      --greenBg:#e9f8f1;
+      --red:#d65b6d;
+      --redBg:#fff0f3;
+      --orange:#c37a22;
+      --orangeBg:#fff5e7;
+      --shadow:0 8px 24px rgba(78,55,139,.11);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    body{overflow-x:hidden}
+
+    /* Fixed 430px logical canvas. On narrower screens the whole UI scales as one unit. */
+    #shell{position:relative;margin:0 auto;overflow:visible}
+    #app{
+      width:var(--canvas);
+      min-height:100vh;
+      transform-origin:top left;
+      background:
+        radial-gradient(circle at 12% -4%,rgba(143,115,223,.18),transparent 25%),
+        radial-gradient(circle at 88% 2%,rgba(240,182,76,.10),transparent 20%),
+        linear-gradient(180deg,#f7f4ff 0,#f2eefb 34%,#f4f1fb 100%);
+      padding:12px 12px 30px;
+    }
+    .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+    .eyebrow{font-size:11px;font-weight:800;color:var(--purple);letter-spacing:.1px;margin-bottom:3px}
+    h1{margin:0;font-size:19px;line-height:1.2;letter-spacing:-.45px;font-weight:900}
+    .subhead{font-size:11px;color:var(--muted);font-weight:700;margin-top:4px}
+    .top-actions{display:flex;gap:5px;padding-top:1px}
+    .mini-btn{height:30px;padding:0 9px;border:1px solid #cfc3ee;border-radius:9px;background:#fff;color:#56438f;font-size:11px;font-weight:850;box-shadow:0 2px 8px rgba(91,65,156,.07)}
+    .mini-btn.primary{background:linear-gradient(180deg,#8264d4,#6f50c2);border-color:#6c4dbd;color:#fff}
+
+    .status-strip{height:29px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.76);border:1px solid #e1daef;border-radius:10px;padding:0 9px;margin-bottom:8px;font-size:10.5px;font-weight:750;color:#756d89}
+    .status-left{display:flex;align-items:center;gap:6px;min-width:0}
+    .dot{width:7px;height:7px;border-radius:50%;background:#b9afc9;box-shadow:0 0 0 3px rgba(185,175,201,.18);flex:0 0 auto}
+    .dot.online{background:#32aa72;box-shadow:0 0 0 3px rgba(50,170,114,.14)}
+    .dot.preview{background:#efad42;box-shadow:0 0 0 3px rgba(239,173,66,.14)}
+    #roundLabel{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .round-type{color:var(--purple);font-weight:900;white-space:nowrap}
+
+    .section-card{background:rgba(255,255,255,.93);border:1px solid #ded6f0;border-radius:15px;box-shadow:var(--shadow);padding:10px;margin-top:9px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .section-title{font-size:13.5px;font-weight:900;letter-spacing:-.2px}
+    .section-note{font-size:10px;color:var(--muted);font-weight:700}
+
+    .boss-rail{display:grid;grid-template-columns:82px 1fr;gap:6px;align-items:stretch}
+    .history-wrap{position:relative;min-width:0;overflow:hidden}
+    .history-scroll{display:flex;gap:5px;overflow-x:auto;scroll-behavior:smooth;overscroll-behavior-inline:contain;scrollbar-width:none;padding:0 0 2px}
+    .history-scroll::-webkit-scrollbar{display:none}
+    .history-wrap::after{content:"";position:absolute;right:0;top:0;bottom:2px;width:14px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.92));opacity:.78}
+    .boss-card{position:relative;width:75px;min-width:75px;height:163px;border-radius:11px;border:1px solid #ddd5ec;background:#fbfaff;padding:5px 4px 6px;text-align:center;box-shadow:0 3px 11px rgba(83,61,140,.06);overflow:hidden;transition:transform .16s ease,box-shadow .16s ease}
+    .boss-card:active{transform:scale(.985)}
+    .boss-card.current{width:82px;min-width:82px;border:2px solid #7655cb;background:linear-gradient(180deg,#ffffff,#f5f0ff);box-shadow:0 0 0 2px rgba(118,85,203,.09),0 7px 18px rgba(92,65,164,.14);padding:4px 4px 5px}
+    .current-badge{position:absolute;z-index:2;top:4px;left:4px;height:17px;padding:0 5px;border-radius:6px;background:#7152c7;color:#fff;font-size:8.5px;font-weight:950;line-height:17px;box-shadow:0 2px 7px rgba(70,48,133,.22)}
+    .boss-img{display:block;width:65px;height:65px;border-radius:8px;object-fit:cover;margin:0 auto 4px;background:linear-gradient(135deg,#eee8ff,#fff);border:1px solid rgba(110,83,186,.12)}
+    .current .boss-img{width:69px;height:69px}
+    .boss-index{font-size:8.5px;color:#948aa9;font-weight:800;line-height:1.1;margin-bottom:1px}
+    .boss-name{font-size:11px;color:#382d55;font-weight:950;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .boss-metrics{margin-top:5px;border-top:1px solid #ece7f4;padding-top:4px;display:grid;gap:2px}
+    .metric-line{font-size:8.5px;color:#837b93;font-weight:750;line-height:1.12}
+    .metric-line b{display:block;color:#4b3a7b;font-size:9.5px;font-weight:950;margin-top:1px;white-space:nowrap;letter-spacing:-.2px}
+    .empty-boss{display:flex;align-items:center;justify-content:center;height:100%;font-size:9px;color:#9b92aa;font-weight:800;padding:4px;line-height:1.35}
+
+    .quick-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+    .sum-box{border:1px solid #e4ddf1;background:#faf8ff;border-radius:10px;padding:7px 5px;text-align:center}
+    .sum-label{font-size:9px;color:#8b829e;font-weight:800}
+    .sum-value{font-size:13px;color:#4d3a80;font-weight:950;margin-top:1px;line-height:1.2}
+
+    .members-card{padding:10px 8px 8px}
+    .member-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;border:1px solid #ddd5eb;border-radius:11px;overflow:hidden;background:#fff}
+    .member-table col:nth-child(1){width:34%}.member-table col:nth-child(2){width:17%}.member-table col:nth-child(3){width:25%}.member-table col:nth-child(4){width:24%}
+    .member-table th{height:31px;background:#ece6fa;color:#57467f;font-size:10.5px;font-weight:950;border-bottom:1px solid #d8cfea;text-align:center}
+    .member-table th+th,.member-table td+td{border-left:1px solid #eee9f5}
+    .member-table td{height:42px;border-bottom:1px solid #eeeaf4;text-align:center;font-size:11.5px;font-weight:800;background:#fff;padding:0 4px}
+    .member-table tr:last-child td{border-bottom:none}
+    .member-table tbody tr{cursor:pointer}
+    .member-table tbody tr:active td{background:#faf8ff}
+    .member-name{text-align:left!important;padding-left:10px!important;color:#302746;font-weight:900!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .resource-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;color:#3e3260;font-weight:950!important}
+    .resource-num.low{color:#c77a28}.resource-num.empty{color:#d4576a}
+    .status-pill{display:inline-flex;align-items:center;justify-content:center;min-width:53px;height:23px;padding:0 7px;border-radius:999px;font-size:10px;font-weight:950;border:1px solid transparent}
+    .status-pill.joined{color:#237e55;background:var(--greenBg);border-color:#bfe8d4}
+    .status-pill.waiting{color:#c24f63;background:var(--redBg);border-color:#f4cad2}
+    .status-pill.no-boss{color:#776e89;background:#f2eff7;border-color:#e2ddea}
+    .table-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 3px 0;font-size:9.5px;color:#8b839a;font-weight:700}
+    .table-foot strong{color:#644ab0}
+
+    .legend{display:flex;align-items:center;gap:10px;font-size:9.5px;color:#8a8299;font-weight:750}
+    .legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px;vertical-align:1px}
+    .legend .g{background:#3aaa75}.legend .r{background:#d96678}
+
+    .footer{text-align:center;color:#9a91ab;font-size:9.5px;font-weight:700;margin-top:16px;line-height:1.6}
+    .footer b{color:#7156b8}
+
+    .toast{position:fixed;transform-origin:bottom center;z-index:70;left:50%;bottom:22px;transform:translate(-50%,18px) scale(var(--ui-scale));opacity:0;pointer-events:none;background:#30264b;color:#fff;border-radius:10px;padding:9px 13px;font-size:11px;font-weight:800;box-shadow:0 8px 24px rgba(31,22,53,.28);transition:.2s ease;white-space:nowrap}
+    .toast.show{opacity:1;transform:translate(-50%,0) scale(var(--ui-scale))}
+
+    .modal-backdrop{position:fixed;z-index:60;inset:0;background:rgba(31,23,48,.43);display:none;align-items:flex-end;justify-content:center;padding:0}
+    .modal-backdrop.open{display:flex}
+    .modal{width:430px;max-height:91vh;transform:scale(var(--ui-scale));transform-origin:bottom center;background:#f8f6fd;border-radius:18px 18px 0 0;box-shadow:0 -14px 40px rgba(34,23,65,.24);border:1px solid #d6cdec;overflow:hidden;display:flex;flex-direction:column}
+    .modal.tall{max-height:94vh}
+    .modal-head{height:53px;min-height:53px;background:#fff;border-bottom:1px solid #e1daef;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
+    .modal-title{font-size:15px;font-weight:950;color:#332751;letter-spacing:-.2px}
+    .close-btn{width:31px;height:31px;border-radius:9px;border:1px solid #ded5ed;background:#faf8ff;color:#6c5a94;font-size:17px;font-weight:800;line-height:1}
+    .modal-body{padding:10px 12px 14px;overflow:auto;-webkit-overflow-scrolling:touch}
+    .modal-actions{display:flex;gap:7px;padding:9px 12px 12px;background:#fff;border-top:1px solid #e4deee}
+    .action-btn{flex:1;height:38px;border-radius:10px;border:1px solid #d8cfeb;background:#fff;color:#5f4c91;font-size:12px;font-weight:900}
+    .action-btn.primary{background:linear-gradient(180deg,#8264d4,#6f50c2);border-color:#6c4dbd;color:#fff}
+    .action-btn.danger{background:#fff3f5;border-color:#f2c9d0;color:#c95163}
+
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .field{display:grid;gap:4px}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:10px;color:#7f7692;font-weight:850}
+    .field input,.field select{width:100%;height:37px;border:1px solid #d8cfeb;background:#fff;color:#3b3152;border-radius:9px;padding:0 9px;font-size:16px;font-weight:750;outline:none}
+    .field input:focus,.field select:focus{border-color:#8d73d8;box-shadow:0 0 0 3px rgba(141,115,216,.10)}
+    .help{font-size:9.5px;line-height:1.45;color:#8c849b;font-weight:700;margin-top:4px}
+
+    .setup-list{margin-top:10px;border:1px solid #ded6ec;border-radius:11px;overflow:hidden;background:#fff}
+    .setup-row{display:grid;grid-template-columns:1.15fr .55fr 1fr;align-items:center;min-height:39px;border-bottom:1px solid #eeeaf4;padding:0 7px;gap:5px}
+    .setup-row:last-child{border-bottom:none}
+    .setup-row.head{min-height:30px;background:#eee8fa;color:#68558f;font-size:9.5px;font-weight:950;text-align:center}
+    .setup-name{font-size:11px;font-weight:900;color:#332a49;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .setup-row input,.setup-row select{height:30px;border:1px solid #ddd5ea;border-radius:7px;background:#fff;text-align:center;font-size:16px;font-weight:800;color:#493d68;min-width:0}
+
+    .boss-detail-hero{display:grid;grid-template-columns:82px 1fr;gap:9px;align-items:center;background:#fff;border:1px solid #dfd7ec;border-radius:12px;padding:8px;margin-bottom:9px}
+    .boss-detail-hero img{width:82px;height:82px;object-fit:cover;border-radius:10px;border:1px solid #dfd6ed}
+    .boss-detail-name{font-size:16px;font-weight:950;color:#342751;margin-bottom:5px}
+    .boss-detail-stats{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+    .detail-stat{background:#f6f2ff;border-radius:8px;padding:5px 6px;font-size:9px;color:#84799c;font-weight:800}
+    .detail-stat b{display:block;color:#4d3a7d;font-size:11px;margin-top:1px}
+    .participant-list{border:1px solid #ddd5eb;border-radius:11px;overflow:hidden;background:#fff}
+    .participant-head,.participant-row{display:grid;grid-template-columns:1fr 72px 100px;align-items:center;gap:5px;padding:0 8px}
+    .participant-head{height:30px;background:#ece6fa;color:#645287;font-size:9.5px;font-weight:950;text-align:center}
+    .participant-row{min-height:40px;border-top:1px solid #eeeaf4;font-size:11px}
+    .participant-row .pname{font-weight:900;color:#332a4a}
+    .participant-row .ptime,.participant-row .pscore{text-align:right;font-weight:900;font-variant-numeric:tabular-nums;color:#54446f}
+    .participant-empty{padding:22px 8px;text-align:center;color:#938aa3;font-size:11px;font-weight:800}
+
+    .edit-list{border:1px solid #ddd5eb;border-radius:11px;overflow:hidden;background:#fff}
+    .edit-head,.edit-row{display:grid;grid-template-columns:28px 1fr 72px 104px;align-items:center;gap:5px;padding:0 6px}
+    .edit-head{height:30px;background:#ece6fa;color:#645287;font-size:9px;font-weight:950;text-align:center}
+    .edit-row{min-height:42px;border-top:1px solid #eeeaf4}
+    .edit-row .ename{font-size:10.5px;font-weight:900;color:#342b4a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .edit-row input[type="checkbox"]{width:18px;height:18px;accent-color:#7354c7;margin:auto}
+    .edit-row input[type="text"],.edit-row input[type="number"]{width:100%;height:31px;border:1px solid #ded6ea;border-radius:7px;background:#fff;text-align:center;font-size:16px;font-weight:800;color:#493d68;min-width:0;padding:0 4px}
+    .edit-row.disabled input[type="text"],.edit-row.disabled input[type="number"]{background:#f5f2f8;color:#b1a9bd}
+
+    .member-detail-card{background:#fff;border:1px solid #dfd7ec;border-radius:12px;padding:10px;margin-bottom:9px}
+    .member-detail-name{font-size:18px;font-weight:950;color:#342751}
+    .resource-cards{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+    .resource-card{border-radius:10px;background:#f5f1ff;padding:8px;text-align:center}
+    .resource-card span{display:block;font-size:9px;color:#817798;font-weight:850}
+    .resource-card b{display:block;margin-top:2px;font-size:18px;color:#503d86;font-weight:950;font-variant-numeric:tabular-nums}
+    .calc-note{margin-top:8px;padding:8px;border-radius:9px;background:#fff8e8;color:#8b6725;font-size:9.5px;font-weight:750;line-height:1.45;border:1px solid #f0dfb5}
+
+    .galaxy-placeholder{display:flex!important;align-items:center;justify-content:center;background:radial-gradient(circle,#a786f2,#4f3a8d)!important;color:white;font-size:20px;font-weight:950}
+  </style>
+</head>
+<body>
+  <div id="shell">
+    <main id="app">
+      <div class="topbar">
+        <div>
+          <div class="eyebrow">SERVER 879 · 도살자</div>
+          <h1>균열 · 은하 길드 운영현황</h1>
+          <div class="subhead">길드원 15명 · 실시간 칼 / 시간 / 보스 참여 관리</div>
+        </div>
+        <div class="top-actions">
+          <button class="mini-btn" id="roundSetupBtn">회차 설정</button>
+          <button class="mini-btn primary" id="addBossBtn">보스 추가</button>
+        </div>
+      </div>
+
+      <div class="status-strip">
+        <div class="status-left"><span id="syncDot" class="dot preview"></span><span id="roundLabel">미리보기 데이터 · 실제 회차 미설정</span></div>
+        <span class="round-type" id="roundType">균열</span>
+      </div>
+
+      <section class="section-card">
+        <div class="section-head">
+          <div class="section-title">이번 회차 초대형 보스</div>
+          <div class="section-note">현재 보스 고정 · 이전 보스 ←→</div>
+        </div>
+        <div class="boss-rail">
+          <div id="currentBossSlot"></div>
+          <div class="history-wrap">
+            <div class="history-scroll" id="historyBossRail"></div>
+          </div>
+        </div>
+        <div class="quick-summary">
+          <div class="sum-box"><div class="sum-label">현재 참여</div><div class="sum-value" id="currentJoinSummary">-</div></div>
+          <div class="sum-box"><div class="sum-label">현재 길드 합계</div><div class="sum-value" id="currentScoreSummary">-</div></div>
+          <div class="sum-box"><div class="sum-label">현재 미참여</div><div class="sum-value" id="currentMissingSummary">-</div></div>
+        </div>
+      </section>
+
+      <section class="section-card members-card">
+        <div class="section-head">
+          <div>
+            <div class="section-title">길드원 현재 자원</div>
+            <div class="section-note" style="margin-top:2px">보스 참여 = 1칼 자동 차감 · 일반몹 사용량 포함</div>
+          </div>
+          <div class="legend"><span><i class="g"></i>참여</span><span><i class="r"></i>미참여</span></div>
+        </div>
+        <table class="member-table" aria-label="길드원 현재 자원 현황">
+          <colgroup><col><col><col><col></colgroup>
+          <thead><tr><th>길드원</th><th>남은 칼</th><th>남은 시간</th><th>현재 보스</th></tr></thead>
+          <tbody id="memberRows"></tbody>
+        </table>
+        <div class="table-foot"><span>길드원을 누르면 <strong>일반몹 사용량</strong>을 관리할 수 있습니다.</span><span id="updatedAt">-</span></div>
+      </section>
+
+      <div class="footer">
+        <b>Created by 돗돔 · V0.1.0</b>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="roundModal">
+    <div class="modal tall">
+      <div class="modal-head"><div class="modal-title">회차 시작 설정</div><button class="close-btn" data-close="roundModal">×</button></div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field"><label>콘텐츠</label><select id="setupMode"><option value="rift">균열의 격전지</option><option value="galaxy">은하의 격전지</option></select></div>
+          <div class="field"><label>시작 시각</label><input type="datetime-local" id="setupStart" /></div>
+        </div>
+        <div class="help">기본 10칼 / 20분. 차공 시간 확장자는 20:20 ~ 22:00 범위에서 길드원별로 설정합니다. 새 회차 시작 시 이전 회차 운영기록은 별도 문서로 남습니다.</div>
+        <div class="setup-list" id="setupMemberList"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="action-btn" data-close="roundModal">취소</button>
+        <button class="action-btn primary" id="saveRoundSetupBtn">현재 기준값 저장</button>
+        <button class="action-btn primary" id="startNewRoundBtn">새 회차 시작</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="addBossModal">
+    <div class="modal">
+      <div class="modal-head"><div class="modal-title">새 초대형 보스 등록</div><button class="close-btn" data-close="addBossModal">×</button></div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field"><label>지역</label><select id="newBossArea"><option value="wolf">늑대</option><option value="pirate">해적</option><option value="cat">고양이</option><option value="food">음식</option><option value="galaxy">은하</option></select></div>
+          <div class="field"><label>팝업 시각</label><input type="datetime-local" id="newBossStart" /></div>
+        </div>
+        <div class="help">다음 보스 지역은 예측하지 않습니다. 실제 등장한 보스만 등록하며, 새 보스를 등록하면 직전 현재 보스는 이전 보스로 이동합니다.</div>
+      </div>
+      <div class="modal-actions"><button class="action-btn" data-close="addBossModal">취소</button><button class="action-btn primary" id="confirmAddBossBtn">등록</button></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="bossModal">
+    <div class="modal tall">
+      <div class="modal-head"><div class="modal-title" id="bossModalTitle">보스 상세</div><button class="close-btn" data-close="bossModal">×</button></div>
+      <div class="modal-body" id="bossModalBody"></div>
+      <div class="modal-actions" id="bossModalActions"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="memberModal">
+    <div class="modal">
+      <div class="modal-head"><div class="modal-title">길드원 자원 상세</div><button class="close-btn" data-close="memberModal">×</button></div>
+      <div class="modal-body" id="memberModalBody"></div>
+      <div class="modal-actions"><button class="action-btn" data-close="memberModal">취소</button><button class="action-btn primary" id="saveMemberUsageBtn">저장</button></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  "use strict";
+  const LOGICAL_WIDTH = 430;
+  const WRITE_PIN = "154100";
+  const VALID_TIME_BONUSES = [0,20,40,60,80,100,120];
+  const MEMBER_ORDER = ["돗돔","매콤갈비","사마엘","혀녕","데이다라","XIGN","뱅수띠","승부왕","진니","토시살","페르시안","하니엘","별제븝","바포메트","옥돔"];
+
+  // Existing calculator reference data is kept internally for future calculations/links, but not exposed as duplicate lookup UI.
+  const INTERNAL_REFERENCE = Object.freeze({
+    serverKill:6,
+    members:{
+      "돗돔":{base:191.6,z1:0,z2:5,z3:0,field:{wolf:13,pirate:22,cat:22,food:6,galaxy:0}},
+      "매콤갈비":{base:142.5,z1:5,z2:5,z3:0,field:{wolf:8,pirate:8,cat:8,food:8,galaxy:0}},
+      "사마엘":{base:122.5,z1:0,z2:5,z3:0,field:{wolf:13,pirate:7,cat:7,food:7,galaxy:0}},
+      "혀녕":{base:93.8,z1:0,z2:5,z3:0,field:{wolf:24,pirate:22,cat:22,food:22,galaxy:0}},
+      "데이다라":{base:93,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "XIGN":{base:84,z1:0,z2:5,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "뱅수띠":{base:64,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "승부왕":{base:60.1,z1:0,z2:0,z3:0,field:{wolf:0,pirate:1,cat:0,food:1,galaxy:0}},
+      "진니":{base:57.5,z1:0,z2:5,z3:0,field:{wolf:7,pirate:6,cat:6,food:6,galaxy:0}},
+      "토시살":{base:57,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "페르시안":{base:57,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "하니엘":{base:45,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "별제븝":{base:38,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "바포메트":{base:35.5,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "옥돔":{base:34.5,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}}
+    }
+  });
+
+  const BOSS_META = {
+    wolf:{name:"늑대",asset:"assets/boss-wolf.png"},
+    pirate:{name:"해적",asset:"assets/boss-pirate.png"},
+    cat:{name:"고양이",asset:"assets/boss-cat.png"},
+    food:{name:"음식",asset:"assets/boss-food.png"},
+    galaxy:{name:"은하",asset:null}
+  };
+
+  const deepClone = obj => JSON.parse(JSON.stringify(obj));
+  const makeMemberState = (initialSeconds=1200) => ({initialSwords:10,initialSeconds,normalSwords:0,normalSeconds:0});
+  const makeMembers = () => Object.fromEntries(MEMBER_ORDER.map(n => [n,makeMemberState()]));
+  const nowLocalInput = () => {
+    const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16);
+  };
+  const fmtNum = n => Number(n||0).toLocaleString("ko-KR");
+  const fmtTime = s => { s=Math.max(0,Math.round(Number(s)||0)); return `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`; };
+  const parseTime = v => {
+    const t=String(v||"").trim();
+    if(/^\d+$/.test(t)) return Number(t)*60;
+    const m=t.match(/^(\d{1,2}):(\d{1,2})$/); if(!m) return 0;
+    return Number(m[1])*60+Math.min(59,Number(m[2]));
+  };
+  const isoToLocal = iso => {
+    if(!iso) return "-"; const d=new Date(iso); if(Number.isNaN(d.getTime())) return "-";
+    return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+  };
+  const localInputToIso = v => v ? new Date(v).toISOString() : new Date().toISOString();
+  const uniqueId = p => `${p}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,7)}`;
+
+  function sampleParticipants(count, offset=0){
+    const out={};
+    for(let i=0;i<count;i++){
+      const n=MEMBER_ORDER[(i+offset)%MEMBER_ORDER.length];
+      out[n]={usedSeconds:45+((i*19+offset*7)%91),score:115000+((i*73841+offset*91021)%580000)};
+    }
+    return out;
+  }
+  function makePreviewRound(){
+    const members=makeMembers();
+    members["돗돔"].initialSeconds=1320;
+    members["혀녕"].initialSeconds=1260;
+    members["승부왕"].initialSeconds=1220;
+    members["진니"].normalSwords=1; members["진니"].normalSeconds=74;
+    members["XIGN"].normalSwords=2; members["XIGN"].normalSeconds=132;
+    const bosses=[
+      {id:"demo1",order:1,area:"wolf",status:"ended",startedAt:new Date(Date.now()-42*3600000).toISOString(),endedAt:new Date(Date.now()-34*3600000).toISOString(),participants:sampleParticipants(13,0)},
+      {id:"demo2",order:2,area:"pirate",status:"ended",startedAt:new Date(Date.now()-32*3600000).toISOString(),endedAt:new Date(Date.now()-25*3600000).toISOString(),participants:sampleParticipants(14,1)},
+      {id:"demo3",order:3,area:"food",status:"ended",startedAt:new Date(Date.now()-23*3600000).toISOString(),endedAt:new Date(Date.now()-16*3600000).toISOString(),participants:sampleParticipants(12,2)},
+      {id:"demo4",order:4,area:"cat",status:"ended",startedAt:new Date(Date.now()-14*3600000).toISOString(),endedAt:new Date(Date.now()-7*3600000).toISOString(),participants:sampleParticipants(15,0)},
+      {id:"demo5",order:5,area:"wolf",status:"current",startedAt:new Date(Date.now()-3*3600000).toISOString(),endedAt:null,participants:sampleParticipants(9,0)}
+    ];
+    return {id:"preview",mode:"rift",startAt:new Date(Date.now()-44*3600000).toISOString(),endAt:new Date(Date.now()+4*3600000).toISOString(),members,bosses,currentBossId:"demo5",preview:true,updatedAt:new Date().toISOString()};
+  }
+
+  let state={round:makePreviewRound(),firebase:null,connected:false,adminUnlocked:false,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null};
+
+  function bossById(id){ return state.round?.bosses?.find(b=>b.id===id)||null; }
+  function currentBoss(){ return bossById(state.round?.currentBossId); }
+  function participantCount(b){ return b ? Object.keys(b.participants||{}).length : 0; }
+  function bossScore(b){ return b ? Object.values(b.participants||{}).reduce((a,p)=>a+(Number(p.score)||0),0) : 0; }
+  function bossParticipationCount(name){ return (state.round?.bosses||[]).reduce((a,b)=>a+(b.participants&&b.participants[name]?1:0),0); }
+  function bossUsedSeconds(name){ return (state.round?.bosses||[]).reduce((a,b)=>a+(Number(b.participants?.[name]?.usedSeconds)||0),0); }
+  function memberRemaining(name){
+    const m=state.round?.members?.[name]||makeMemberState();
+    const usedBoss= bossParticipationCount(name);
+    const swords=Math.max(0,(Number(m.initialSwords)||10)-usedBoss-(Number(m.normalSwords)||0));
+    const seconds=Math.max(0,(Number(m.initialSeconds)||1200)-bossUsedSeconds(name)-(Number(m.normalSeconds)||0));
+    return {swords,seconds,usedBoss,usedSeconds:bossUsedSeconds(name)};
+  }
+
+  function bossImageMarkup(area,cls="boss-img"){
+    const meta=BOSS_META[area]||BOSS_META.wolf;
+    if(!meta.asset) return `<div class="${cls} galaxy-placeholder">✦</div>`;
+    return `<img class="${cls}" src="${meta.asset}" alt="${meta.name} 초대형 보스">`;
+  }
+
+  function bossCardMarkup(b,isCurrent=false){
+    if(!b) return `<div class="boss-card ${isCurrent?"current":""}"><div class="empty-boss">현재 보스<br>등록 전</div></div>`;
+    const meta=BOSS_META[b.area]||{name:b.area};
+    return `<button class="boss-card ${isCurrent?"current":""}" data-boss-id="${b.id}" aria-label="#${b.order} ${meta.name} 상세보기">
+      ${isCurrent?`<span class="current-badge">현재</span>`:""}
+      ${bossImageMarkup(b.area)}
+      <div class="boss-index">#${b.order}</div><div class="boss-name">${meta.name}</div>
+      <div class="boss-metrics"><div class="metric-line">참여<b>${participantCount(b)}명</b></div><div class="metric-line">길드 합계<b>${fmtNum(bossScore(b))}</b></div></div>
+    </button>`;
+  }
+
+  function renderBossRail(){
+    const cur=currentBoss();
+    document.getElementById("currentBossSlot").innerHTML=bossCardMarkup(cur,true);
+    const history=(state.round?.bosses||[]).filter(b=>b.id!==state.round.currentBossId).sort((a,b)=>a.order-b.order);
+    document.getElementById("historyBossRail").innerHTML=history.map(b=>bossCardMarkup(b,false)).join("") || `<div class="boss-card"><div class="empty-boss">이전 보스<br>없음</div></div>`;
+    const join=participantCount(cur), score=bossScore(cur), missing=cur?Math.max(0,MEMBER_ORDER.length-join):0;
+    document.getElementById("currentJoinSummary").textContent=cur?`${join} / ${MEMBER_ORDER.length}`:"-";
+    document.getElementById("currentScoreSummary").textContent=cur?fmtNum(score):"-";
+    document.getElementById("currentMissingSummary").textContent=cur?`${missing}명`:"-";
+    document.querySelectorAll("[data-boss-id]").forEach(el=>el.onclick=()=>openBossModal(el.dataset.bossId,false));
+  }
+
+  function renderMembers(){
+    const cur=currentBoss();
+    const rows=MEMBER_ORDER.map(name=>{
+      const r=memberRemaining(name);
+      const joined=!!cur?.participants?.[name];
+      const swordCls=r.swords===0?"empty":r.swords<=2?"low":"";
+      const timeCls=r.seconds===0?"empty":r.seconds<=180?"low":"";
+      const status=cur?(joined?`<span class="status-pill joined">참여</span>`:`<span class="status-pill waiting">미참여</span>`):`<span class="status-pill no-boss">대기</span>`;
+      return `<tr data-member="${name}"><td class="member-name">${name}</td><td class="resource-num ${swordCls}">${r.swords}칼</td><td class="resource-num ${timeCls}">${fmtTime(r.seconds)}</td><td>${status}</td></tr>`;
+    }).join("");
+    document.getElementById("memberRows").innerHTML=rows;
+    document.querySelectorAll("#memberRows tr").forEach(tr=>tr.onclick=()=>openMemberModal(tr.dataset.member));
+  }
+
+  function renderHeader(){
+    const r=state.round;
+    const dot=document.getElementById("syncDot");
+    dot.className=`dot ${state.connected&&!r?.preview?"online":"preview"}`;
+    if(r?.preview){
+      document.getElementById("roundLabel").textContent="미리보기 데이터 · 회차 설정 후 실제 값으로 전환";
+    }else if(r){
+      document.getElementById("roundLabel").textContent=`${isoToLocal(r.startAt)} ~ ${isoToLocal(r.endAt)} · ${state.connected?"실시간 동기화":"연결 대기"}`;
+    }else{
+      document.getElementById("roundLabel").textContent="활성 회차 없음";
+    }
+    document.getElementById("roundType").textContent=r?.mode==="galaxy"?"은하":"균열";
+    document.getElementById("updatedAt").textContent=r?.updatedAt?`갱신 ${isoToLocal(r.updatedAt)}`:"-";
+  }
+
+  function renderAll(){ renderHeader(); renderBossRail(); renderMembers(); syncCanvasScale(); }
+
+  function showToast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(showToast._t); showToast._t=setTimeout(()=>t.classList.remove("show"),1800); }
+  function openModal(id){ document.getElementById(id).classList.add("open"); syncCanvasScale(); }
+  function closeModal(id){ document.getElementById(id).classList.remove("open"); }
+  document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+  document.querySelectorAll(".modal-backdrop").forEach(m=>m.addEventListener("click",e=>{if(e.target===m) closeModal(m.id);}));
+
+  function fillRoundSetup(){
+    const r=state.round||makePreviewRound();
+    document.getElementById("setupMode").value=r.mode||"rift";
+    const d=new Date(r.startAt||Date.now()); d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
+    document.getElementById("setupStart").value=d.toISOString().slice(0,16);
+    document.getElementById("setupMemberList").innerHTML=`<div class="setup-row head"><div>길드원</div><div>시작 칼</div><div>시작 시간</div></div>`+MEMBER_ORDER.map(name=>{
+      const m=r.members?.[name]||makeMemberState();
+      const options=VALID_TIME_BONUSES.map(b=>`<option value="${1200+b}" ${Number(m.initialSeconds)===1200+b?"selected":""}>${fmtTime(1200+b)}</option>`).join("");
+      return `<div class="setup-row" data-setup-member="${name}"><div class="setup-name">${name}</div><input class="setup-swords" type="number" inputmode="numeric" min="0" max="10" value="${Math.min(10,Number(m.initialSwords)||10)}"><select class="setup-time">${options}</select></div>`;
+    }).join("");
+  }
+
+  function gatherSetupMembers(preserveUsage=true){
+    const out={};
+    document.querySelectorAll("[data-setup-member]").forEach(row=>{
+      const name=row.dataset.setupMember, prev=state.round?.members?.[name]||makeMemberState();
+      out[name]={initialSwords:Math.min(10,Math.max(0,Number(row.querySelector(".setup-swords").value)||10)),initialSeconds:Number(row.querySelector(".setup-time").value)||1200,normalSwords:preserveUsage?(Number(prev.normalSwords)||0):0,normalSeconds:preserveUsage?(Number(prev.normalSeconds)||0):0};
+    });
+    return out;
+  }
+
+  async function ensureAdmin(){
+    if(state.adminUnlocked) return true;
+    const pin=window.prompt("운영진 PIN을 입력하세요.");
+    if(pin===null) return false;
+    if(pin!==WRITE_PIN){showToast("PIN이 일치하지 않습니다.");return false;}
+    state.adminUnlocked=true; return true;
+  }
+
+  async function persistRound(round){
+    if(!state.firebase){ showToast("Firebase 연결 후 저장할 수 있습니다."); return false; }
+    if(!(await ensureAdmin())) return false;
+    round.updatedAt=new Date().toISOString();
+    try{ await state.firebase.saveRound(round); return true; }
+    catch(err){ console.error(err); showToast("저장 중 오류가 발생했습니다."); return false; }
+  }
+
+  document.getElementById("roundSetupBtn").onclick=()=>{fillRoundSetup();openModal("roundModal");};
+  document.getElementById("saveRoundSetupBtn").onclick=async()=>{
+    if(state.round?.preview){showToast("미리보기 상태입니다. ‘새 회차 시작’을 사용하세요.");return;}
+    const r=deepClone(state.round); r.mode=document.getElementById("setupMode").value; r.members=gatherSetupMembers(true);
+    if(await persistRound(r)){closeModal("roundModal");showToast("기준값을 저장했습니다.");}
+  };
+  document.getElementById("startNewRoundBtn").onclick=async()=>{
+    if(!(await ensureAdmin())) return;
+    const startIso=localInputToIso(document.getElementById("setupStart").value||nowLocalInput());
+    const end=new Date(new Date(startIso).getTime()+(47*60+45)*60000).toISOString();
+    const round={id:`round_${startIso.slice(0,10)}_${Date.now().toString(36)}`,mode:document.getElementById("setupMode").value,startAt:startIso,endAt:end,members:gatherSetupMembers(false),bosses:[],currentBossId:null,preview:false,updatedAt:new Date().toISOString()};
+    if(await state.firebase.createRound(round)){closeModal("roundModal");showToast("새 회차를 시작했습니다.");}
+  };
+
+  document.getElementById("addBossBtn").onclick=()=>{
+    if(state.round?.preview){showToast("먼저 실제 회차를 시작하세요.");return;}
+    document.getElementById("newBossStart").value=nowLocalInput();
+    const galaxyOpt=document.querySelector('#newBossArea option[value="galaxy"]'); galaxyOpt.disabled=state.round?.mode!=="galaxy";
+    if(galaxyOpt.disabled && document.getElementById("newBossArea").value==="galaxy") document.getElementById("newBossArea").value="wolf";
+    openModal("addBossModal");
+  };
+  document.getElementById("confirmAddBossBtn").onclick=async()=>{
+    if(!(await ensureAdmin())) return;
+    const r=deepClone(state.round); const nowIso=new Date().toISOString();
+    const old=r.bosses.find(b=>b.id===r.currentBossId); if(old){old.status="ended"; old.endedAt=old.endedAt||nowIso;}
+    const order=Math.max(0,...r.bosses.map(b=>Number(b.order)||0))+1;
+    const id=uniqueId("boss");
+    r.bosses.push({id,order,area:document.getElementById("newBossArea").value,status:"current",startedAt:localInputToIso(document.getElementById("newBossStart").value),endedAt:null,participants:{}});
+    r.currentBossId=id;
+    if(await persistRound(r)){closeModal("addBossModal");showToast(`#${order} 보스를 등록했습니다.`);}
+  };
+
+  function openBossModal(id,edit=false){
+    const b=bossById(id); if(!b)return; state.selectedBossId=id; state.editingBoss=edit;
+    const meta=BOSS_META[b.area];
+    document.getElementById("bossModalTitle").textContent=`#${b.order} ${meta.name} 초대형 보스`;
+    const body=document.getElementById("bossModalBody"), actions=document.getElementById("bossModalActions");
+    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${meta.name} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">팝업<b>${isoToLocal(b.startedAt)}</b></div><div class="detail-stat">상태<b>${b.status==="current"?"진행 중":"종료"}</b></div></div></div></div>`;
+    if(!edit){
+      const parts=MEMBER_ORDER.filter(n=>b.participants?.[n]);
+      const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>참여 길드원</div><div>사용시간</div><div>스코어</div></div>${parts.map(n=>{const p=b.participants[n];return `<div class="participant-row"><div class="pname">${n}</div><div class="ptime">${fmtTime(p.usedSeconds)}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
+      body.innerHTML=hero+list;
+      actions.innerHTML=`<button class="action-btn" data-boss-close>닫기</button><button class="action-btn primary" id="editBossBtn">참여 기록 수정</button>`;
+      actions.querySelector("[data-boss-close]").onclick=()=>closeModal("bossModal");
+      document.getElementById("editBossBtn").onclick=()=>openBossModal(id,true);
+    }else{
+      body.innerHTML=hero+`<div class="help" style="margin:0 0 7px">참여 체크 자체가 <b>1칼 사용</b>입니다. 같은 보스에는 개인당 1칼만 사용할 수 있으며, 실제 사용시간과 스코어만 입력합니다.</div><div class="edit-list"><div class="edit-head"><div>참여</div><div>길드원</div><div>시간</div><div>스코어</div></div>${MEMBER_ORDER.map(n=>{const p=b.participants?.[n],on=!!p;return `<div class="edit-row ${on?"":"disabled"}" data-edit-member="${n}"><input type="checkbox" ${on?"checked":""}><div class="ename">${n}</div><input class="etime" type="text" inputmode="numeric" value="${on?fmtTime(p.usedSeconds):"00:00"}" ${on?"":"disabled"}><input class="escore" type="number" inputmode="numeric" min="0" value="${on?Number(p.score)||0:0}" ${on?"":"disabled"}></div>`;}).join("")}</div>`;
+      body.querySelectorAll("[data-edit-member]").forEach(row=>{const cb=row.querySelector('input[type="checkbox"]'); cb.onchange=()=>{row.classList.toggle("disabled",!cb.checked);row.querySelector(".etime").disabled=!cb.checked;row.querySelector(".escore").disabled=!cb.checked;};});
+      actions.innerHTML=`<button class="action-btn" id="cancelBossEditBtn">취소</button><button class="action-btn primary" id="saveBossEditBtn">저장</button>`;
+      document.getElementById("cancelBossEditBtn").onclick=()=>openBossModal(id,false);
+      document.getElementById("saveBossEditBtn").onclick=saveBossParticipants;
+    }
+    openModal("bossModal");
+  }
+
+  async function saveBossParticipants(){
+    if(!(await ensureAdmin())) return;
+    const r=deepClone(state.round), b=r.bosses.find(x=>x.id===state.selectedBossId); if(!b)return;
+    const next={}; let invalid="";
+    document.querySelectorAll("[data-edit-member]").forEach(row=>{
+      const name=row.dataset.editMember, on=row.querySelector('input[type="checkbox"]').checked; if(!on)return;
+      const sec=parseTime(row.querySelector(".etime").value), score=Math.max(0,Number(row.querySelector(".escore").value)||0);
+      const m=r.members[name]||makeMemberState();
+      const otherBossSeconds=r.bosses.filter(x=>x.id!==b.id).reduce((a,x)=>a+(Number(x.participants?.[name]?.usedSeconds)||0),0);
+      const available=(Number(m.initialSeconds)||1200)-(Number(m.normalSeconds)||0)-otherBossSeconds;
+      const otherBossCount=r.bosses.filter(x=>x.id!==b.id && x.participants?.[name]).length;
+      const availableSwords=(Number(m.initialSwords)||10)-(Number(m.normalSwords)||0)-otherBossCount;
+      if(availableSwords<1) invalid=`${name}님의 남은 칼이 없습니다.`;
+      else if(sec>available) invalid=`${name}님의 남은 시간(${fmtTime(Math.max(0,available))})을 초과했습니다.`;
+      next[name]={usedSeconds:sec,score};
+    });
+    if(invalid){showToast(invalid);return;}
+    b.participants=next;
+    if(await persistRound(r)){showToast("보스 참여 기록을 저장했습니다.");openBossModal(b.id,false);}
+  }
+
+  function openMemberModal(name){
+    state.selectedMember=name; const m=state.round?.members?.[name]||makeMemberState(), r=memberRemaining(name);
+    const currentJoined=!!currentBoss()?.participants?.[name];
+    document.getElementById("memberModalBody").innerHTML=`<div class="member-detail-card"><div class="member-detail-name">${name}</div><div class="resource-cards"><div class="resource-card"><span>현재 남은 칼</span><b>${r.swords}칼</b></div><div class="resource-card"><span>현재 남은 시간</span><b>${fmtTime(r.seconds)}</b></div></div><div class="calc-note">초대형 보스 참여 ${r.usedBoss}회 = ${r.usedBoss}칼 자동 차감 · 현재 보스 ${currentJoined?"참여 완료":"미참여"}</div></div><div class="form-grid"><div class="field"><label>일반몹 사용 칼</label><input id="normalSwordsInput" type="number" inputmode="numeric" min="0" max="10" value="${Number(m.normalSwords)||0}"></div><div class="field"><label>일반몹 사용 시간 (mm:ss)</label><input id="normalTimeInput" type="text" inputmode="numeric" value="${fmtTime(m.normalSeconds)}"></div></div><div class="help">일반몹은 개별 몹당 1칼 사용 규칙을 전제로 총 사용 칼만 집계합니다. 초대형 보스에서 사용한 칼은 참여기록으로 자동 계산되므로 여기서 다시 입력하지 않습니다.</div>`;
+    openModal("memberModal");
+  }
+
+  document.getElementById("saveMemberUsageBtn").onclick=async()=>{
+    if(!(await ensureAdmin())) return;
+    const name=state.selectedMember; if(!name)return; const r=deepClone(state.round), m=r.members[name]||makeMemberState();
+    const normalSwords=Math.max(0,Math.min(10,Number(document.getElementById("normalSwordsInput").value)||0));
+    const normalSeconds=Math.max(0,parseTime(document.getElementById("normalTimeInput").value));
+    const bossCount=bossParticipationCount(name), bossSec=bossUsedSeconds(name);
+    if(normalSwords+bossCount>Number(m.initialSwords||10)){showToast("초기 칼보다 사용량이 많습니다.");return;}
+    if(normalSeconds+bossSec>Number(m.initialSeconds||1200)){showToast("초기 시간보다 사용량이 많습니다.");return;}
+    m.normalSwords=normalSwords; m.normalSeconds=normalSeconds; r.members[name]=m;
+    if(await persistRound(r)){closeModal("memberModal");showToast("일반몹 사용량을 저장했습니다.");}
+  };
+
+  function syncCanvasScale(){
+    const shell=document.getElementById("shell"), app=document.getElementById("app");
+    const scale=Math.min(1,window.innerWidth/LOGICAL_WIDTH);
+    app.style.transform=`scale(${scale})`;
+    document.documentElement.style.setProperty("--ui-scale",String(scale));
+    shell.style.width=`${LOGICAL_WIDTH*scale}px`;
+    requestAnimationFrame(()=>{shell.style.height=`${app.scrollHeight*scale}px`;});
+  }
+  window.addEventListener("resize",syncCanvasScale,{passive:true});
+  if(window.ResizeObserver) new ResizeObserver(syncCanvasScale).observe(document.getElementById("app"));
+
+  async function initFirebase(){
+    try{
+      const [appMod,authMod,fsMod]=await Promise.all([
+        import("https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js"),
+        import("https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js")
+      ]);
+      const firebaseConfig={apiKey:"AIzaSyBKJT7idO3z4uBvL645uNl2XSFa8mq7IO4",authDomain:"cat-hero-boss.firebaseapp.com",projectId:"cat-hero-boss",storageBucket:"cat-hero-boss.firebasestorage.app",messagingSenderId:"1065873409630",appId:"1:1065873409630:web:109f8edbe6a818833bd6cf",measurementId:"G-4QJSQ5DFDT"};
+      const app=appMod.initializeApp(firebaseConfig), auth=authMod.getAuth(app), db=fsMod.getFirestore(app);
+      if(!auth.currentUser) await authMod.signInAnonymously(auth);
+      const activeRef=fsMod.doc(db,"riftGalaxyOps","active");
+      let unsubActive=null;
+      const subscribeRound=(roundId)=>{
+        if(state.unsubscribeRound){state.unsubscribeRound();state.unsubscribeRound=null;}
+        if(!roundId){state.connected=true;renderAll();return;}
+        state.unsubscribeRound=fsMod.onSnapshot(fsMod.doc(db,"riftGalaxyRounds",roundId),snap=>{
+          if(snap.exists()){state.round={id:snap.id,...snap.data(),preview:false};state.connected=true;renderAll();}
+        },err=>{console.error(err);state.connected=false;renderHeader();});
+      };
+      unsubActive=fsMod.onSnapshot(activeRef,snap=>{state.connected=true;const id=snap.exists()?snap.data().roundId:null; if(id) subscribeRound(id); else renderAll();},err=>{console.error(err);state.connected=false;renderHeader();});
+      state.firebase={
+        async saveRound(round){ await fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),round,{merge:false}); },
+        async createRound(round){ await fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),round,{merge:false}); await fsMod.setDoc(activeRef,{roundId:round.id,updatedAt:new Date().toISOString()},{merge:false}); }
+      };
+      renderHeader();
+    }catch(err){ console.warn("Firebase offline preview",err); state.connected=false; renderHeader(); }
+  }
+
+  document.getElementById("setupStart").value=nowLocalInput();
+  renderAll();
+  if(location.protocol!=="file:") initFirebase();
+  window.__guildOps={getState:()=>deepClone(state.round),reference:INTERNAL_REFERENCE};
+})();
+</script>
+</body>
+</html>
