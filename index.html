@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.1.8</title>
+  <title>균열 · 은하 길드 운영현황 V0.1.9</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -497,6 +497,100 @@
     .time-battery i{height:9px!important;border-radius:2px!important}
     .status-pill{min-width:50px!important;height:26px!important;padding:0 7px!important;font-size:10.8px!important}
     .table-foot{padding-top:9px!important;font-size:10px!important}
+
+
+    /* V0.1.9 — 4x1 boss rail, fixed current + scrollable recent history */
+    .section-card:first-of-type{padding:10px 7px 11px!important}
+    .boss-rail{
+      grid-template-columns:97px minmax(0,1fr)!important;
+      gap:5px!important;
+      align-items:stretch!important;
+      width:100%!important;
+    }
+    #currentBossSlot{
+      width:97px!important;
+      min-width:97px!important;
+      padding-right:6px!important;
+      border-right:3px solid #c8b7ef!important;
+      box-sizing:border-box!important;
+    }
+    .history-wrap{
+      position:relative!important;
+      min-width:0!important;
+      overflow:hidden!important;
+    }
+    .history-scroll{
+      display:grid!important;
+      grid-auto-flow:column!important;
+      grid-auto-columns:88px!important;
+      grid-template-rows:1fr!important;
+      gap:4px!important;
+      overflow-x:auto!important;
+      overflow-y:hidden!important;
+      scroll-behavior:smooth!important;
+      scroll-snap-type:x proximity!important;
+      overscroll-behavior-inline:contain!important;
+      padding:0 18px 2px 0!important;
+      scrollbar-width:none!important;
+    }
+    .history-scroll::-webkit-scrollbar{display:none!important}
+    .boss-card,.boss-card.current{
+      width:88px!important;
+      min-width:88px!important;
+      height:216px!important;
+      padding:5px!important;
+      border-radius:12px!important;
+      scroll-snap-align:start!important;
+    }
+    .boss-card.current{border-width:2px!important}
+    .boss-image-area{height:76px!important;flex:0 0 76px!important}
+    .boss-img,.current .boss-img{width:74px!important;height:74px!important;border-radius:9px!important}
+    .current-badge{top:3px!important;left:3px!important;height:17px!important;line-height:17px!important;font-size:8.4px!important;padding:0 5px!important}
+    .boss-title-area{height:44px!important;min-height:44px!important;padding:4px 0!important;gap:3px!important}
+    .boss-title-line{font-size:11.4px!important;line-height:1.05!important;letter-spacing:-.35px!important}
+    .boss-level-badge{height:17px!important;min-width:38px!important;padding:0 6px!important;font-size:8.8px!important}
+    .boss-summary-area{padding:6px 1px 0!important;gap:5px!important}
+    .boss-summary-row{font-size:8.8px!important;line-height:1.08!important;padding:0 1px!important;gap:3px!important}
+    .boss-summary-row b{font-size:10px!important;letter-spacing:-.2px!important}
+    .boss-summary-row.score-row{margin-top:1px!important;padding-top:5px!important;gap:3px!important}
+    .boss-summary-row.score-row span{font-size:8.4px!important}
+    .boss-summary-row.score-row b{font-size:9.7px!important;letter-spacing:-.4px!important;white-space:nowrap!important}
+    .empty-boss{font-size:9.3px!important;line-height:1.4!important;color:#a59cad!important}
+    .history-next-btn{
+      position:absolute;
+      z-index:5;
+      right:0;
+      top:0;
+      width:18px;
+      height:216px;
+      border:0;
+      padding:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      gap:0;
+      background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.94) 48%,#fff 100%);
+      color:#7657ca;
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .history-next-btn.show{display:flex}
+    .history-chevron{
+      width:8px;
+      height:8px;
+      border-top:2.5px solid currentColor;
+      border-right:2.5px solid currentColor;
+      transform:rotate(45deg);
+      margin-left:-3px;
+      filter:drop-shadow(0 0 3px rgba(118,87,202,.35));
+      animation:historyArrowPulse 1.35s ease-in-out infinite;
+    }
+    .history-chevron+ .history-chevron{animation-delay:.18s}
+    @keyframes historyArrowPulse{0%,100%{opacity:.28;transform:translateX(-2px) rotate(45deg)}50%{opacity:1;transform:translateX(2px) rotate(45deg)}}
+    @media (prefers-reduced-motion:reduce){.history-chevron{animation:none;opacity:.85}}
+
+    .member-table th:nth-child(2) span{display:inline-block;text-align:center}
+
 </style>
 </head>
 <body>
@@ -525,6 +619,9 @@
           <div id="currentBossSlot"></div>
           <div class="history-wrap">
             <div class="history-scroll" id="historyBossRail"></div>
+            <button type="button" class="history-next-btn" id="historyNextBtn" aria-label="더 이전 초대형 보스 보기">
+              <span class="history-chevron"></span><span class="history-chevron"></span>
+            </button>
           </div>
         </div>
         <div class="quick-summary">
@@ -545,14 +642,14 @@
         </div>
         <table class="member-table" aria-label="길드원 현재 자원 현황">
           <colgroup><col><col><col><col><col></colgroup>
-          <thead><tr><th>길드원</th><th><span>보스<br>참여현황</span></th><th>칼(기회)</th><th>잔여 시간</th><th>현재 보스</th></tr></thead>
+          <thead><tr><th>길드원</th><th><span>초대형<br>참여현황</span></th><th>칼(기회)</th><th>잔여 시간</th><th>현재 초대형</th></tr></thead>
           <tbody id="memberRows"></tbody>
         </table>
         <div class="table-foot"><span>길드원을 누르면 <strong>일반몹 사용량</strong>을 관리할 수 있습니다.</span></div>
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.1.8</b>
+        <b>Created by 돗돔 · V0.1.9</b>
       </div>
     </main>
   </div>
@@ -759,21 +856,34 @@
     </button>`;
   }
 
+  function updateHistoryNextButton(){
+    const rail=document.getElementById("historyBossRail"), btn=document.getElementById("historyNextBtn");
+    if(!rail||!btn) return;
+    const hasMore=rail.scrollWidth>rail.clientWidth+2;
+    const atEnd=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-3;
+    btn.classList.toggle("show",hasMore&&!atEnd);
+  }
+
   function renderBossRail(){
     const cur=currentBoss();
     document.getElementById("currentBossSlot").innerHTML=bossCardMarkup(cur,true);
-    const history=(state.round?.bosses||[]).filter(b=>b.id!==state.round.currentBossId).sort((a,b)=>a.order-b.order);
+    const history=(state.round?.bosses||[])
+      .filter(b=>b.id!==state.round.currentBossId)
+      .sort((a,b)=>(Number(b.order)||0)-(Number(a.order)||0));
     const historyCards=history.map(b=>bossCardMarkup(b,false));
-    const visibleHistorySlots=4;
+    const visibleHistorySlots=3;
     while(historyCards.length<visibleHistorySlots){
       historyCards.push(`<div class="boss-card"><div class="empty-boss">${history.length?"등록 전":"이전 보스<br>없음"}</div></div>`);
     }
-    document.getElementById("historyBossRail").innerHTML=historyCards.join("");
+    const rail=document.getElementById("historyBossRail");
+    rail.innerHTML=historyCards.join("");
+    rail.scrollLeft=0;
     const join=participantCount(cur), score=bossScore(cur), missing=cur?Math.max(0,MEMBER_ORDER.length-join):0;
     document.getElementById("currentJoinSummary").textContent=cur?`${join} / ${MEMBER_ORDER.length}`:"-";
     document.getElementById("currentScoreSummary").textContent=cur?fmtNum(score):"-";
     document.getElementById("currentMissingSummary").textContent=cur?`${missing}명`:"-";
     document.querySelectorAll("[data-boss-id]").forEach(el=>el.onclick=()=>openBossModal(el.dataset.bossId,false));
+    requestAnimationFrame(updateHistoryNextButton);
   }
 
   function renderMembers(){
@@ -1111,6 +1221,22 @@
     m.normalSwords=normalSwords; m.normalSeconds=normalSeconds; r.members[name]=m;
     if(await persistRound(r)){closeModal("memberModal");showToast("일반몹 사용량을 저장했습니다.");}
   };
+
+  const historyRailEl=document.getElementById("historyBossRail");
+  const historyNextBtn=document.getElementById("historyNextBtn");
+  if(historyRailEl){
+    historyRailEl.addEventListener("scroll",updateHistoryNextButton,{passive:true});
+  }
+  if(historyNextBtn){
+    historyNextBtn.addEventListener("click",()=>{
+      const rail=document.getElementById("historyBossRail");
+      if(!rail) return;
+      const card=rail.querySelector(".boss-card");
+      const step=card?card.getBoundingClientRect().width+4:rail.clientWidth*.86;
+      rail.scrollBy({left:step*2,behavior:"smooth"});
+      setTimeout(updateHistoryNextButton,420);
+    });
+  }
 
   function syncCanvasScale(){
     const shell=document.getElementById("shell"), app=document.getElementById("app");
