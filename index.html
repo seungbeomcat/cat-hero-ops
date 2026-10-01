@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.2</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.3</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -824,6 +824,102 @@
     .history-stats .score b{font-size:10.6px!important}
     .history-next-btn{height:194px!important}
 
+
+    /* V0.2.3 — simplified boss participation + direct resource control */
+    #currentBossSlot .current-boss-identity{
+      height:38px!important;
+      justify-content:center!important;
+      padding:0 0 7px!important;
+    }
+    #currentBossSlot .current-boss-identity strong{
+      width:100%!important;
+      text-align:center!important;
+      font-size:21px!important;
+      letter-spacing:-.55px!important;
+      overflow:visible!important;
+      text-overflow:clip!important;
+    }
+    #currentBossSlot .current-info-grid{
+      grid-template-rows:repeat(3,27px)!important;
+      gap:5px!important;
+      margin-top:8px!important;
+    }
+    #currentBossSlot .current-info-box,
+    #currentBossSlot .current-info-box.score{
+      height:27px!important;
+      min-height:27px!important;
+      padding:0 9px!important;
+      border-radius:8px!important;
+    }
+    #currentBossSlot .current-info-box span,
+    #currentBossSlot .current-info-box.score span{font-size:9.6px!important}
+    #currentBossSlot .current-info-box b{font-size:13px!important}
+    #currentBossSlot .current-info-box.score b{font-size:14px!important}
+    #currentBossSlot .current-main-badge{min-width:42px!important;text-align:center!important}
+
+    .history-zone{margin-top:10px!important;padding-top:10px!important}
+    .history-scroll{gap:7px!important;padding:0!important;scroll-snap-type:x mandatory!important}
+    .history-card{
+      flex:0 0 calc((100% - 14px)/3)!important;
+      width:calc((100% - 14px)/3)!important;
+      height:202px!important;
+      padding:6px!important;
+      scroll-snap-align:start!important;
+    }
+    .history-image-wrap{height:84px!important}
+    .history-boss-image{width:84px!important;height:84px!important}
+    .history-seq{font-size:10.5px!important;min-width:24px!important}
+    .history-title{height:32px!important}
+    .history-title strong{font-size:12.5px!important}
+    .history-title span{font-size:9.2px!important;height:18px!important;line-height:18px!important}
+    .history-stats{gap:4px!important;padding-top:6px!important}
+    .history-stats>div{padding:5px 3px!important}
+    .history-stats span{font-size:8.5px!important}
+    .history-stats b{font-size:10.8px!important}
+    .history-stats .score b{font-size:11.5px!important}
+    .history-stats .rank{right:7px!important;top:7px!important;width:43px!important;height:24px!important}
+    .history-stats .rank b{font-size:10px!important}
+    .history-empty{
+      height:72px!important;min-height:72px!important;border:0!important;background:transparent!important;
+      font-size:13px!important;font-weight:900!important;color:#8e849f!important;
+    }
+    .history-next-btn{
+      width:30px!important;height:202px!important;right:0!important;
+      background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.72) 42%,rgba(255,255,255,.94) 100%)!important;
+      color:#7457c4!important;opacity:.82!important;
+    }
+    .history-chevron{width:10px!important;height:10px!important;border-width:2px 2px 0 0!important}
+
+    .participant-head,.participant-row{grid-template-columns:minmax(0,1fr) 132px!important;gap:8px!important}
+    .participant-row .pname{text-align:center!important}
+    .participant-row .pscore{text-align:center!important;font-size:12px!important}
+    .edit-head,.edit-row{grid-template-columns:58px minmax(0,1fr) 132px!important;gap:7px!important;padding:0 8px!important}
+    .edit-head{font-size:10px!important}
+    .edit-row{min-height:46px!important}
+    .edit-row .ename{text-align:center!important;font-size:11.5px!important}
+    .edit-row .escore{height:34px!important;font-size:15px!important}
+
+    .member-detail-card{padding:12px!important;margin-bottom:10px!important}
+    .member-detail-name{font-size:20px!important;text-align:left!important;margin-bottom:9px!important}
+    .member-resource-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .member-resource-edit{background:#f5f1ff;border:1px solid #e1d8f1;border-radius:11px;padding:9px;text-align:center}
+    .member-resource-edit>span{display:block;font-size:9.5px;font-weight:900;color:#766a8e;margin-bottom:5px}
+    .sword-edit-line{height:37px;display:flex;align-items:center;justify-content:center;gap:5px}
+    .sword-edit-line input{width:58px;height:37px;border:1px solid #d7cdea;border-radius:9px;background:#fff;text-align:center;font-size:20px;font-weight:950;color:#4b397c;padding:0}
+    .sword-edit-line em{font-style:normal;font-size:16px;font-weight:950;color:#544377}
+    .member-remaining-time{height:37px!important;font-size:18px!important;color:#4b397c!important}
+    .member-history-title{font-size:12.5px;font-weight:950;color:#493c68;margin:2px 2px 7px}
+    .member-history-list{border:1px solid #dfd7ec;border-radius:11px;overflow:hidden;background:#fff}
+    .member-history-item{min-height:46px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-bottom:1px solid #eeeaf4}
+    .member-history-item:last-child{border-bottom:0}
+    .member-history-boss{min-width:0;display:flex;flex-direction:column;gap:2px}
+    .member-history-boss b{font-size:11.5px;color:#372d4d;font-weight:950;white-space:nowrap}
+    .member-history-boss span{font-size:8.8px;color:#8b8299;font-weight:850}
+    .member-history-status{flex:0 0 auto;min-width:54px;height:25px;display:flex;align-items:center;justify-content:center;border-radius:999px;font-size:9.5px;font-weight:950}
+    .member-history-status.joined{background:#eaf8f1;color:#178354;border:1px solid #a9dec5}
+    .member-history-status.missed{background:#fff1f4;color:#cb4b60;border:1px solid #efb8c2}
+    .member-history-empty{height:70px;display:flex;align-items:center;justify-content:center;border:1px dashed #ded7e9;border-radius:11px;color:#958ca4;font-size:10.5px;font-weight:850;background:#fbfaff}
+
 </style>
 </head>
 <body>
@@ -850,7 +946,6 @@
       <section class="section-card boss-dashboard-card">
         <div class="current-boss-panel" id="currentBossSlot"></div>
         <div class="history-zone">
-          <div class="history-zone-head">소멸 초대형 기록</div>
           <div class="history-wrap">
             <div class="history-scroll" id="historyBossRail"></div>
             <button type="button" class="history-next-btn" id="historyNextBtn" aria-label="더 이전 소멸 초대형 보기">
@@ -866,7 +961,7 @@
           <div class="resource-updated"><span>최종 업데이트</span><b id="updatedAt">-</b></div>
         </div>
         <div class="member-subrow">
-          <div class="section-note">보스 참여 = 1칼 자동 차감 · 일반몹 사용량 포함</div>
+          <div class="section-note">초대형 참여 1회 = 1칼 자동 차감 · 남은 자원은 길드원 선택 후 직접 수정</div>
           <div class="legend"><span><i class="g"></i>참여</span><span><i class="r"></i>미참여</span></div>
         </div>
         <table class="member-table" aria-label="길드원 현재 자원 현황">
@@ -874,11 +969,11 @@
           <thead><tr><th>길드원</th><th><span>초대형<br>참여현황</span></th><th>칼(기회)</th><th>잔여 시간</th><th>현재 초대형</th></tr></thead>
           <tbody id="memberRows"></tbody>
         </table>
-        <div class="table-foot"><span>길드원을 누르면 <strong>일반몹 사용량</strong>을 관리할 수 있습니다.</span></div>
+        <div class="table-foot"><span>길드원을 누르면 <strong>초대형 참여 이력</strong>과 현재 자원을 확인·수정할 수 있습니다.</span></div>
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.2</b>
+        <b>Created by 돗돔 · V0.2.3</b>
       </div>
     </main>
   </div>
@@ -929,7 +1024,7 @@
 
   <div class="modal-backdrop" id="memberModal">
     <div class="modal">
-      <div class="modal-head"><div class="modal-title">길드원 자원 상세</div><button class="close-btn" data-close="memberModal">×</button></div>
+      <div class="modal-head"><div class="modal-title">길드원 상세</div><button class="close-btn" data-close="memberModal">×</button></div>
       <div class="modal-body" id="memberModalBody"></div>
       <div class="modal-actions"><button class="action-btn" data-close="memberModal">취소</button><button class="action-btn primary" id="saveMemberUsageBtn">저장</button></div>
     </div>
@@ -1081,9 +1176,9 @@
     }
     const meta=BOSS_META[b.area]||{name:b.area};
     const joined=participantCount(b), missing=Math.max(0,MEMBER_ORDER.length-joined), score=bossScore(b);
-    return `<button type="button" class="current-boss-image-card" data-boss-id="${b.id}" aria-label="현재 ${meta.name} 초대형 상세보기"><span class="current-badge current-main-badge">현재 초대형</span>${bossImageMarkup(b.area,"current-main-image")}</button>
+    return `<button type="button" class="current-boss-image-card" data-boss-id="${b.id}" aria-label="현재 ${meta.name} 초대형 상세보기"><span class="current-badge current-main-badge">현재</span>${bossImageMarkup(b.area,"current-main-image")}</button>
       <button type="button" class="current-boss-info" data-boss-id="${b.id}" aria-label="현재 ${meta.name} 초대형 상세보기">
-        <div class="current-boss-identity"><span class="current-level">${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"}</span><strong>${meta.name}</strong></div>
+        <div class="current-boss-identity"><strong>${b.bossLevel?`LV.${b.bossLevel}`:"LV.-"} ${meta.name}</strong></div>
         <div class="current-info-grid">
           <div class="current-info-box join"><span>현재 참여인원</span><b>${joined}명</b></div>
           <div class="current-info-box missing"><span>현재 불참인원</span><b>${missing}명</b></div>
@@ -1098,7 +1193,7 @@
     const rank=Number(b.rank)>0?`${Number(b.rank)}위`:'-';
     const popupOrder=Number(b.order)||historyIndex;
     return `<button type="button" class="history-card" data-boss-id="${b.id}" aria-label="#${popupOrder} 소멸 ${meta.name} 초대형 상세보기">
-      <div class="history-image-wrap"><span class="history-seq">${popupOrder}</span>${bossImageMarkup(b.area,"history-boss-image")}</div>
+      <div class="history-image-wrap"><span class="history-seq">#${popupOrder}</span>${bossImageMarkup(b.area,"history-boss-image")}</div>
       <div class="history-title"><strong>${meta.name}</strong><span>${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"}</span></div>
       <div class="history-stats">
         <div><span>참여</span><b>${joined}명</b></div>
@@ -1129,7 +1224,7 @@
         return bd-ad;
       });
     const rail=document.getElementById("historyBossRail");
-    rail.innerHTML=history.length?history.map((b,i)=>historyBossCardMarkup(b,i+1)).join(""):`<div class="history-empty">아직 소멸된 초대형 기록이 없습니다.</div>`;
+    rail.innerHTML=history.length?history.map((b,i)=>historyBossCardMarkup(b,i+1)).join(""):`<div class="history-empty">소멸보스 없음</div>`;
     rail.scrollLeft=0;
     document.querySelectorAll("[data-boss-id]").forEach(el=>el.onclick=()=>openBossModal(el.dataset.bossId,false));
     requestAnimationFrame(updateHistoryNextButton);
@@ -1291,6 +1386,11 @@
     Object.assign(pickerState,{kind:"normalDuration",durationSeconds:Number(btn.dataset.seconds)||0,maxSeconds:max,durationButton:btn});
     renderDurationPicker();pickerOpen(`${name} 일반몹 사용시간`);
   }
+  function openMemberRemainingTimePicker(name,btn){
+    const max=Math.max(0,Number(btn.dataset.maxSeconds)||0);
+    Object.assign(pickerState,{kind:"memberRemainingTime",durationSeconds:Number(btn.dataset.seconds)||0,maxSeconds:max,durationButton:btn});
+    renderDurationPicker();pickerOpen(`${name} 잔여 시간`);
+  }
   document.getElementById("setupStartDateBtn").onclick=()=>openDatePicker("setupStartDate","setupStartDateBtn","회차 시작 날짜");
   document.getElementById("setupStartTimeBtn").onclick=()=>openClockPicker("setupStartTime","setupStartTimeBtn","회차 시작 시각");
   document.getElementById("newBossStartDateBtn").onclick=()=>openDatePicker("newBossStartDate","newBossStartDateBtn","보스 팝업 날짜");
@@ -1304,7 +1404,7 @@
       const row=pickerState.setupRow,idx=pickerState.choiceIndex;row.dataset.timeIndex=String(idx);row.querySelector(".setup-time-choice").textContent=fmtTime(1200+VALID_TIME_BONUSES[idx]);
     }else if(pickerState.kind==="level"){
       bossLevelValue=pickerState.levelValues[pickerState.choiceIndex];renderBossLevelChoice();
-    }else if(pickerState.kind==="bossDuration"||pickerState.kind==="normalDuration"){
+    }else if(pickerState.kind==="bossDuration"||pickerState.kind==="normalDuration"||pickerState.kind==="memberRemainingTime"){
       const btn=pickerState.durationButton;btn.dataset.seconds=String(pickerState.durationSeconds);btn.textContent=fmtTime(pickerState.durationSeconds);
     }
     closeModal("pickerModal");
@@ -1411,18 +1511,18 @@
     const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">불참인원<b>${Math.max(0,MEMBER_ORDER.length-participantCount(b))}명</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">${b.status==="current"?"상태":"등수"}<b>${rankText}</b></div></div></div></div>`;
     if(!edit){
       const parts=MEMBER_ORDER.filter(n=>b.participants?.[n]);
-      const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>참여 길드원</div><div>사용시간</div><div>스코어</div></div>${parts.map(n=>{const p=b.participants[n];return `<div class="participant-row"><div class="pname">${n}</div><div class="ptime">${fmtTime(p.usedSeconds)}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
+      const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>참여 길드원</div><div>스코어</div></div>${parts.map(n=>{const p=b.participants[n];return `<div class="participant-row"><div class="pname">${n}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
       body.innerHTML=hero+list;
       actions.innerHTML=`<button class="action-btn" data-boss-close>닫기</button><button class="action-btn primary" id="editBossBtn">참여 기록 수정</button>`;
       actions.querySelector("[data-boss-close]").onclick=()=>closeModal("bossModal");
       document.getElementById("editBossBtn").onclick=()=>openBossModal(id,true);
     }else{
       const rankEditor=b.status==="current"?"":`<div class="ended-rank-editor"><span>최종 길드 순위</span><div><input id="bossRankInput" type="number" inputmode="numeric" min="1" max="999" placeholder="순위" value="${Number(b.rank)>0?Number(b.rank):""}"><em>위</em></div></div>`;
-      body.innerHTML=hero+rankEditor+`<div class="help" style="margin:0 0 7px">참여 체크 자체가 <b>1칼 사용</b>입니다. 같은 보스에는 개인당 1칼만 사용할 수 있으며, 실제 사용시간과 스코어만 입력합니다.</div><div class="edit-list"><div class="edit-head"><div>참여</div><div>길드원</div><div>시간</div><div>스코어</div></div>${MEMBER_ORDER.map(n=>{const p=b.participants?.[n],on=!!p;return `<div class="edit-row ${on?"":"disabled"}" data-edit-member="${n}"><input type="checkbox" ${on?"checked":""}><div class="ename">${n}</div><button type="button" class="etime-picker" data-seconds="${on?Number(p.usedSeconds)||0:0}" ${on?"":"disabled"}>${on?fmtTime(p.usedSeconds):"00:00"}</button><input class="escore" type="number" inputmode="numeric" min="0" value="${on?Number(p.score)||0:0}" ${on?"":"disabled"}></div>`;}).join("")}</div>`;
+      body.innerHTML=hero+rankEditor+`<div class="edit-list"><div class="edit-head"><div>참여</div><div>길드원</div><div>스코어</div></div>${MEMBER_ORDER.map(n=>{const p=b.participants?.[n],on=!!p;return `<div class="edit-row" data-edit-member="${n}"><input type="checkbox" ${on?"checked":""}><div class="ename">${n}</div><input class="escore" type="number" inputmode="numeric" min="0" value="${on?Number(p.score)||0:0}"></div>`;}).join("")}</div>`;
       body.querySelectorAll("[data-edit-member]").forEach(row=>{
-        const cb=row.querySelector('input[type="checkbox"]'), timeBtn=row.querySelector(".etime-picker");
-        cb.onchange=()=>{row.classList.toggle("disabled",!cb.checked);timeBtn.disabled=!cb.checked;row.querySelector(".escore").disabled=!cb.checked;};
-        timeBtn.onclick=()=>openBossDurationPicker(row);
+        const cb=row.querySelector('input[type="checkbox"]'), scoreInput=row.querySelector(".escore");
+        cb.onchange=()=>{ if(!cb.checked) scoreInput.value="0"; };
+        scoreInput.oninput=()=>{ if((Number(scoreInput.value)||0)>0) cb.checked=true; };
       });
       actions.innerHTML=`<button class="action-btn" id="cancelBossEditBtn">취소</button><button class="action-btn primary" id="saveBossEditBtn">저장</button>`;
       document.getElementById("cancelBossEditBtn").onclick=()=>openBossModal(id,false);
@@ -1436,16 +1536,14 @@
     const r=deepClone(state.round), b=r.bosses.find(x=>x.id===state.selectedBossId); if(!b)return;
     const next={}; let invalid="";
     document.querySelectorAll("[data-edit-member]").forEach(row=>{
-      const name=row.dataset.editMember, on=row.querySelector('input[type="checkbox"]').checked; if(!on)return;
-      const sec=Math.max(0,Number(row.querySelector(".etime-picker").dataset.seconds)||0), score=Math.max(0,Number(row.querySelector(".escore").value)||0);
+      const name=row.dataset.editMember, score=Math.max(0,Number(row.querySelector(".escore").value)||0);
+      const on=row.querySelector('input[type="checkbox"]').checked || score>0; if(!on)return;
       const m=r.members[name]||makeMemberState();
-      const otherBossSeconds=r.bosses.filter(x=>x.id!==b.id).reduce((a,x)=>a+(Number(x.participants?.[name]?.usedSeconds)||0),0);
-      const available=(Number(m.initialSeconds)||1200)-(Number(m.normalSeconds)||0)-otherBossSeconds;
       const otherBossCount=r.bosses.filter(x=>x.id!==b.id && x.participants?.[name]).length;
       const availableSwords=(Number(m.initialSwords)||10)-(Number(m.normalSwords)||0)-otherBossCount;
       if(availableSwords<1) invalid=`${name}님의 남은 칼이 없습니다.`;
-      else if(sec>available) invalid=`${name}님의 남은 시간(${fmtTime(Math.max(0,available))})을 초과했습니다.`;
-      next[name]={usedSeconds:sec,score};
+      const legacySeconds=Number(b.participants?.[name]?.usedSeconds)||0;
+      next[name]={usedSeconds:legacySeconds,score};
     });
     if(invalid){showToast(invalid);return;}
     b.participants=next;
@@ -1457,25 +1555,41 @@
     if(await persistRound(r)){showToast("보스 참여 기록을 저장했습니다.");openBossModal(b.id,false);}
   }
 
+  function memberBossHistoryMarkup(name){
+    const bosses=[...(state.round?.bosses||[])].sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0));
+    if(!bosses.length) return `<div class="member-history-empty">이번 회차에 등록된 초대형 보스가 없습니다.</div>`;
+    return `<div class="member-history-list">${bosses.map(b=>{
+      const meta=BOSS_META[b.area]||{name:b.area};
+      const joined=!!b.participants?.[name];
+      const current=b.id===state.round.currentBossId;
+      return `<div class="member-history-item"><div class="member-history-boss"><b>#${Number(b.order)||'-'} ${meta.name}</b><span>${b.bossLevel?`Lv.${b.bossLevel}`:'Lv.-'}${current?' · 현재':''}</span></div><span class="member-history-status ${joined?'joined':'missed'}">${joined?'참여':'미참여'}</span></div>`;
+    }).join("")}</div>`;
+  }
+
   function openMemberModal(name){
     state.selectedMember=name; const m=state.round?.members?.[name]||makeMemberState(), r=memberRemaining(name);
-    const currentJoined=!!currentBoss()?.participants?.[name];
-    document.getElementById("memberModalBody").innerHTML=`<div class="member-detail-card"><div class="member-detail-name">${name}</div><div class="resource-cards"><div class="resource-card"><span>현재 칼(기회)</span><b>${r.swords}/10</b></div><div class="resource-card"><span>현재 잔여 시간</span><b>${fmtTime(r.seconds)}</b></div></div><div class="calc-note">보스 참여 ${r.usedBoss}회 = ${r.usedBoss}칼 자동 차감 · 현재 보스 ${currentJoined?"참여 완료":"미참여"}</div></div><div class="form-grid"><div class="field"><label>일반몹 사용 칼</label><input id="normalSwordsInput" type="number" inputmode="numeric" min="0" max="10" value="${Number(m.normalSwords)||0}"></div><div class="field"><label>일반몹 사용 시간</label><button type="button" class="picker-display normal-time-picker" id="normalTimeBtn" data-seconds="${Number(m.normalSeconds)||0}">${fmtTime(m.normalSeconds)}</button></div></div><div class="help">일반몹은 개별 몹당 1칼 사용 규칙을 전제로 총 사용 칼만 집계합니다. 보스에서 사용한 칼은 참여기록으로 자동 계산되므로 여기서 다시 입력하지 않습니다.</div>`;
-    const normalBtn=document.getElementById("normalTimeBtn");
-    if(normalBtn) normalBtn.onclick=()=>openNormalDurationPicker(name,normalBtn);
+    const maxSwords=Math.max(0,(Number(m.initialSwords)||10)-bossParticipationCount(name));
+    const maxTime=Math.max(0,(Number(m.initialSeconds)||1200)-bossUsedSeconds(name));
+    document.getElementById("memberModalBody").innerHTML=`<div class="member-detail-card"><div class="member-detail-name">${name}</div><div class="member-resource-edit-grid"><div class="member-resource-edit"><span>현재 칼(기회)</span><div class="sword-edit-line"><input id="remainingSwordsInput" type="number" inputmode="numeric" min="0" max="${maxSwords}" value="${r.swords}"><em>/10</em></div></div><div class="member-resource-edit"><span>현재 잔여 시간</span><button type="button" class="picker-display member-remaining-time" id="remainingTimeBtn" data-seconds="${r.seconds}" data-max-seconds="${maxTime}">${fmtTime(r.seconds)}</button></div></div></div><div class="member-history-title">이번 회차 초대형 참여</div>${memberBossHistoryMarkup(name)}`;
+    const timeBtn=document.getElementById("remainingTimeBtn");
+    if(timeBtn) timeBtn.onclick=()=>openMemberRemainingTimePicker(name,timeBtn);
     openModal("memberModal");
   }
 
   document.getElementById("saveMemberUsageBtn").onclick=async()=>{
     if(!(await ensureAdmin())) return;
     const name=state.selectedMember; if(!name)return; const r=deepClone(state.round), m=r.members[name]||makeMemberState();
-    const normalSwords=Math.max(0,Math.min(10,Number(document.getElementById("normalSwordsInput").value)||0));
-    const normalSeconds=Math.max(0,Number(document.getElementById("normalTimeBtn").dataset.seconds)||0);
     const bossCount=bossParticipationCount(name), bossSec=bossUsedSeconds(name);
-    if(normalSwords+bossCount>Number(m.initialSwords||10)){showToast("초기 칼보다 사용량이 많습니다.");return;}
-    if(normalSeconds+bossSec>Number(m.initialSeconds||1200)){showToast("초기 시간보다 사용량이 많습니다.");return;}
-    m.normalSwords=normalSwords; m.normalSeconds=normalSeconds; r.members[name]=m;
-    if(await persistRound(r)){closeModal("memberModal");showToast("일반몹 사용량을 저장했습니다.");}
+    const initialSwords=Number(m.initialSwords)||10, initialSeconds=Number(m.initialSeconds)||1200;
+    const maxSwords=Math.max(0,initialSwords-bossCount), maxTime=Math.max(0,initialSeconds-bossSec);
+    const desiredSwords=Math.max(0,Math.floor(Number(document.getElementById("remainingSwordsInput").value)||0));
+    const desiredSeconds=Math.max(0,Number(document.getElementById("remainingTimeBtn").dataset.seconds)||0);
+    if(desiredSwords>maxSwords){showToast(`초대형 참여 ${bossCount}회를 반영하면 최대 ${maxSwords}칼까지 남을 수 있습니다.`);return;}
+    if(desiredSeconds>maxTime){showToast(`설정 가능한 최대 잔여 시간은 ${fmtTime(maxTime)}입니다.`);return;}
+    m.normalSwords=Math.max(0,initialSwords-bossCount-desiredSwords);
+    m.normalSeconds=Math.max(0,initialSeconds-bossSec-desiredSeconds);
+    r.members[name]=m;
+    if(await persistRound(r)){closeModal("memberModal");showToast("길드원 현재 자원을 저장했습니다.");}
   };
 
   const historyRailEl=document.getElementById("historyBossRail");
@@ -1487,9 +1601,7 @@
     historyNextBtn.addEventListener("click",()=>{
       const rail=document.getElementById("historyBossRail");
       if(!rail) return;
-      const card=rail.querySelector(".history-card");
-      const step=card?card.getBoundingClientRect().width+4:rail.clientWidth*.86;
-      rail.scrollBy({left:step*2,behavior:"smooth"});
+      rail.scrollBy({left:rail.clientWidth,behavior:"smooth"});
       setTimeout(updateHistoryNextButton,420);
     });
   }
