@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.1.6</title>
+  <title>균열 · 은하 길드 운영현황 V0.1.7</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -337,7 +337,7 @@
 
 
     /* V0.1.6 boss 5x1 + status hierarchy */
-    .section-card:first-of-type{padding:9px 8px 10px}
+    .section-card:first-of-type{padding:9px 7px 10px}
     .boss-rail{grid-template-columns:74px minmax(0,1fr);gap:4px;align-items:stretch}
     .history-scroll{gap:4px;padding-bottom:2px}
     .history-wrap::after{width:8px}
@@ -378,6 +378,71 @@
     .time-battery.safe i.on{background:linear-gradient(180deg,#f6cc55,#e5a82d)}
     .time-battery.mid i.on{background:linear-gradient(180deg,#f3a24d,#e57a29)}
     .time-battery.danger i.on{background:linear-gradient(180deg,#ef7481,#d74c5f)}
+
+  
+
+    /* V0.1.7 boss rail rebuild — fixed 5x1 composition */
+    .section-card:first-of-type{padding:9px 8px 10px}
+    .boss-rail{
+      display:grid!important;
+      grid-template-columns:76px minmax(0,1fr)!important;
+      gap:3px!important;
+      align-items:stretch!important;
+      width:100%!important;
+    }
+    #currentBossSlot{width:76px;min-width:76px}
+    .history-wrap{min-width:0;overflow:hidden;position:relative}
+    .history-scroll{
+      display:grid!important;
+      grid-auto-flow:column!important;
+      grid-auto-columns:76px!important;
+      grid-template-rows:1fr!important;
+      gap:3px!important;
+      overflow-x:auto!important;
+      overflow-y:hidden!important;
+      scroll-snap-type:x proximity;
+      padding:0 0 2px!important;
+      scrollbar-width:none;
+    }
+    .history-scroll::-webkit-scrollbar{display:none}
+    .history-wrap::after{display:none!important}
+    .boss-card,.boss-card.current{
+      width:76px!important;
+      min-width:76px!important;
+      height:194px!important;
+      padding:4px!important;
+      border-radius:11px!important;
+      overflow:hidden!important;
+      display:flex!important;
+      flex-direction:column!important;
+      align-items:stretch!important;
+      scroll-snap-align:start;
+      box-sizing:border-box;
+    }
+    .boss-card.current{border-width:2px!important}
+    .boss-image-area{height:66px!important;flex:0 0 66px!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;position:relative!important}
+    .boss-img,.current .boss-img{width:64px!important;height:64px!important;margin:0 auto!important;border-radius:8px!important}
+    .current-badge{top:3px!important;left:3px!important;height:16px!important;line-height:16px!important;padding:0 5px!important;font-size:8px!important;border-radius:6px!important}
+    .boss-title-area{min-height:39px!important;height:39px!important;padding:4px 0 3px!important;gap:2px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;border-bottom:1px solid #eee8f5!important;box-sizing:border-box}
+    .boss-title-line{font-size:10px!important;line-height:1.05!important;letter-spacing:-.35px!important;white-space:nowrap!important;overflow:visible!important}
+    .boss-level-badge{height:15px!important;min-width:34px!important;padding:0 5px!important;font-size:7.8px!important}
+    .boss-summary-area{flex:1!important;min-height:0!important;padding:5px 0 0!important;gap:4px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+    .boss-summary-row{display:grid!important;grid-template-columns:1fr auto!important;align-items:center!important;gap:2px!important;font-size:7.7px!important;line-height:1.05!important;text-align:left!important;padding:0 1px!important;min-width:0!important}
+    .boss-summary-row span{white-space:nowrap!important}
+    .boss-summary-row b{font-size:8.7px!important;line-height:1.05!important;letter-spacing:-.25px!important;white-space:nowrap!important;overflow:visible!important;max-width:none!important}
+    .boss-summary-row.missing-row span,.boss-summary-row.missing-row b{color:#d94f62!important}
+    .boss-summary-row.score-row{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;margin-top:2px!important;padding:4px 0 0!important;border-top:1px solid #eee8f5!important;text-align:center!important;gap:2px!important}
+    .boss-summary-row.score-row span{font-size:7.5px!important;line-height:1!important;color:#746a86!important}
+    .boss-summary-row.score-row b{font-size:7.8px!important;line-height:1!important;letter-spacing:-.55px!important;color:#342953!important;max-width:100%!important}
+    .empty-boss{height:100%!important;min-height:0!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:5px!important;font-size:8.3px!important;line-height:1.35!important;color:#a39aae!important;text-align:center!important}
+
+    .quick-summary{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;margin-top:8px!important}
+    .sum-box{min-height:46px!important;padding:6px 4px!important;border-width:1.5px!important}
+    .sum-box.join-summary{background:#e8f8ef!important;border-color:#72d4a1!important;box-shadow:inset 0 0 0 1px rgba(40,157,98,.04)}
+    .sum-box.join-summary .sum-label,.sum-box.join-summary .sum-value{color:#188653!important}
+    .sum-box.missing-summary{background:#fff0f3!important;border-color:#ef9bad!important;box-shadow:inset 0 0 0 1px rgba(204,63,86,.03)}
+    .sum-box.missing-summary .sum-label,.sum-box.missing-summary .sum-value{color:#c83f57!important}
+    .sum-box.score-summary{background:#faf8ff!important;border-color:#d8ccef!important}
 
   </style>
 </head>
@@ -434,7 +499,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.1.6</b>
+        <b>Created by 돗돔 · V0.1.7</b>
       </div>
     </main>
   </div>
@@ -645,7 +710,12 @@
     const cur=currentBoss();
     document.getElementById("currentBossSlot").innerHTML=bossCardMarkup(cur,true);
     const history=(state.round?.bosses||[]).filter(b=>b.id!==state.round.currentBossId).sort((a,b)=>a.order-b.order);
-    document.getElementById("historyBossRail").innerHTML=history.map(b=>bossCardMarkup(b,false)).join("") || `<div class="boss-card"><div class="empty-boss">이전 보스<br>없음</div></div>`;
+    const historyCards=history.map(b=>bossCardMarkup(b,false));
+    const visibleHistorySlots=4;
+    while(historyCards.length<visibleHistorySlots){
+      historyCards.push(`<div class="boss-card"><div class="empty-boss">${history.length?"등록 전":"이전 보스<br>없음"}</div></div>`);
+    }
+    document.getElementById("historyBossRail").innerHTML=historyCards.join("");
     const join=participantCount(cur), score=bossScore(cur), missing=cur?Math.max(0,MEMBER_ORDER.length-join):0;
     document.getElementById("currentJoinSummary").textContent=cur?`${join} / ${MEMBER_ORDER.length}`:"-";
     document.getElementById("currentScoreSummary").textContent=cur?fmtNum(score):"-";
