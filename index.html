@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.1.7</title>
+  <title>균열 · 은하 길드 운영현황 V0.1.8</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -444,7 +444,60 @@
     .sum-box.missing-summary .sum-label,.sum-box.missing-summary .sum-value{color:#c83f57!important}
     .sum-box.score-summary{background:#faf8ff!important;border-color:#d8ccef!important}
 
-  </style>
+  
+
+    /* V0.1.8 readability-first refinement — preserve structure, enlarge information */
+    .section-card:first-of-type{padding:10px 6px 11px!important}
+    .boss-rail{grid-template-columns:76px minmax(0,1fr)!important;gap:2px!important}
+    .history-scroll{grid-auto-columns:76px!important;gap:2px!important}
+    .boss-card,.boss-card.current{height:208px!important}
+    .boss-title-area{height:42px!important;min-height:42px!important;padding:4px 0 4px!important;gap:3px!important}
+    .boss-title-line{font-size:10.6px!important;letter-spacing:-.32px!important}
+    .boss-level-badge{height:16px!important;min-width:36px!important;font-size:8.4px!important;padding:0 5px!important}
+    .boss-summary-area{padding:6px 0 0!important;gap:5px!important}
+    .boss-summary-row{font-size:8.2px!important;line-height:1.08!important;padding:0 1px!important}
+    .boss-summary-row b{font-size:9.3px!important;letter-spacing:-.2px!important}
+    .boss-summary-row.score-row{margin-top:1px!important;padding-top:5px!important;gap:3px!important}
+    .boss-summary-row.score-row span{font-size:8px!important}
+    .boss-summary-row.score-row b{font-size:8.5px!important;letter-spacing:-.6px!important}
+    .empty-boss{font-size:8.8px!important}
+    .quick-summary{gap:5px!important;margin-top:9px!important}
+    .sum-box{min-height:49px!important;padding:7px 4px!important}
+    .sum-label{font-size:9.2px!important}
+    .sum-value{font-size:14.2px!important}
+
+    .members-card{padding:12px 7px 10px!important}
+    .member-head{margin-bottom:7px!important}
+    .members-card .section-title{font-size:15px!important;letter-spacing:-.25px!important}
+    .member-subrow{margin:0 2px 9px!important}
+    .member-subrow .section-note{font-size:10.2px!important}
+    .legend{font-size:10.2px!important;gap:9px!important}
+    .resource-updated{min-height:31px!important;padding-left:10px!important;gap:7px!important}
+    .resource-updated span{font-size:8.5px!important}
+    .resource-updated b{font-size:10.2px!important}
+
+    .member-table col:nth-child(1){width:16%!important}
+    .member-table col:nth-child(2){width:17%!important}
+    .member-table col:nth-child(3){width:20%!important}
+    .member-table col:nth-child(4){width:27%!important}
+    .member-table col:nth-child(5){width:20%!important}
+    .member-table th{height:46px!important;font-size:10.7px!important;line-height:1.13!important;padding:0 3px!important;letter-spacing:-.15px!important}
+    .member-table td{height:69px!important;font-size:12px!important;padding:5px 3px!important}
+    .member-name{font-size:12.4px!important;font-weight:950!important;letter-spacing:-.22px!important;text-align:center!important;padding-left:2px!important;padding-right:2px!important;overflow:visible!important;text-overflow:clip!important}
+    .participation-cell{gap:0!important}
+    .participation-count{font-size:12.8px!important;line-height:1!important}
+    .sword-cell{gap:5px!important}
+    .sword-value{font-size:12.6px!important;line-height:1!important;color:#176fbd!important}
+    .sword-segments{width:58px!important;gap:1.5px!important}
+    .sword-segments i{height:5px!important;border-radius:2.5px!important}
+    .sword-segments i.on{background:linear-gradient(180deg,#42a7ef,#187dcc)!important}
+    .time-cell{gap:6px!important}
+    .time-value{font-size:13.3px!important;line-height:1!important;color:#2f2b48!important;letter-spacing:-.15px!important}
+    .time-battery{width:74px!important;gap:2px!important;margin-top:0!important}
+    .time-battery i{height:9px!important;border-radius:2px!important}
+    .status-pill{min-width:50px!important;height:26px!important;padding:0 7px!important;font-size:10.8px!important}
+    .table-foot{padding-top:9px!important;font-size:10px!important}
+</style>
 </head>
 <body>
   <div id="shell">
@@ -499,7 +552,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.1.7</b>
+        <b>Created by 돗돔 · V0.1.8</b>
       </div>
     </main>
   </div>
