@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.3</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.5</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -167,6 +167,9 @@
     .action-btn{flex:1;height:38px;border-radius:10px;border:1px solid #d8cfeb;background:#fff;color:#5f4c91;font-size:12px;font-weight:900}
     .action-btn.primary{background:linear-gradient(180deg,#8264d4,#6f50c2);border-color:#6c4dbd;color:#fff}
     .action-btn.danger{background:#fff3f5;border-color:#f2c9d0;color:#c95163}
+    .modal-actions.confirming-delete{flex-wrap:wrap;align-items:center}
+    .delete-confirm-copy{flex:0 0 100%;padding:2px 2px 6px;color:#ad4354;font-size:10.5px;font-weight:800;line-height:1.45;text-align:center}
+    .delete-confirm-copy b{font-weight:950;color:#9f3346}
 
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
     .round-start-grid{grid-template-columns:1.1fr 1fr .72fr}
@@ -920,6 +923,114 @@
     .member-history-status.missed{background:#fff1f4;color:#cb4b60;border:1px solid #efb8c2}
     .member-history-empty{height:70px;display:flex;align-items:center;justify-content:center;border:1px dashed #ded7e9;border-radius:11px;color:#958ca4;font-size:10.5px;font-weight:850;background:#fbfaff}
 
+    /* V0.2.4 — readability + top anchored boss detail */
+    /* V0.2.5 — safe boss record deletion for test/incorrect entries */
+    #currentBossSlot .current-boss-identity strong{
+      font-size:21.5px!important;
+      text-align:center!important;
+      letter-spacing:-.6px!important;
+    }
+    #currentBossSlot .current-info-layout{
+      display:grid!important;
+      grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr)!important;
+      gap:7px!important;
+      margin-top:8px!important;
+      min-width:0!important;
+    }
+    #currentBossSlot .current-info-grid{
+      margin-top:0!important;
+      grid-template-rows:repeat(3,27px)!important;
+      gap:5px!important;
+    }
+    #currentBossSlot .current-info-box span,
+    #currentBossSlot .current-info-box.score span{
+      font-size:10.6px!important;
+      font-weight:900!important;
+      letter-spacing:-.18px!important;
+    }
+    #currentBossSlot .current-info-box b{font-size:14.8px!important}
+    #currentBossSlot .current-info-box.score b{font-size:15.5px!important}
+    #currentBossSlot .current-participants-box{
+      min-width:0!important;
+      height:91px!important;
+      border:1px solid #ddd5ee!important;
+      border-radius:9px!important;
+      background:#faf8ff!important;
+      padding:7px 7px!important;
+      box-sizing:border-box!important;
+      text-align:left!important;
+      overflow:hidden!important;
+    }
+    #currentBossSlot .current-participants-box>strong{
+      display:block!important;
+      font-size:10.4px!important;
+      line-height:1!important;
+      color:#65567f!important;
+      margin-bottom:6px!important;
+      text-align:center!important;
+    }
+    #currentBossSlot .current-participants-box>div{
+      display:grid!important;
+      grid-template-columns:1fr 1fr!important;
+      gap:4px 5px!important;
+      align-content:start!important;
+    }
+    #currentBossSlot .current-participants-box span,
+    #currentBossSlot .current-participants-box em,
+    #currentBossSlot .current-participants-box i{
+      min-width:0!important;
+      font-style:normal!important;
+      font-size:9.8px!important;
+      line-height:15px!important;
+      font-weight:900!important;
+      color:#473968!important;
+      white-space:nowrap!important;
+      overflow:hidden!important;
+      text-overflow:ellipsis!important;
+      text-align:center!important;
+    }
+    #currentBossSlot .current-participants-box em{color:#776a8d!important}
+    #currentBossSlot .current-participants-box i{grid-column:1/-1;color:#948aa3!important;padding-top:17px!important}
+
+    .history-card{height:204px!important}
+    .history-title strong{font-size:13.2px!important}
+    .history-title span{font-size:10px!important}
+    .history-stats span{font-size:9.7px!important;font-weight:900!important}
+    .history-stats b{font-size:12.3px!important}
+    .history-stats>div{min-height:31px!important;padding:4px 5px!important}
+    .history-stats .score{
+      min-height:29px!important;
+      padding:0 7px!important;
+      display:flex!important;
+      flex-direction:row!important;
+      align-items:center!important;
+      justify-content:space-between!important;
+      gap:7px!important;
+      text-align:left!important;
+    }
+    .history-stats .score span{font-size:9.8px!important;white-space:nowrap!important}
+    .history-stats .score b{font-size:13.3px!important;text-align:right!important;overflow:visible!important;text-overflow:clip!important}
+    .history-next-btn{height:204px!important}
+
+    .member-table thead th+th{border-left:1px solid #d3cae7!important}
+    .member-table tbody td:first-child{font-size:13.4px!important;font-weight:950!important;letter-spacing:-.25px!important}
+
+    #bossModal.open{
+      align-items:flex-start!important;
+      justify-content:center!important;
+      padding:calc(env(safe-area-inset-top, 0px) + 78px) 0 18px!important;
+      box-sizing:border-box!important;
+    }
+    #bossModal .modal{
+      transform-origin:top center!important;
+      border-radius:18px!important;
+      max-height:calc(100dvh - env(safe-area-inset-top, 0px) - 104px)!important;
+      box-shadow:0 15px 42px rgba(34,23,65,.28)!important;
+    }
+    #bossModal .boss-detail-name{font-size:15.5px!important}
+    #bossModal .detail-stat{font-size:10.5px!important}
+    #bossModal .detail-stat b{font-size:13.2px!important}
+
 </style>
 </head>
 <body>
@@ -973,7 +1084,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.3</b>
+        <b>Created by 돗돔 · V0.2.5</b>
       </div>
     </main>
   </div>
@@ -1176,13 +1287,22 @@
     }
     const meta=BOSS_META[b.area]||{name:b.area};
     const joined=participantCount(b), missing=Math.max(0,MEMBER_ORDER.length-joined), score=bossScore(b);
+    const joinedNames=MEMBER_ORDER.filter(n=>b.participants?.[n]);
+    const visibleNames=joinedNames.slice(0,6);
+    const extraCount=Math.max(0,joinedNames.length-visibleNames.length);
+    const participantMarkup=visibleNames.length
+      ? `${visibleNames.map(n=>`<span>${n}</span>`).join("")}${extraCount?`<em>외 ${extraCount}명</em>`:""}`
+      : `<i>아직 없음</i>`;
     return `<button type="button" class="current-boss-image-card" data-boss-id="${b.id}" aria-label="현재 ${meta.name} 초대형 상세보기"><span class="current-badge current-main-badge">현재</span>${bossImageMarkup(b.area,"current-main-image")}</button>
       <button type="button" class="current-boss-info" data-boss-id="${b.id}" aria-label="현재 ${meta.name} 초대형 상세보기">
-        <div class="current-boss-identity"><strong>${b.bossLevel?`LV.${b.bossLevel}`:"LV.-"} ${meta.name}</strong></div>
-        <div class="current-info-grid">
-          <div class="current-info-box join"><span>현재 참여인원</span><b>${joined}명</b></div>
-          <div class="current-info-box missing"><span>현재 불참인원</span><b>${missing}명</b></div>
-          <div class="current-info-box score"><span>길드원 점수 합계</span><b>${fmtNum(score)}</b></div>
+        <div class="current-boss-identity"><strong>#${Number(b.order)||'-'} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${meta.name}</strong></div>
+        <div class="current-info-layout">
+          <div class="current-info-grid">
+            <div class="current-info-box join"><span>참여인원</span><b>${joined}명</b></div>
+            <div class="current-info-box missing"><span>불참인원</span><b>${missing}명</b></div>
+            <div class="current-info-box score"><span>점수합계</span><b>${fmtNum(score)}</b></div>
+          </div>
+          <div class="current-participants-box"><strong>참여 길드원</strong><div>${participantMarkup}</div></div>
         </div>
       </button>`;
   }
@@ -1505,17 +1625,19 @@
   function openBossModal(id,edit=false){
     const b=bossById(id); if(!b)return; state.selectedBossId=id; state.editingBoss=edit;
     const meta=BOSS_META[b.area];
-    document.getElementById("bossModalTitle").textContent=`#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel} `:""}보스`;
+    document.getElementById("bossModalTitle").textContent=`#${b.order} ${b.bossLevel?`Lv.${b.bossLevel} `:""}${meta.name} 보스`;
     const body=document.getElementById("bossModalBody"), actions=document.getElementById("bossModalActions");
     const rankText=b.status==="current"?"진행 중":(Number(b.rank)>0?`${Number(b.rank)}위`:"미입력");
-    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">불참인원<b>${Math.max(0,MEMBER_ORDER.length-participantCount(b))}명</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">${b.status==="current"?"상태":"등수"}<b>${rankText}</b></div></div></div></div>`;
+    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${meta.name} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">불참인원<b>${Math.max(0,MEMBER_ORDER.length-participantCount(b))}명</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">${b.status==="current"?"상태":"등수"}<b>${rankText}</b></div></div></div></div>`;
     if(!edit){
       const parts=MEMBER_ORDER.filter(n=>b.participants?.[n]);
       const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>참여 길드원</div><div>스코어</div></div>${parts.map(n=>{const p=b.participants[n];return `<div class="participant-row"><div class="pname">${n}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
       body.innerHTML=hero+list;
-      actions.innerHTML=`<button class="action-btn" data-boss-close>닫기</button><button class="action-btn primary" id="editBossBtn">참여 기록 수정</button>`;
+      actions.classList.remove("confirming-delete");
+      actions.innerHTML=`<button class="action-btn danger" id="deleteBossBtn">삭제</button><button class="action-btn" data-boss-close>닫기</button><button class="action-btn primary" id="editBossBtn">참여 기록 수정</button>`;
       actions.querySelector("[data-boss-close]").onclick=()=>closeModal("bossModal");
       document.getElementById("editBossBtn").onclick=()=>openBossModal(id,true);
+      document.getElementById("deleteBossBtn").onclick=()=>showBossDeleteConfirm(id);
     }else{
       const rankEditor=b.status==="current"?"":`<div class="ended-rank-editor"><span>최종 길드 순위</span><div><input id="bossRankInput" type="number" inputmode="numeric" min="1" max="999" placeholder="순위" value="${Number(b.rank)>0?Number(b.rank):""}"><em>위</em></div></div>`;
       body.innerHTML=hero+rankEditor+`<div class="edit-list"><div class="edit-head"><div>참여</div><div>길드원</div><div>스코어</div></div>${MEMBER_ORDER.map(n=>{const p=b.participants?.[n],on=!!p;return `<div class="edit-row" data-edit-member="${n}"><input type="checkbox" ${on?"checked":""}><div class="ename">${n}</div><input class="escore" type="number" inputmode="numeric" min="0" value="${on?Number(p.score)||0:0}"></div>`;}).join("")}</div>`;
@@ -1524,11 +1646,37 @@
         cb.onchange=()=>{ if(!cb.checked) scoreInput.value="0"; };
         scoreInput.oninput=()=>{ if((Number(scoreInput.value)||0)>0) cb.checked=true; };
       });
+      actions.classList.remove("confirming-delete");
       actions.innerHTML=`<button class="action-btn" id="cancelBossEditBtn">취소</button><button class="action-btn primary" id="saveBossEditBtn">저장</button>`;
       document.getElementById("cancelBossEditBtn").onclick=()=>openBossModal(id,false);
       document.getElementById("saveBossEditBtn").onclick=saveBossParticipants;
     }
     openModal("bossModal");
+  }
+
+  function showBossDeleteConfirm(id){
+    const b=bossById(id); if(!b)return;
+    const meta=BOSS_META[b.area]||{name:b.area};
+    const actions=document.getElementById("bossModalActions");
+    actions.classList.add("confirming-delete");
+    actions.innerHTML=`<div class="delete-confirm-copy"><b>#${Number(b.order)||'-'} ${b.bossLevel?`Lv.${b.bossLevel} `:''}${meta.name}</b> 보스 기록을 삭제할까요?<br>참여자와 스코어도 함께 삭제되며 되돌릴 수 없습니다.</div><button class="action-btn" id="cancelDeleteBossBtn">취소</button><button class="action-btn danger" id="confirmDeleteBossBtn">정말 삭제</button>`;
+    document.getElementById("cancelDeleteBossBtn").onclick=()=>openBossModal(id,false);
+    document.getElementById("confirmDeleteBossBtn").onclick=()=>deleteBossRecord(id);
+  }
+
+  async function deleteBossRecord(id){
+    if(!(await ensureAdmin())) return;
+    const r=deepClone(state.round);
+    const idx=r.bosses.findIndex(x=>x.id===id);
+    if(idx<0){showToast("삭제할 보스 기록을 찾지 못했습니다.");return;}
+    const target=r.bosses[idx], meta=BOSS_META[target.area]||{name:target.area};
+    const wasCurrent=r.currentBossId===id;
+    r.bosses.splice(idx,1);
+    if(wasCurrent) r.currentBossId=null;
+    if(await persistRound(r)){
+      closeModal("bossModal");
+      showToast(`#${Number(target.order)||'-'} ${meta.name} 보스 기록을 삭제했습니다.`);
+    }
   }
 
   async function saveBossParticipants(){
