@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.1.5</title>
+  <title>균열 · 은하 길드 운영현황 V0.1.6</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -335,6 +335,50 @@
     .time-battery.danger i.on{background:linear-gradient(180deg,#ef7481,#d94d60)}
     .time-used{display:none!important}
 
+
+    /* V0.1.6 boss 5x1 + status hierarchy */
+    .section-card:first-of-type{padding:9px 8px 10px}
+    .boss-rail{grid-template-columns:74px minmax(0,1fr);gap:4px;align-items:stretch}
+    .history-scroll{gap:4px;padding-bottom:2px}
+    .history-wrap::after{width:8px}
+    .boss-card,.boss-card.current{width:74px;min-width:74px;height:202px;padding:4px 4px 5px;border-radius:11px}
+    .boss-card.current{border-width:2px}
+    .boss-image-area{height:66px;display:flex;align-items:flex-start;justify-content:center}
+    .boss-img,.current .boss-img{width:64px;height:64px;margin:0 auto;border-radius:8px}
+    .current-badge{top:4px;left:4px;height:16px;line-height:16px;padding:0 5px;font-size:8px;border-radius:6px}
+    .boss-title-area{min-height:42px;padding:4px 0 4px;gap:3px}
+    .boss-title-line{font-size:10px;line-height:1.05;letter-spacing:-.35px}
+    .boss-level-badge{min-width:35px;height:16px;padding:0 5px;font-size:8px}
+    .boss-summary-area{padding:5px 0 0;gap:3px;justify-content:flex-start}
+    .boss-summary-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px;font-size:7.6px;line-height:1.05;text-align:left}
+    .boss-summary-row b{max-width:none;overflow:visible;text-overflow:clip;font-size:8.7px;line-height:1.05;letter-spacing:-.25px}
+    .boss-summary-row.missing-row span,.boss-summary-row.missing-row b{color:#d94f62}
+    .boss-summary-row.score-row{display:block;margin-top:3px;padding-top:4px;border-top:1px solid #eee8f5;text-align:center}
+    .boss-summary-row.score-row span{display:block;color:#746a86;font-size:7.4px;line-height:1}
+    .boss-summary-row.score-row b{display:block;margin-top:2px;color:#342953;font-size:8.5px;line-height:1;letter-spacing:-.45px;white-space:nowrap}
+    .empty-boss{font-size:8.5px}
+
+    .quick-summary{gap:6px;margin-top:8px}
+    .sum-box{min-height:46px;padding:6px 4px;border-width:1.5px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .sum-box.join-summary{background:#eaf9f1;border-color:#82d7ac}
+    .sum-box.join-summary .sum-label,.sum-box.join-summary .sum-value{color:#188653}
+    .sum-box.missing-summary{background:#fff0f3;border-color:#ee9ead}
+    .sum-box.missing-summary .sum-label,.sum-box.missing-summary .sum-value{color:#c83f57}
+    .sum-box.score-summary{background:#faf8ff;border-color:#d8ccef}
+    .sum-label{font-size:8.7px}
+    .sum-value{font-size:13.5px}
+
+    .member-table col:nth-child(1){width:14%}
+    .member-table col:nth-child(2){width:18%}
+    .member-table col:nth-child(3){width:18%}
+    .member-table col:nth-child(4){width:26%}
+    .member-table col:nth-child(5){width:24%}
+    .member-name{font-size:9.8px!important}
+    .status-pill{min-width:42px;height:22px;padding:0 6px}
+    .time-battery.safe i.on{background:linear-gradient(180deg,#f6cc55,#e5a82d)}
+    .time-battery.mid i.on{background:linear-gradient(180deg,#f3a24d,#e57a29)}
+    .time-battery.danger i.on{background:linear-gradient(180deg,#ef7481,#d74c5f)}
+
   </style>
 </head>
 <body>
@@ -390,7 +434,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.1.5</b>
+        <b>Created by 돗돔 · V0.1.6</b>
       </div>
     </main>
   </div>
@@ -417,7 +461,7 @@
 
   <div class="modal-backdrop" id="addBossModal">
     <div class="modal">
-      <div class="modal-head"><div class="modal-title">새 초대형 보스 등록</div><button class="close-btn" data-close="addBossModal">×</button></div>
+      <div class="modal-head"><div class="modal-title">새 보스 등록</div><button class="close-btn" data-close="addBossModal">×</button></div>
       <div class="modal-body">
         <div class="form-grid boss-register-grid">
           <div class="field"><label>지역</label><select id="newBossArea"><option value="wolf">늑대</option><option value="pirate">해적</option><option value="cat">고양이</option><option value="food">음식</option><option value="galaxy">은하</option></select></div>
@@ -879,7 +923,7 @@
   function openBossModal(id,edit=false){
     const b=bossById(id); if(!b)return; state.selectedBossId=id; state.editingBoss=edit;
     const meta=BOSS_META[b.area];
-    document.getElementById("bossModalTitle").textContent=`#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel} `:""}초대형 보스`;
+    document.getElementById("bossModalTitle").textContent=`#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel} `:""}보스`;
     const body=document.getElementById("bossModalBody"), actions=document.getElementById("bossModalActions");
     const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${meta.name} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat">참여인원<b>${participantCount(b)} / ${MEMBER_ORDER.length}</b></div><div class="detail-stat">길드 합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat">팝업<b>${isoToLocal(b.startedAt)}</b></div><div class="detail-stat">상태<b>${b.status==="current"?"진행 중":"종료"}</b></div></div></div></div>`;
     if(!edit){
@@ -927,7 +971,7 @@
   function openMemberModal(name){
     state.selectedMember=name; const m=state.round?.members?.[name]||makeMemberState(), r=memberRemaining(name);
     const currentJoined=!!currentBoss()?.participants?.[name];
-    document.getElementById("memberModalBody").innerHTML=`<div class="member-detail-card"><div class="member-detail-name">${name}</div><div class="resource-cards"><div class="resource-card"><span>현재 칼(기회)</span><b>${r.swords}/10</b></div><div class="resource-card"><span>현재 잔여 시간</span><b>${fmtTime(r.seconds)}</b></div></div><div class="calc-note">초대형 보스 참여 ${r.usedBoss}회 = ${r.usedBoss}칼 자동 차감 · 현재 보스 ${currentJoined?"참여 완료":"미참여"}</div></div><div class="form-grid"><div class="field"><label>일반몹 사용 칼</label><input id="normalSwordsInput" type="number" inputmode="numeric" min="0" max="10" value="${Number(m.normalSwords)||0}"></div><div class="field"><label>일반몹 사용 시간</label><button type="button" class="picker-display normal-time-picker" id="normalTimeBtn" data-seconds="${Number(m.normalSeconds)||0}">${fmtTime(m.normalSeconds)}</button></div></div><div class="help">일반몹은 개별 몹당 1칼 사용 규칙을 전제로 총 사용 칼만 집계합니다. 초대형 보스에서 사용한 칼은 참여기록으로 자동 계산되므로 여기서 다시 입력하지 않습니다.</div>`;
+    document.getElementById("memberModalBody").innerHTML=`<div class="member-detail-card"><div class="member-detail-name">${name}</div><div class="resource-cards"><div class="resource-card"><span>현재 칼(기회)</span><b>${r.swords}/10</b></div><div class="resource-card"><span>현재 잔여 시간</span><b>${fmtTime(r.seconds)}</b></div></div><div class="calc-note">보스 참여 ${r.usedBoss}회 = ${r.usedBoss}칼 자동 차감 · 현재 보스 ${currentJoined?"참여 완료":"미참여"}</div></div><div class="form-grid"><div class="field"><label>일반몹 사용 칼</label><input id="normalSwordsInput" type="number" inputmode="numeric" min="0" max="10" value="${Number(m.normalSwords)||0}"></div><div class="field"><label>일반몹 사용 시간</label><button type="button" class="picker-display normal-time-picker" id="normalTimeBtn" data-seconds="${Number(m.normalSeconds)||0}">${fmtTime(m.normalSeconds)}</button></div></div><div class="help">일반몹은 개별 몹당 1칼 사용 규칙을 전제로 총 사용 칼만 집계합니다. 보스에서 사용한 칼은 참여기록으로 자동 계산되므로 여기서 다시 입력하지 않습니다.</div>`;
     const normalBtn=document.getElementById("normalTimeBtn");
     if(normalBtn) normalBtn.onclick=()=>openNormalDurationPicker(name,normalBtn);
     openModal("memberModal");
