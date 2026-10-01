@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.1.0</title>
+  <title>균열 · 은하 길드 운영현황 V0.1.1</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -50,21 +50,20 @@
         linear-gradient(180deg,#f7f4ff 0,#f2eefb 34%,#f4f1fb 100%);
       padding:12px 12px 30px;
     }
-    .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
-    .eyebrow{font-size:11px;font-weight:800;color:var(--purple);letter-spacing:.1px;margin-bottom:3px}
-    h1{margin:0;font-size:19px;line-height:1.2;letter-spacing:-.45px;font-weight:900}
-    .subhead{font-size:11px;color:var(--muted);font-weight:700;margin-top:4px}
-    .top-actions{display:flex;gap:5px;padding-top:1px}
-    .mini-btn{height:30px;padding:0 9px;border:1px solid #cfc3ee;border-radius:9px;background:#fff;color:#56438f;font-size:11px;font-weight:850;box-shadow:0 2px 8px rgba(91,65,156,.07)}
+    .topbar{display:block;margin-bottom:7px;padding:1px 1px 0}
+    h1{margin:0;font-size:21px;line-height:1.16;letter-spacing:-.55px;font-weight:900}
+    .subhead{font-size:11px;color:var(--muted);font-weight:760;margin-top:5px;line-height:1.25}
+    .admin-bar{height:38px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(255,255,255,.78);border:1px solid #e1daef;border-radius:11px;padding:0 6px 0 9px;margin-bottom:8px;box-shadow:0 3px 11px rgba(78,55,139,.05)}
+    .sync-state{display:flex;align-items:center;gap:6px;min-width:0;color:#7a718e;font-size:10px;font-weight:800}
+    #syncText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .top-actions{display:flex;gap:5px;flex:0 0 auto}
+    .mini-btn{height:27px;padding:0 9px;border:1px solid #cfc3ee;border-radius:8px;background:#fff;color:#56438f;font-size:10.5px;font-weight:850;box-shadow:0 2px 7px rgba(91,65,156,.06)}
     .mini-btn.primary{background:linear-gradient(180deg,#8264d4,#6f50c2);border-color:#6c4dbd;color:#fff}
 
-    .status-strip{height:29px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.76);border:1px solid #e1daef;border-radius:10px;padding:0 9px;margin-bottom:8px;font-size:10.5px;font-weight:750;color:#756d89}
     .status-left{display:flex;align-items:center;gap:6px;min-width:0}
     .dot{width:7px;height:7px;border-radius:50%;background:#b9afc9;box-shadow:0 0 0 3px rgba(185,175,201,.18);flex:0 0 auto}
     .dot.online{background:#32aa72;box-shadow:0 0 0 3px rgba(50,170,114,.14)}
     .dot.preview{background:#efad42;box-shadow:0 0 0 3px rgba(239,173,66,.14)}
-    #roundLabel{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .round-type{color:var(--purple);font-weight:900;white-space:nowrap}
 
     .section-card{background:rgba(255,255,255,.93);border:1px solid #ded6f0;border-radius:15px;box-shadow:var(--shadow);padding:10px;margin-top:9px}
     .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -116,6 +115,11 @@
     .legend{display:flex;align-items:center;gap:10px;font-size:9.5px;color:#8a8299;font-weight:750}
     .legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px;vertical-align:1px}
     .legend .g{background:#3aaa75}.legend .r{background:#d96678}
+    .member-head{align-items:flex-start;margin-bottom:5px}
+    .member-subrow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 7px}
+    .update-stamp{flex:0 0 auto;min-width:108px;border:1px solid #e2dbef;background:#f9f7ff;border-radius:9px;padding:4px 7px;text-align:right;line-height:1.1}
+    .update-stamp span{display:block;font-size:8px;color:#968da8;font-weight:800}
+    .update-stamp b{display:block;margin-top:2px;font-size:9.5px;color:#5c488f;font-weight:900;font-variant-numeric:tabular-nums;white-space:nowrap}
 
     .footer{text-align:center;color:#9a91ab;font-size:9.5px;font-weight:700;margin-top:16px;line-height:1.6}
     .footer b{color:#7156b8}
@@ -189,26 +193,21 @@
   <div id="shell">
     <main id="app">
       <div class="topbar">
-        <div>
-          <div class="eyebrow">SERVER 879 · 도살자</div>
-          <h1>균열 · 은하 길드 운영현황</h1>
-          <div class="subhead">길드원 15명 · 실시간 칼 / 시간 / 보스 참여 관리</div>
-        </div>
+        <h1 id="pageTitle">균열의 격전지</h1>
+        <div class="subhead" id="periodText">운영기간 · 토요일 09:00 ~ 월요일 08:45</div>
+      </div>
+
+      <div class="admin-bar">
+        <div class="sync-state"><span id="syncDot" class="dot preview"></span><span id="syncText">미리보기 데이터 · 실제 회차 미설정</span></div>
         <div class="top-actions">
           <button class="mini-btn" id="roundSetupBtn">회차 설정</button>
           <button class="mini-btn primary" id="addBossBtn">보스 추가</button>
         </div>
       </div>
 
-      <div class="status-strip">
-        <div class="status-left"><span id="syncDot" class="dot preview"></span><span id="roundLabel">미리보기 데이터 · 실제 회차 미설정</span></div>
-        <span class="round-type" id="roundType">균열</span>
-      </div>
-
       <section class="section-card">
         <div class="section-head">
           <div class="section-title">이번 회차 초대형 보스</div>
-          <div class="section-note">현재 보스 고정 · 이전 보스 ←→</div>
         </div>
         <div class="boss-rail">
           <div id="currentBossSlot"></div>
@@ -224,11 +223,12 @@
       </section>
 
       <section class="section-card members-card">
-        <div class="section-head">
-          <div>
-            <div class="section-title">길드원 현재 자원</div>
-            <div class="section-note" style="margin-top:2px">보스 참여 = 1칼 자동 차감 · 일반몹 사용량 포함</div>
-          </div>
+        <div class="section-head member-head">
+          <div class="section-title">길드원 현재 자원</div>
+          <div class="update-stamp"><span>최종 업데이트</span><b id="updatedAt">-</b></div>
+        </div>
+        <div class="member-subrow">
+          <div class="section-note">보스 참여 = 1칼 자동 차감 · 일반몹 사용량 포함</div>
           <div class="legend"><span><i class="g"></i>참여</span><span><i class="r"></i>미참여</span></div>
         </div>
         <table class="member-table" aria-label="길드원 현재 자원 현황">
@@ -236,11 +236,11 @@
           <thead><tr><th>길드원</th><th>남은 칼</th><th>남은 시간</th><th>현재 보스</th></tr></thead>
           <tbody id="memberRows"></tbody>
         </table>
-        <div class="table-foot"><span>길드원을 누르면 <strong>일반몹 사용량</strong>을 관리할 수 있습니다.</span><span id="updatedAt">-</span></div>
+        <div class="table-foot"><span>길드원을 누르면 <strong>일반몹 사용량</strong>을 관리할 수 있습니다.</span></div>
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.1.0</b>
+        <b>Created by 돗돔 · V0.1.1</b>
       </div>
     </main>
   </div>
@@ -348,9 +348,25 @@
     const m=t.match(/^(\d{1,2}):(\d{1,2})$/); if(!m) return 0;
     return Number(m[1])*60+Math.min(59,Number(m[2]));
   };
-  const isoToLocal = iso => {
-    if(!iso) return "-"; const d=new Date(iso); if(Number.isNaN(d.getTime())) return "-";
+  const toDateSafe = value => {
+    if(!value) return null;
+    if(typeof value?.toDate === "function") return value.toDate();
+    if(typeof value === "object" && Number.isFinite(Number(value.seconds))) return new Date(Number(value.seconds)*1000);
+    const d=new Date(value); return Number.isNaN(d.getTime())?null:d;
+  };
+  const isoToLocal = value => {
+    const d=toDateSafe(value); if(!d) return "-";
     return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+  };
+  const fmtPeriod = (start,end) => {
+    const a=toDateSafe(start), b=toDateSafe(end); if(!a||!b) return "운영기간 · 토요일 09:00 ~ 월요일 08:45";
+    const days=["일","월","화","수","목","금","토"];
+    const f=d=>`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")} (${days[d.getDay()]}) ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+    return `운영기간 · ${f(a)} ~ ${f(b)}`;
+  };
+  const fmtUpdate = value => {
+    const d=toDateSafe(value); if(!d) return "-";
+    return `${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   };
   const localInputToIso = v => v ? new Date(v).toISOString() : new Date().toISOString();
   const uniqueId = p => `${p}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,7)}`;
@@ -380,7 +396,8 @@
     return {id:"preview",mode:"rift",startAt:new Date(Date.now()-44*3600000).toISOString(),endAt:new Date(Date.now()+4*3600000).toISOString(),members,bosses,currentBossId:"demo5",preview:true,updatedAt:new Date().toISOString()};
   }
 
-  let state={round:makePreviewRound(),firebase:null,connected:false,adminUnlocked:false,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null};
+  let state={round:makePreviewRound(),firebase:null,firebaseError:null,connected:false,adminUnlocked:false,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null};
+  let firebaseReadyPromise=null;
 
   function bossById(id){ return state.round?.bosses?.find(b=>b.id===id)||null; }
   function currentBoss(){ return bossById(state.round?.currentBossId); }
@@ -443,15 +460,15 @@
     const r=state.round;
     const dot=document.getElementById("syncDot");
     dot.className=`dot ${state.connected&&!r?.preview?"online":"preview"}`;
-    if(r?.preview){
-      document.getElementById("roundLabel").textContent="미리보기 데이터 · 회차 설정 후 실제 값으로 전환";
-    }else if(r){
-      document.getElementById("roundLabel").textContent=`${isoToLocal(r.startAt)} ~ ${isoToLocal(r.endAt)} · ${state.connected?"실시간 동기화":"연결 대기"}`;
-    }else{
-      document.getElementById("roundLabel").textContent="활성 회차 없음";
-    }
-    document.getElementById("roundType").textContent=r?.mode==="galaxy"?"은하":"균열";
-    document.getElementById("updatedAt").textContent=r?.updatedAt?`갱신 ${isoToLocal(r.updatedAt)}`:"-";
+    document.getElementById("pageTitle").textContent=r?.mode==="galaxy"?"은하의 격전지":"균열의 격전지";
+    document.getElementById("periodText").textContent=r?.preview?"운영기간 · 토요일 09:00 ~ 월요일 08:45":fmtPeriod(r?.startAt,r?.endAt);
+    const syncText=document.getElementById("syncText");
+    if(r?.preview) syncText.textContent="미리보기 데이터 · 실제 회차 미설정";
+    else if(state.connected) syncText.textContent="실시간 동기화";
+    else if(state.firebaseError) syncText.textContent="Firebase 연결 오류";
+    else syncText.textContent="연결 대기";
+    const updated=r?.updatedAtServer||r?.updatedAt;
+    document.getElementById("updatedAt").textContent=fmtUpdate(updated);
   }
 
   function renderAll(){ renderHeader(); renderBossRail(); renderMembers(); syncCanvasScale(); }
@@ -491,12 +508,25 @@
     state.adminUnlocked=true; return true;
   }
 
+  function firebaseErrorMessage(err){
+    const code=String(err?.code||"");
+    if(code.includes("permission-denied")) return "Firebase 권한 오류입니다. Firestore 규칙을 확인하세요.";
+    if(code.includes("unavailable")||code.includes("network")) return "네트워크 또는 Firebase 연결을 확인하세요.";
+    return err?.message?`저장 오류: ${String(err.message).slice(0,70)}`:"Firebase 저장 중 오류가 발생했습니다.";
+  }
+  async function ensureFirebaseReady(){
+    if(state.firebase) return true;
+    if(firebaseReadyPromise) await firebaseReadyPromise;
+    if(state.firebase) return true;
+    showToast(state.firebaseError?firebaseErrorMessage(state.firebaseError):"Firebase 연결에 실패했습니다.");
+    return false;
+  }
   async function persistRound(round){
-    if(!state.firebase){ showToast("Firebase 연결 후 저장할 수 있습니다."); return false; }
+    if(!(await ensureFirebaseReady())) return false;
     if(!(await ensureAdmin())) return false;
     round.updatedAt=new Date().toISOString();
     try{ await state.firebase.saveRound(round); return true; }
-    catch(err){ console.error(err); showToast("저장 중 오류가 발생했습니다."); return false; }
+    catch(err){ console.error(err); state.firebaseError=err; showToast(firebaseErrorMessage(err)); return false; }
   }
 
   document.getElementById("roundSetupBtn").onclick=()=>{fillRoundSetup();openModal("roundModal");};
@@ -506,11 +536,20 @@
     if(await persistRound(r)){closeModal("roundModal");showToast("기준값을 저장했습니다.");}
   };
   document.getElementById("startNewRoundBtn").onclick=async()=>{
+    const btn=document.getElementById("startNewRoundBtn");
+    if(!(await ensureFirebaseReady())) return;
     if(!(await ensureAdmin())) return;
     const startIso=localInputToIso(document.getElementById("setupStart").value||nowLocalInput());
     const end=new Date(new Date(startIso).getTime()+(47*60+45)*60000).toISOString();
     const round={id:`round_${startIso.slice(0,10)}_${Date.now().toString(36)}`,mode:document.getElementById("setupMode").value,startAt:startIso,endAt:end,members:gatherSetupMembers(false),bosses:[],currentBossId:null,preview:false,updatedAt:new Date().toISOString()};
-    if(await state.firebase.createRound(round)){closeModal("roundModal");showToast("새 회차를 시작했습니다.");}
+    const oldText=btn.textContent; btn.disabled=true; btn.textContent="시작 중…";
+    try{
+      await state.firebase.createRound(round);
+      state.round=round; state.connected=true; state.firebaseError=null; renderAll();
+      closeModal("roundModal"); showToast("새 회차를 시작했습니다.");
+    }catch(err){
+      console.error(err); state.firebaseError=err; renderHeader(); showToast(firebaseErrorMessage(err));
+    }finally{btn.disabled=false;btn.textContent=oldText;}
   };
 
   document.getElementById("addBossBtn").onclick=()=>{
@@ -626,16 +665,30 @@
       };
       unsubActive=fsMod.onSnapshot(activeRef,snap=>{state.connected=true;const id=snap.exists()?snap.data().roundId:null; if(id) subscribeRound(id); else renderAll();},err=>{console.error(err);state.connected=false;renderHeader();});
       state.firebase={
-        async saveRound(round){ await fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),round,{merge:false}); },
-        async createRound(round){ await fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),round,{merge:false}); await fsMod.setDoc(activeRef,{roundId:round.id,updatedAt:new Date().toISOString()},{merge:false}); }
+        async saveRound(round){
+          const payload=deepClone(round); delete payload.updatedAtServer;
+          payload.updatedAt=new Date().toISOString();
+          payload.updatedAtServer=fsMod.serverTimestamp();
+          await fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false});
+        },
+        async createRound(round){
+          const payload=deepClone(round); delete payload.updatedAtServer;
+          payload.updatedAt=new Date().toISOString();
+          payload.updatedAtServer=fsMod.serverTimestamp();
+          const batch=fsMod.writeBatch(db);
+          batch.set(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false});
+          batch.set(activeRef,{roundId:round.id,updatedAt:new Date().toISOString(),updatedAtServer:fsMod.serverTimestamp()},{merge:false});
+          await batch.commit();
+        }
       };
+      state.firebaseError=null;
       renderHeader();
-    }catch(err){ console.warn("Firebase offline preview",err); state.connected=false; renderHeader(); }
+    }catch(err){ console.warn("Firebase offline preview",err); state.firebaseError=err; state.connected=false; renderHeader(); }
   }
 
   document.getElementById("setupStart").value=nowLocalInput();
   renderAll();
-  if(location.protocol!=="file:") initFirebase();
+  if(location.protocol!=="file:") firebaseReadyPromise=initFirebase();
   window.__guildOps={getState:()=>deepClone(state.round),reference:INTERNAL_REFERENCE};
 })();
 </script>
