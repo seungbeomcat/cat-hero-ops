@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.12</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.15</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -1440,6 +1440,157 @@
       .period-card{padding:0 12px!important;}
     }
 
+
+    /* V0.2.15 — exact boss-page header + balanced status typography + history slots */
+    .topbar{
+      width:100%!important;
+      display:grid!important;
+      grid-template-columns:29% 71%!important;
+      gap:0!important;
+      min-height:48px!important;
+      height:48px!important;
+      padding:0!important;
+      margin:0 0 10px!important;
+      border:2px solid #d7c8ed!important;
+      border-radius:16px!important;
+      background:#faf8ff!important;
+      box-shadow:none!important;
+      overflow:hidden!important;
+      align-items:stretch!important;
+    }
+    .calculator-back-link{
+      min-width:0!important;
+      width:100%!important;
+      height:100%!important;
+      min-height:0!important;
+      padding:0 8px!important;
+      margin:0!important;
+      border:0!important;
+      border-right:1px solid #e1d7ef!important;
+      border-radius:0!important;
+      background:#f4effc!important;
+      box-shadow:none!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      color:#5b2ca4!important;
+      font-size:10.8px!important;
+      line-height:1!important;
+      font-weight:950!important;
+      letter-spacing:-.3px!important;
+      white-space:nowrap!important;
+      text-decoration:none!important;
+    }
+    .calculator-back-link::before{
+      content:"‹"!important;
+      margin-right:5px!important;
+      font-size:20px!important;
+      line-height:1!important;
+      font-weight:950!important;
+    }
+    .topbar-copy,.period-icon,.period-label{display:none!important}
+    .period-card{
+      min-width:0!important;
+      width:100%!important;
+      height:100%!important;
+      min-height:0!important;
+      padding:0 13px!important;
+      margin:0!important;
+      border:0!important;
+      border-radius:0!important;
+      background:#fbfaff!important;
+      box-shadow:none!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:flex-end!important;
+      overflow:hidden!important;
+    }
+    .period-copy{
+      min-width:0!important;
+      width:100%!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:flex-end!important;
+    }
+    .topbar .subhead{
+      margin:0!important;
+      width:100%!important;
+      color:#24558e!important;
+      font-size:9.25px!important;
+      line-height:1!important;
+      font-weight:950!important;
+      letter-spacing:-.46px!important;
+      white-space:nowrap!important;
+      text-align:right!important;
+      font-variant-numeric:tabular-nums!important;
+      overflow:visible!important;
+    }
+
+    /* Current summary: top label and bottom value use one size within each status box. */
+    #currentBossSlot .current-info-box.join span,
+    #currentBossSlot .current-info-box.join b,
+    #currentBossSlot .current-info-box.missing span,
+    #currentBossSlot .current-info-box.missing b{
+      font-size:11.4px!important;
+      line-height:1!important;
+      letter-spacing:-.25px!important;
+    }
+
+    /* Ended boss card: participation label/value use one size within the history card. */
+    .history-stats .join span,.history-stats .join b,
+    .history-stats .missing span,.history-stats .missing b{
+      font-size:10.3px!important;
+      line-height:1!important;
+      letter-spacing:-.2px!important;
+    }
+
+    /* Three visible history slots with subtle separators. Horizontal paging remains intact. */
+    .history-wrap::before{
+      content:""!important;
+      position:absolute!important;
+      inset:0!important;
+      z-index:0!important;
+      pointer-events:none!important;
+      background:
+        linear-gradient(to right, transparent calc(33.333% - .5px), rgba(105,82,156,.16) calc(33.333% - .5px), rgba(105,82,156,.16) calc(33.333% + .5px), transparent calc(33.333% + .5px)),
+        linear-gradient(to right, transparent calc(66.666% - .5px), rgba(105,82,156,.16) calc(66.666% - .5px), rgba(105,82,156,.16) calc(66.666% + .5px), transparent calc(66.666% + .5px))!important;
+    }
+    .history-scroll{position:relative!important;z-index:1!important;min-height:202px!important}
+    .history-next-btn{z-index:6!important}
+    .history-empty-slot{
+      flex:0 0 calc((100% - 14px)/3)!important;
+      width:calc((100% - 14px)/3)!important;
+      height:202px!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      padding:8px!important;
+      box-sizing:border-box!important;
+      text-align:center!important;
+      color:#9a91a8!important;
+      font-size:9.6px!important;
+      line-height:1.35!important;
+      font-weight:850!important;
+      word-break:keep-all!important;
+      background:transparent!important;
+      border:0!important;
+    }
+
+    /* V0.2.15 — tighter top spacing + larger period text */
+    .topbar{
+      margin-bottom:4px!important;
+    }
+    .topbar .subhead{
+      font-size:10.65px!important;
+      letter-spacing:-.48px!important;
+    }
+    .admin-bar{
+      margin-bottom:4px!important;
+    }
+    .boss-dashboard-card{
+      margin-top:4px!important;
+    }
+
 </style>
 </head>
 <body>
@@ -1447,11 +1598,9 @@
     <main id="app" class="booting">
       <div class="topbar">
         <a class="calculator-back-link" href="https://seungbeomcat.github.io/dosalja/" aria-label="도살자 격전지 계산기로 돌아가기">계산기로 돌아가기</a>
-        <div class="period-card" aria-label="운영 기간">
-          <span class="period-icon" aria-hidden="true"><i></i></span>
+        <div class="period-card" aria-label="진행기간">
           <div class="period-copy">
-            <div class="subhead" id="periodText">10.3(토) 09:00부터
-10.5(월) 08:45</div>
+            <div class="subhead" id="periodText">진행기간 : 10월3일(토) 09:00부터 10월5일(월) 08:45까지</div>
           </div>
         </div>
       </div>
@@ -1492,7 +1641,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.12</b>
+        <b>Created by 돗돔 · V0.2.15</b>
       </div>
     </main>
   </div>
@@ -1620,11 +1769,11 @@
     return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   };
   const fmtPeriod = (start,end) => {
-    const a=toDateSafe(start), b=toDateSafe(end); if(!a||!b) return "10.3(토) 09:00부터\n10.5(월) 08:45";
+    const a=toDateSafe(start), b=toDateSafe(end); if(!a||!b) return "진행기간 : 10월3일(토) 09:00부터 10월5일(월) 08:45까지";
     const days=["일","월","화","수","목","금","토"];
-    const md=d=>`${d.getMonth()+1}.${d.getDate()}(${days[d.getDay()]})`;
+    const md=d=>`${d.getMonth()+1}월${d.getDate()}일(${days[d.getDay()]})`;
     const hm=d=>`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
-    return `${md(a)} ${hm(a)}부터\n${md(b)} ${hm(b)}`;
+    return `진행기간 : ${md(a)} ${hm(a)}부터 ${md(b)} ${hm(b)}까지`;
   };
   const fmtResourceUpdate = value => {
     const d=toDateSafe(value); if(!d) return "-";
@@ -1746,7 +1895,8 @@
         return bd-ad;
       });
     const rail=document.getElementById("historyBossRail");
-    rail.innerHTML=history.length?history.map((b,i)=>historyBossCardMarkup(b,i+1)).join(""):`<div class="history-empty">소멸보스 없음</div>`;
+    rail.innerHTML=history.length?history.map((b,i)=>historyBossCardMarkup(b,i+1)).join(""):
+      Array.from({length:3},()=>`<div class="history-empty-slot">현재 소멸 초대형 없음</div>`).join("");
     rail.scrollLeft=0;
     document.querySelectorAll("[data-boss-id]").forEach(el=>el.onclick=()=>openBossModal(el.dataset.bossId,false));
     requestAnimationFrame(updateHistoryNextButton);
@@ -1780,7 +1930,7 @@
     const r=state.round;
     const dot=document.getElementById("syncDot");
     dot.className=`dot ${state.loading?"preview":state.connected&&r&&!r.isDraft?"online":"preview"}`;
-    document.getElementById("periodText").textContent=r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"10.3(토) 09:00부터\n10.5(월) 08:45";
+    document.getElementById("periodText").textContent=r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"진행기간 : 10월3일(토) 09:00부터 10월5일(월) 08:45까지";
     const syncText=document.getElementById("syncText");
     if(state.loading) syncText.textContent="데이터 불러오는 중";
     else if(r?.isDraft) syncText.textContent="실제 회차 미설정";
