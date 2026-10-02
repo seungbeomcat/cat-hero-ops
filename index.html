@@ -1325,127 +1325,119 @@
       font-variant-numeric:tabular-nums;
     }
 
-    /* V0.2.11 header proportion refinement */
+    /* V0.2.13 — boss-page style compact header */
     .topbar{
-      grid-template-columns:96px 134px minmax(0,1fr)!important;
-      gap:4px!important;
+      display:grid!important;
+      grid-template-columns:136px minmax(0,1fr)!important;
+      gap:10px!important;
       min-height:58px!important;
-      padding:5px!important;
+      padding:0!important;
+      background:transparent!important;
+      border:none!important;
+      box-shadow:none!important;
+      margin-bottom:10px!important;
+      align-items:stretch!important;
     }
     .calculator-back-link{
-      height:48px!important;
-      min-height:48px!important;
-      padding:0 5px!important;
-      border-radius:12px!important;
-      font-size:9.25px!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      min-height:54px!important;
+      height:54px!important;
+      padding:0 12px!important;
+      border-radius:18px!important;
+      border:2px solid #d9ccef!important;
+      background:linear-gradient(180deg,#fcfbff 0%,#f4effd 100%)!important;
+      color:#5e39bd!important;
+      font-size:11.8px!important;
+      font-weight:950!important;
       letter-spacing:-.28px!important;
-    }
-    .calculator-back-link::before{
-      margin-right:3px!important;
-      font-size:19px!important;
-    }
-    .topbar-copy{
-      height:48px!important;
-      padding:0 3px!important;
-    }
-    .topbar h1{
-      font-size:16.8px!important;
-      letter-spacing:-.6px!important;
-    }
-    .period-card{
-      height:48px!important;
-      padding:4px 6px!important;
-      grid-template-columns:22px minmax(0,1fr)!important;
-      gap:4px!important;
-      border-radius:12px!important;
-    }
-    .period-icon{width:22px!important;height:22px!important;border-radius:7px!important}
-    .period-icon::before{left:5px!important;right:5px!important;top:6px!important;bottom:4px!important}
-    .period-icon::after{left:7px!important;top:4px!important;width:8px!important}
-    .period-icon i{left:8px!important;top:11px!important}
-    .period-copy{gap:0!important}
-    .period-label{display:none!important}
-    .topbar .subhead{
-      font-size:8.15px!important;
-      line-height:1.18!important;
-      letter-spacing:-.22px!important;
-      white-space:pre-line!important;
-      text-align:left!important;
-    }
-
-
-    /* V0.2.12 — header readability rebuild */
-    .topbar{
-      grid-template-columns:94px minmax(0,1fr) 170px!important;
-      gap:5px!important;
-      min-height:62px!important;
-      padding:5px!important;
-    }
-    .calculator-back-link{
-      height:52px!important;
-      min-height:52px!important;
-      padding:0 6px!important;
-      border-radius:13px!important;
-      font-size:9.3px!important;
-      letter-spacing:-.28px!important;
-      box-shadow:0 5px 13px rgba(83,53,164,.17)!important;
-    }
-    .calculator-back-link::before{
-      margin-right:3px!important;
-      font-size:18px!important;
-    }
-    .topbar-copy{
-      height:52px!important;
-      min-width:0!important;
-      padding:0 2px!important;
-    }
-    .topbar h1{
-      font-size:17.2px!important;
-      line-height:1.04!important;
-      letter-spacing:-.58px!important;
+      text-decoration:none!important;
+      box-shadow:0 4px 12px rgba(105,74,176,.08)!important;
       white-space:nowrap!important;
     }
+    .calculator-back-link::before{
+      content:"‹"!important;
+      margin-right:6px!important;
+      font-size:22px!important;
+      line-height:1!important;
+      font-weight:950!important;
+    }
+    .topbar-copy{display:none!important}
     .period-card{
-      height:52px!important;
-      padding:5px 8px 5px 6px!important;
-      grid-template-columns:18px minmax(0,1fr)!important;
-      gap:5px!important;
-      border-radius:13px!important;
+      display:flex!important;
       align-items:center!important;
+      justify-content:flex-end!important;
+      min-height:54px!important;
+      height:54px!important;
+      padding:0 16px!important;
+      border-radius:18px!important;
+      border:2px solid #d9ccef!important;
+      background:linear-gradient(180deg,#fcfbff 0%,#f6f1ff 100%)!important;
+      box-shadow:0 4px 12px rgba(105,74,176,.06)!important;
+      gap:8px!important;
+      overflow:hidden!important;
     }
     .period-icon{
       width:18px!important;
       height:18px!important;
       border-radius:6px!important;
+      flex:0 0 auto!important;
+      background:linear-gradient(180deg,#faf6ff 0%,#efe6ff 100%)!important;
+      border:2px solid #d7c7fb!important;
+      position:relative!important;
+      display:block!important;
     }
     .period-icon::before{
-      left:4px!important;right:4px!important;top:6px!important;bottom:4px!important;
-      border-width:1.7px!important;
+      content:""!important;
+      position:absolute!important;
+      left:3px!important; right:3px!important; top:5px!important; bottom:3px!important;
+      border:1.6px solid #6f50c2!important;
+      border-top:none!important;
+      border-radius:0 0 3px 3px!important;
     }
     .period-icon::after{
-      left:6px!important;top:4px!important;width:8px!important;height:4px!important;
-      border-left-width:1.7px!important;border-right-width:1.7px!important;
+      content:""!important;
+      position:absolute!important;
+      left:5px!important; top:2px!important; width:8px!important; height:4px!important;
+      border-left:1.6px solid #6f50c2!important;
+      border-right:1.6px solid #6f50c2!important;
+      border-top:1.6px solid #6f50c2!important;
+      border-radius:2px 2px 0 0!important;
+      background:#fff!important;
     }
     .period-icon i{
-      left:7px!important;top:10px!important;width:2.6px!important;height:2.6px!important;
-      box-shadow:4.5px 0 0 #6f50c2,0 4.5px 0 #6f50c2,4.5px 4.5px 0 #6f50c2!important;
+      position:absolute!important;
+      left:6px!important; top:9px!important; width:2px!important; height:2px!important;
+      border-radius:50%!important;
+      background:#6f50c2!important;
+      box-shadow:4px 0 0 #6f50c2,0 4px 0 #6f50c2,4px 4px 0 #6f50c2!important;
     }
     .period-copy{
       min-width:0!important;
-      gap:1px!important;
-      justify-content:center!important;
+      flex:1 1 auto!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:flex-end!important;
+      gap:0!important;
     }
+    .period-label{display:none!important}
     .topbar .subhead{
       margin:0!important;
-      font-size:11.15px!important;
-      line-height:1.18!important;
-      letter-spacing:-.33px!important;
-      color:#0d4f87!important;
+      font-size:12.2px!important;
+      line-height:1!important;
+      letter-spacing:-.34px!important;
+      color:#184f93!important;
       font-weight:950!important;
-      white-space:pre-line!important;
-      word-break:keep-all!important;
-      text-align:left!important;
+      white-space:nowrap!important;
+      text-align:right!important;
       font-variant-numeric:tabular-nums!important;
+    }
+    @media (max-width: 380px){
+      .topbar{grid-template-columns:128px minmax(0,1fr)!important; gap:8px!important;}
+      .calculator-back-link{font-size:11.1px!important; padding:0 10px!important;}
+      .topbar .subhead{font-size:11.3px!important;}
+      .period-card{padding:0 12px!important;}
     }
 
 </style>
@@ -1455,10 +1447,7 @@
     <main id="app" class="booting">
       <div class="topbar">
         <a class="calculator-back-link" href="https://seungbeomcat.github.io/dosalja/" aria-label="도살자 격전지 계산기로 돌아가기">계산기로 돌아가기</a>
-        <div class="topbar-copy">
-          <h1 id="pageTitle">균열의 격전지</h1>
-        </div>
-        <div class="period-card" aria-label="운영기간">
+        <div class="period-card" aria-label="운영 기간">
           <span class="period-icon" aria-hidden="true"><i></i></span>
           <div class="period-copy">
             <div class="subhead" id="periodText">10.3(토) 09:00부터
@@ -1791,7 +1780,6 @@
     const r=state.round;
     const dot=document.getElementById("syncDot");
     dot.className=`dot ${state.loading?"preview":state.connected&&r&&!r.isDraft?"online":"preview"}`;
-    document.getElementById("pageTitle").textContent=r?.mode==="galaxy"?"은하의 격전지":"균열의 격전지";
     document.getElementById("periodText").textContent=r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"10.3(토) 09:00부터\n10.5(월) 08:45";
     const syncText=document.getElementById("syncText");
     if(state.loading) syncText.textContent="데이터 불러오는 중";
