@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.8</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.9</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -1182,6 +1182,87 @@
       max-width:none!important;
     }
 
+
+
+    /* V0.2.9 — 2구역 현황 계열의 통합형 상단 툴바 */
+    .topbar{
+      position:relative!important;
+      display:grid!important;
+      grid-template-columns:122px minmax(0,1fr)!important;
+      min-height:54px!important;
+      margin:0 0 8px!important;
+      padding:0!important;
+      overflow:hidden!important;
+      border:1px solid #d6cbea!important;
+      border-radius:12px!important;
+      background:rgba(255,255,255,.82)!important;
+      box-shadow:0 3px 11px rgba(78,55,139,.055)!important;
+    }
+    .calculator-back-link{
+      position:static!important;
+      width:auto!important;
+      height:100%!important;
+      min-height:54px!important;
+      padding:0 8px!important;
+      border:0!important;
+      border-right:1px solid #ddd4ee!important;
+      border-radius:0!important;
+      background:linear-gradient(180deg,rgba(246,242,255,.96),rgba(241,236,253,.82))!important;
+      box-shadow:none!important;
+      color:#5a4594!important;
+      font-size:10.7px!important;
+      font-weight:950!important;
+      letter-spacing:-.22px!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      white-space:nowrap!important;
+    }
+    .calculator-back-link::before{
+      content:"‹";
+      display:inline-block;
+      margin-right:4px;
+      font-size:18px;
+      line-height:1;
+      font-weight:950;
+      color:#7556c6;
+      transform:translateY(-.5px);
+    }
+    .calculator-back-link:active{background:#eee8fa!important}
+    .topbar-copy{
+      min-width:0!important;
+      width:auto!important;
+      padding:6px 9px 5px!important;
+      box-sizing:border-box!important;
+      display:flex!important;
+      flex-direction:column!important;
+      align-items:center!important;
+      justify-content:center!important;
+      gap:3px!important;
+      text-align:center!important;
+    }
+    .topbar h1{
+      margin:0!important;
+      font-size:15.3px!important;
+      line-height:1.05!important;
+      letter-spacing:-.45px!important;
+      font-weight:950!important;
+      color:#30254a!important;
+      text-align:center!important;
+      white-space:nowrap!important;
+    }
+    .topbar .subhead{
+      margin:0!important;
+      max-width:100%!important;
+      font-size:9.75px!important;
+      line-height:1.18!important;
+      color:#285888!important;
+      font-weight:950!important;
+      letter-spacing:-.16px!important;
+      text-align:center!important;
+      white-space:normal!important;
+      word-break:keep-all!important;
+    }
 </style>
 </head>
 <body>
@@ -1231,7 +1312,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.8</b>
+        <b>Created by 돗돔 · V0.2.9</b>
       </div>
     </main>
   </div>
@@ -1361,8 +1442,9 @@
   const fmtPeriod = (start,end) => {
     const a=toDateSafe(start), b=toDateSafe(end); if(!a||!b) return "운영기간 · 토요일 09:00 ~ 월요일 08:45";
     const days=["일","월","화","수","목","금","토"];
-    const f=d=>`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")} (${days[d.getDay()]}) ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
-    return `운영기간 · ${f(a)} ~ ${f(b)}`;
+    const mmdd=d=>`${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")} (${days[d.getDay()]}) ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+    const endYear=a.getFullYear()===b.getFullYear()?"":`${b.getFullYear()}.`;
+    return `운영기간 · ${a.getFullYear()}.${mmdd(a)} ~ ${endYear}${mmdd(b)}`;
   };
   const fmtResourceUpdate = value => {
     const d=toDateSafe(value); if(!d) return "-";
