@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.5</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.6</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -50,12 +50,12 @@
         linear-gradient(180deg,#f7f4ff 0,#f2eefb 34%,#f4f1fb 100%);
       padding:12px 12px 30px;
     }
-    .topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:7px;padding:1px 1px 0}
-    .topbar-copy{min-width:0;flex:1}
-    .calculator-back-link{flex:0 0 auto;height:30px;display:inline-flex;align-items:center;justify-content:center;padding:0 10px;border:1px solid #cfc3ee;border-radius:9px;background:rgba(255,255,255,.86);color:#5a4690;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:-.15px;box-shadow:0 2px 8px rgba(91,65,156,.06);white-space:nowrap}
+    .topbar{position:relative;display:block;margin-bottom:7px;padding:1px 1px 0;min-height:51px}
+    .topbar-copy{min-width:0;width:100%;text-align:center}
+    .calculator-back-link{position:absolute;right:0;top:0;height:30px;display:inline-flex;align-items:center;justify-content:center;padding:0 10px;border:1px solid #cfc3ee;border-radius:9px;background:rgba(255,255,255,.86);color:#5a4690;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:-.15px;box-shadow:0 2px 8px rgba(91,65,156,.06);white-space:nowrap}
     .calculator-back-link:active{background:#f3effc;border-color:#ab98df}
-    h1{margin:0;font-size:21px;line-height:1.16;letter-spacing:-.55px;font-weight:900}
-    .subhead{font-size:11px;color:var(--muted);font-weight:760;margin-top:5px;line-height:1.25}
+    h1{margin:0;text-align:center;font-size:21px;line-height:1.16;letter-spacing:-.55px;font-weight:900}
+    .subhead{font-size:11px;color:#365486;font-weight:850;margin-top:7px;line-height:1.25;text-align:center;letter-spacing:-.08px}
     .admin-bar{height:38px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(255,255,255,.78);border:1px solid #e1daef;border-radius:11px;padding:0 6px 0 9px;margin-bottom:8px;box-shadow:0 3px 11px rgba(78,55,139,.05)}
 
     .booting .section-card,.booting .footer{display:none}
@@ -924,7 +924,7 @@
     .member-history-empty{height:70px;display:flex;align-items:center;justify-content:center;border:1px dashed #ded7e9;border-radius:11px;color:#958ca4;font-size:10.5px;font-weight:850;background:#fbfaff}
 
     /* V0.2.4 — readability + top anchored boss detail */
-    /* V0.2.5 — safe boss record deletion for test/incorrect entries */
+    /* V0.2.6 — centered header, simplified resource heading, Updated label, latest guild stats */
     #currentBossSlot .current-boss-identity strong{
       font-size:21.5px!important;
       text-align:center!important;
@@ -1068,14 +1068,10 @@
 
       <section class="section-card members-card">
         <div class="section-head member-head">
-          <div class="section-title">길드원 현재 자원</div>
-          <div class="resource-updated"><span>최종 업데이트</span><b id="updatedAt">-</b></div>
+          <div class="section-title">현재 자원 및 초대형 참여현황</div>
+          <div class="resource-updated"><span>Updated</span><b id="updatedAt">-</b></div>
         </div>
-        <div class="member-subrow">
-          <div class="section-note">초대형 참여 1회 = 1칼 자동 차감 · 남은 자원은 길드원 선택 후 직접 수정</div>
-          <div class="legend"><span><i class="g"></i>참여</span><span><i class="r"></i>미참여</span></div>
-        </div>
-        <table class="member-table" aria-label="길드원 현재 자원 현황">
+        <table class="member-table" aria-label="현재 자원 및 초대형 참여현황">
           <colgroup><col><col><col><col><col></colgroup>
           <thead><tr><th>길드원</th><th><span>초대형<br>참여현황</span></th><th>칼(기회)</th><th>잔여 시간</th><th>현재 초대형</th></tr></thead>
           <tbody id="memberRows"></tbody>
@@ -1084,7 +1080,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.5</b>
+        <b>Created by 돗돔 · V0.2.6</b>
       </div>
     </main>
   </div>
@@ -1165,7 +1161,7 @@
     members:{
       "돗돔":{base:191.6,z1:0,z2:5,z3:0,field:{wolf:13,pirate:22,cat:22,food:6,galaxy:0}},
       "매콤갈비":{base:142.5,z1:5,z2:5,z3:0,field:{wolf:8,pirate:8,cat:8,food:8,galaxy:0}},
-      "사마엘":{base:122.5,z1:0,z2:5,z3:0,field:{wolf:13,pirate:7,cat:7,food:7,galaxy:0}},
+      "사마엘":{base:129.5,z1:0,z2:5,z3:0,field:{wolf:13,pirate:7,cat:7,food:7,galaxy:0}},
       "혀녕":{base:93.8,z1:0,z2:5,z3:0,field:{wolf:24,pirate:22,cat:22,food:22,galaxy:0}},
       "데이다라":{base:93,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "XIGN":{base:84,z1:0,z2:5,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
