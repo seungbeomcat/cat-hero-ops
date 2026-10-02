@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.9</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.10</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -1184,84 +1184,145 @@
 
 
 
-    /* V0.2.9 — 2구역 현황 계열의 통합형 상단 툴바 */
+    /* V0.2.10 — 강조형 3분할 상단 헤더 (구상안 5 적용) */
     .topbar{
       position:relative!important;
       display:grid!important;
-      grid-template-columns:122px minmax(0,1fr)!important;
-      min-height:54px!important;
+      grid-template-columns:124px 112px minmax(0,1fr)!important;
+      align-items:stretch!important;
+      gap:4px!important;
+      min-height:62px!important;
       margin:0 0 8px!important;
-      padding:0!important;
+      padding:5px!important;
       overflow:hidden!important;
-      border:1px solid #d6cbea!important;
-      border-radius:12px!important;
-      background:rgba(255,255,255,.82)!important;
-      box-shadow:0 3px 11px rgba(78,55,139,.055)!important;
+      border:1px solid #cfc2ee!important;
+      border-radius:15px!important;
+      background:
+        radial-gradient(circle at 12% 28%,rgba(117,82,199,.22),transparent 36%),
+        radial-gradient(circle at 92% 14%,rgba(244,181,210,.25),transparent 33%),
+        linear-gradient(90deg,#d9caf9 0%,#eee6ff 47%,#f6eaf6 100%)!important;
+      box-shadow:0 5px 15px rgba(78,55,139,.09)!important;
     }
     .calculator-back-link{
       position:static!important;
-      width:auto!important;
-      height:100%!important;
-      min-height:54px!important;
-      padding:0 8px!important;
-      border:0!important;
-      border-right:1px solid #ddd4ee!important;
-      border-radius:0!important;
-      background:linear-gradient(180deg,rgba(246,242,255,.96),rgba(241,236,253,.82))!important;
-      box-shadow:none!important;
-      color:#5a4594!important;
-      font-size:10.7px!important;
+      width:100%!important;
+      height:52px!important;
+      min-height:52px!important;
+      padding:0 9px!important;
+      border:1px solid rgba(101,66,188,.20)!important;
+      border-radius:13px!important;
+      background:linear-gradient(180deg,#805fda 0%,#6847c0 100%)!important;
+      box-shadow:0 5px 13px rgba(83,53,164,.18)!important;
+      color:#fff!important;
+      font-size:10.5px!important;
       font-weight:950!important;
-      letter-spacing:-.22px!important;
+      letter-spacing:-.2px!important;
       display:flex!important;
       align-items:center!important;
       justify-content:center!important;
+      text-decoration:none!important;
       white-space:nowrap!important;
     }
     .calculator-back-link::before{
       content:"‹";
       display:inline-block;
-      margin-right:4px;
-      font-size:18px;
+      margin-right:5px;
+      font-size:21px;
       line-height:1;
       font-weight:950;
-      color:#7556c6;
+      color:#fff;
       transform:translateY(-.5px);
     }
-    .calculator-back-link:active{background:#eee8fa!important}
+    .calculator-back-link:active{
+      background:linear-gradient(180deg,#7353cb,#5d3eae)!important;
+      transform:translateY(1px);
+    }
     .topbar-copy{
       min-width:0!important;
       width:auto!important;
-      padding:6px 9px 5px!important;
+      height:52px!important;
+      padding:0 2px!important;
       box-sizing:border-box!important;
       display:flex!important;
-      flex-direction:column!important;
       align-items:center!important;
       justify-content:center!important;
-      gap:3px!important;
       text-align:center!important;
     }
     .topbar h1{
       margin:0!important;
-      font-size:15.3px!important;
+      font-size:16.2px!important;
       line-height:1.05!important;
-      letter-spacing:-.45px!important;
+      letter-spacing:-.55px!important;
       font-weight:950!important;
-      color:#30254a!important;
+      color:#2d1e5d!important;
       text-align:center!important;
       white-space:nowrap!important;
+    }
+    .period-card{
+      min-width:0;
+      height:52px;
+      padding:5px 7px 5px 6px;
+      display:grid;
+      grid-template-columns:25px minmax(0,1fr);
+      align-items:center;
+      gap:5px;
+      border:1px solid rgba(255,255,255,.92);
+      border-radius:13px;
+      background:rgba(255,255,255,.86);
+      box-shadow:0 3px 10px rgba(87,60,153,.07);
+    }
+    .period-icon{
+      position:relative;
+      width:25px;
+      height:25px;
+      border-radius:8px;
+      background:#f1ebff;
+      box-shadow:inset 0 0 0 1px rgba(111,80,194,.10);
+    }
+    .period-icon::before{
+      content:"";
+      position:absolute;
+      left:6px;right:6px;top:7px;bottom:5px;
+      border:2px solid #6f50c2;
+      border-radius:3px;
+      background:#fff;
+    }
+    .period-icon::after{
+      content:"";
+      position:absolute;
+      left:8px;top:5px;
+      width:9px;height:5px;
+      border-left:2px solid #6f50c2;
+      border-right:2px solid #6f50c2;
+    }
+    .period-icon i{
+      position:absolute;
+      z-index:2;
+      left:9px;top:13px;
+      width:3px;height:3px;border-radius:50%;
+      background:#6f50c2;
+      box-shadow:5px 0 0 #6f50c2,0 5px 0 #6f50c2,5px 5px 0 #6f50c2;
+    }
+    .period-copy{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1px;line-height:1.08}
+    .period-label{
+      font-size:8.5px;
+      color:#5d478f;
+      font-weight:950;
+      letter-spacing:-.14px;
+      white-space:nowrap;
     }
     .topbar .subhead{
       margin:0!important;
       max-width:100%!important;
-      font-size:9.75px!important;
-      line-height:1.18!important;
-      color:#285888!important;
+      font-size:8.35px!important;
+      line-height:1.14!important;
+      color:#19528b!important;
       font-weight:950!important;
-      letter-spacing:-.16px!important;
-      text-align:center!important;
-      white-space:normal!important;
+      letter-spacing:-.18px!important;
+      text-align:left!important;
+      white-space:pre-line!important;
       word-break:keep-all!important;
+      font-variant-numeric:tabular-nums;
     }
 </style>
 </head>
@@ -1269,11 +1330,18 @@
   <div id="shell">
     <main id="app" class="booting">
       <div class="topbar">
+        <a class="calculator-back-link" href="https://seungbeomcat.github.io/dosalja/" aria-label="도살자 격전지 계산기로 돌아가기">계산기로 돌아가기</a>
         <div class="topbar-copy">
           <h1 id="pageTitle">균열의 격전지</h1>
-          <div class="subhead" id="periodText">운영기간 · 토요일 09:00 ~ 월요일 08:45</div>
         </div>
-        <a class="calculator-back-link" href="https://seungbeomcat.github.io/dosalja/" aria-label="도살자 격전지 계산기로 돌아가기">계산기로 돌아가기</a>
+        <div class="period-card" aria-label="운영기간">
+          <span class="period-icon" aria-hidden="true"><i></i></span>
+          <div class="period-copy">
+            <span class="period-label">운영기간</span>
+            <div class="subhead" id="periodText">토요일 09:00 ~
+월요일 08:45</div>
+          </div>
+        </div>
       </div>
 
       <div class="admin-bar">
@@ -1312,7 +1380,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.9</b>
+        <b>Created by 돗돔 · V0.2.10</b>
       </div>
     </main>
   </div>
@@ -1440,11 +1508,8 @@
     return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   };
   const fmtPeriod = (start,end) => {
-    const a=toDateSafe(start), b=toDateSafe(end); if(!a||!b) return "운영기간 · 토요일 09:00 ~ 월요일 08:45";
-    const days=["일","월","화","수","목","금","토"];
-    const mmdd=d=>`${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")} (${days[d.getDay()]}) ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
-    const endYear=a.getFullYear()===b.getFullYear()?"":`${b.getFullYear()}.`;
-    return `운영기간 · ${a.getFullYear()}.${mmdd(a)} ~ ${endYear}${mmdd(b)}`;
+    const a=toDateSafe(start), b=toDateSafe(end); if(!a||!b) return "토요일 09:00 ~\n월요일 08:45";
+    return `${a.getFullYear()}.${String(a.getMonth()+1).padStart(2,"0")}.${String(a.getDate()).padStart(2,"0")} (${["일","월","화","수","목","금","토"][a.getDay()]}) ${String(a.getHours()).padStart(2,"0")}:${String(a.getMinutes()).padStart(2,"0")} ~\n${String(b.getMonth()+1).padStart(2,"0")}.${String(b.getDate()).padStart(2,"0")} (${["일","월","화","수","목","금","토"][b.getDay()]}) ${String(b.getHours()).padStart(2,"0")}:${String(b.getMinutes()).padStart(2,"0")}`;
   };
   const fmtResourceUpdate = value => {
     const d=toDateSafe(value); if(!d) return "-";
@@ -1601,7 +1666,7 @@
     const dot=document.getElementById("syncDot");
     dot.className=`dot ${state.loading?"preview":state.connected&&r&&!r.isDraft?"online":"preview"}`;
     document.getElementById("pageTitle").textContent=r?.mode==="galaxy"?"은하의 격전지":"균열의 격전지";
-    document.getElementById("periodText").textContent=r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"운영기간 · 토요일 09:00 ~ 월요일 08:45";
+    document.getElementById("periodText").textContent=r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"토요일 09:00 ~\n월요일 08:45";
     const syncText=document.getElementById("syncText");
     if(state.loading) syncText.textContent="데이터 불러오는 중";
     else if(r?.isDraft) syncText.textContent="실제 회차 미설정";
