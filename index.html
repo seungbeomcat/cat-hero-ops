@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.11</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.12</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -459,7 +459,7 @@
     .boss-level-badge{height:16px!important;min-width:36px!important;font-size:8.4px!important;padding:0 5px!important}
     .boss-summary-area{padding:6px 0 0!important;gap:5px!important}
     .boss-summary-row{font-size:8.2px!important;line-height:1.08!important;padding:0 1px!important}
-    .boss-summary-row b{font-size:9.3px!important;letter-spacing:-.2px!important}
+    .boss-summary-row b{font-size:9.0px!important;letter-spacing:-.2px!important}
     .boss-summary-row.score-row{margin-top:1px!important;padding-top:5px!important;gap:3px!important}
     .boss-summary-row.score-row span{font-size:8px!important}
     .boss-summary-row.score-row b{font-size:8.5px!important;letter-spacing:-.6px!important}
@@ -1372,6 +1372,82 @@
       white-space:pre-line!important;
       text-align:left!important;
     }
+
+
+    /* V0.2.12 — header readability rebuild */
+    .topbar{
+      grid-template-columns:94px minmax(0,1fr) 170px!important;
+      gap:5px!important;
+      min-height:62px!important;
+      padding:5px!important;
+    }
+    .calculator-back-link{
+      height:52px!important;
+      min-height:52px!important;
+      padding:0 6px!important;
+      border-radius:13px!important;
+      font-size:9.3px!important;
+      letter-spacing:-.28px!important;
+      box-shadow:0 5px 13px rgba(83,53,164,.17)!important;
+    }
+    .calculator-back-link::before{
+      margin-right:3px!important;
+      font-size:18px!important;
+    }
+    .topbar-copy{
+      height:52px!important;
+      min-width:0!important;
+      padding:0 2px!important;
+    }
+    .topbar h1{
+      font-size:17.2px!important;
+      line-height:1.04!important;
+      letter-spacing:-.58px!important;
+      white-space:nowrap!important;
+    }
+    .period-card{
+      height:52px!important;
+      padding:5px 8px 5px 6px!important;
+      grid-template-columns:18px minmax(0,1fr)!important;
+      gap:5px!important;
+      border-radius:13px!important;
+      align-items:center!important;
+    }
+    .period-icon{
+      width:18px!important;
+      height:18px!important;
+      border-radius:6px!important;
+    }
+    .period-icon::before{
+      left:4px!important;right:4px!important;top:6px!important;bottom:4px!important;
+      border-width:1.7px!important;
+    }
+    .period-icon::after{
+      left:6px!important;top:4px!important;width:8px!important;height:4px!important;
+      border-left-width:1.7px!important;border-right-width:1.7px!important;
+    }
+    .period-icon i{
+      left:7px!important;top:10px!important;width:2.6px!important;height:2.6px!important;
+      box-shadow:4.5px 0 0 #6f50c2,0 4.5px 0 #6f50c2,4.5px 4.5px 0 #6f50c2!important;
+    }
+    .period-copy{
+      min-width:0!important;
+      gap:1px!important;
+      justify-content:center!important;
+    }
+    .topbar .subhead{
+      margin:0!important;
+      font-size:11.15px!important;
+      line-height:1.18!important;
+      letter-spacing:-.33px!important;
+      color:#0d4f87!important;
+      font-weight:950!important;
+      white-space:pre-line!important;
+      word-break:keep-all!important;
+      text-align:left!important;
+      font-variant-numeric:tabular-nums!important;
+    }
+
 </style>
 </head>
 <body>
@@ -1427,7 +1503,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.11</b>
+        <b>Created by 돗돔 · V0.2.12</b>
       </div>
     </main>
   </div>
