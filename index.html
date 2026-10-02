@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.7</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.8</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -1119,6 +1119,69 @@
     #bossModal .detail-stat.state{background:#faf9fd!important;color:#756a89!important}
     #bossModal .detail-stat.state b{color:#4b3b70!important}
 
+
+
+    /* V0.2.8 — upper/center modal placement, stable post-save return, compact history rank badge */
+    html.modal-open,body.modal-open{
+      overflow:hidden!important;
+      overscroll-behavior:none!important;
+    }
+    .modal-backdrop.open{
+      align-items:center!important;
+      justify-content:center!important;
+      padding:18px 0!important;
+      box-sizing:border-box!important;
+      overflow:hidden!important;
+      touch-action:none!important;
+    }
+    .modal-backdrop .modal{
+      transform-origin:center center!important;
+      border-radius:18px!important;
+      max-height:calc(100dvh - 36px)!important;
+      box-shadow:0 15px 42px rgba(34,23,65,.28)!important;
+      touch-action:auto!important;
+    }
+    .modal-backdrop .modal.tall{max-height:calc(100dvh - 36px)!important}
+    #bossModal.open,#memberModal.open,#roundModal.open,#addBossModal.open{
+      align-items:flex-start!important;
+      justify-content:center!important;
+      padding:calc(env(safe-area-inset-top, 0px) + 54px) 0 18px!important;
+    }
+    #bossModal .modal,#memberModal .modal,#roundModal .modal,#addBossModal .modal{
+      transform-origin:top center!important;
+      max-height:calc(100dvh - env(safe-area-inset-top, 0px) - 80px)!important;
+    }
+    #pickerModal.open{
+      align-items:center!important;
+      justify-content:center!important;
+      padding:18px 0!important;
+    }
+    .modal-body{
+      overscroll-behavior:contain!important;
+    }
+
+    .history-stats .rank{
+      right:5px!important;
+      top:5px!important;
+      width:32px!important;
+      height:22px!important;
+      min-height:22px!important;
+      padding:0 3px!important;
+      border-radius:7px!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      box-sizing:border-box!important;
+    }
+    .history-stats .rank b{
+      font-size:11.8px!important;
+      line-height:1!important;
+      letter-spacing:-.35px!important;
+      overflow:visible!important;
+      text-overflow:clip!important;
+      max-width:none!important;
+    }
+
 </style>
 </head>
 <body>
@@ -1168,7 +1231,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.7</b>
+        <b>Created by 돗돔 · V0.2.8</b>
       </div>
     </main>
   </div>
@@ -1473,8 +1536,26 @@
   function renderAll(){ renderHeader(); renderBossRail(); renderMembers(); syncCanvasScale(); }
 
   function showToast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(showToast._t); showToast._t=setTimeout(()=>t.classList.remove("show"),1800); }
-  function openModal(id){ document.getElementById(id).classList.add("open"); syncCanvasScale(); }
-  function closeModal(id){ document.getElementById(id).classList.remove("open"); }
+  function syncModalPageLock(){
+    const hasOpen=!!document.querySelector(".modal-backdrop.open");
+    document.documentElement.classList.toggle("modal-open",hasOpen);
+    document.body.classList.toggle("modal-open",hasOpen);
+  }
+  function openModal(id){
+    const modal=document.getElementById(id); if(!modal)return;
+    modal.classList.add("open");
+    syncModalPageLock();
+    syncCanvasScale();
+  }
+  function closeModal(id){
+    const modal=document.getElementById(id); if(!modal)return;
+    modal.classList.remove("open");
+    syncModalPageLock();
+  }
+  function returnToBossDashboard(){
+    const target=document.querySelector(".boss-dashboard-card"); if(!target)return;
+    requestAnimationFrame(()=>setTimeout(()=>target.scrollIntoView({behavior:"smooth",block:"start"}),220));
+  }
   document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
   document.querySelectorAll(".modal-backdrop").forEach(m=>m.addEventListener("click",e=>{if(e.target===m) closeModal(m.id);}));
 
@@ -1756,6 +1837,7 @@
     if(await persistRound(r)){
       closeModal("bossModal");
       showToast(`#${Number(target.order)||'-'} ${meta.name} 보스 기록을 삭제했습니다.`);
+      returnToBossDashboard();
     }
   }
 
@@ -1780,7 +1862,12 @@
       const rankVal=Number(rankInput.value);
       b.rank=Number.isFinite(rankVal)&&rankVal>0?Math.min(999,Math.floor(rankVal)):null;
     }
-    if(await persistRound(r)){showToast("보스 참여 기록을 저장했습니다.");openBossModal(b.id,false);}
+    if(await persistRound(r)){
+      if(document.activeElement && typeof document.activeElement.blur==="function") document.activeElement.blur();
+      closeModal("bossModal");
+      showToast("보스 참여 기록을 저장했습니다.");
+      returnToBossDashboard();
+    }
   }
 
   function memberBossHistoryMarkup(name){
