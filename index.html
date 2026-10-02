@@ -1433,13 +1433,6 @@
       text-align:right!important;
       font-variant-numeric:tabular-nums!important;
     }
-    @media (max-width: 380px){
-      .topbar{grid-template-columns:128px minmax(0,1fr)!important; gap:8px!important;}
-      .calculator-back-link{font-size:11.1px!important; padding:0 10px!important;}
-      .topbar .subhead{font-size:11.3px!important;}
-      .period-card{padding:0 12px!important;}
-    }
-
 
     /* V0.2.15 — exact boss-page header + balanced status typography + history slots */
     .topbar{
@@ -1591,6 +1584,68 @@
       margin-top:4px!important;
     }
 
+
+    /* V0.2.16 — latest layout refinements */
+    /* Keep original width ratio, but place the wide period panel on the left. */
+    .topbar{
+      grid-template-columns:71% 29%!important;
+    }
+    .period-card{
+      grid-column:1!important;
+      grid-row:1!important;
+      border-right:1px solid #e1d7ef!important;
+    }
+    .calculator-back-link{
+      grid-column:2!important;
+      grid-row:1!important;
+      border-right:0!important;
+    }
+    .calculator-back-link::before{
+      content:none!important;
+      display:none!important;
+    }
+    .calculator-back-link::after{
+      content:"›"!important;
+      display:inline-block!important;
+      margin-left:5px!important;
+      font-size:20px!important;
+      line-height:1!important;
+      font-weight:950!important;
+    }
+
+    /* Match the compact top-section rhythm between boss and resource sections. */
+    .members-card{
+      margin-top:4px!important;
+    }
+
+    /* Keep Updated dot/text, remove only the vertical divider. */
+    .resource-updated{
+      border-left:0!important;
+    }
+
+    /* Add breathing room between participation labels and values. */
+    #currentBossSlot .current-info-box.join,
+    #currentBossSlot .current-info-box.missing{
+      gap:4px!important;
+    }
+    .history-stats .join,
+    .history-stats .missing{
+      gap:3px!important;
+    }
+
+    /* Make current boss title calmer while preserving weight and alignment. */
+    #currentBossSlot .current-boss-identity strong{
+      font-size:17.5px!important;
+      font-weight:950!important;
+      text-align:center!important;
+    }
+
+    /* Compact member rows without changing any typography or resource graphics. */
+    .member-table td{
+      height:58px!important;
+      padding:2px 3px!important;
+    }
+
 </style>
 </head>
 <body>
@@ -1641,7 +1696,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.15</b>
+        <b>Created by 돗돔 · V0.2.16</b>
       </div>
     </main>
   </div>
@@ -1725,9 +1780,9 @@
       "사마엘":{base:129.5,z1:0,z2:5,z3:0,field:{wolf:13,pirate:7,cat:7,food:7,galaxy:0}},
       "혀녕":{base:93.8,z1:0,z2:5,z3:0,field:{wolf:24,pirate:22,cat:22,food:22,galaxy:0}},
       "데이다라":{base:93,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
-      "XIGN":{base:84,z1:0,z2:5,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "XIGN":{base:87,z1:0,z2:5,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "뱅수띠":{base:64,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
-      "승부왕":{base:60.2,z1:0,z2:0,z3:0,field:{wolf:0,pirate:1,cat:0,food:1,galaxy:0}},
+      "승부왕":{base:60.8,z1:0,z2:0,z3:0,field:{wolf:0,pirate:1,cat:0,food:1,galaxy:0}},
       "진니":{base:57.5,z1:0,z2:5,z3:0,field:{wolf:7,pirate:6,cat:6,food:6,galaxy:0}},
       "토시살":{base:60,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "페르시안":{base:57,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
