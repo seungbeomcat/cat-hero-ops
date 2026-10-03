@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.18</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.20</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1601,7 +1601,7 @@
     }
 
 
-    /* V0.2.18 — latest layout refinements */
+    /* V0.2.20 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,9 +1663,166 @@
     }
 
 
-    /* V0.2.18 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.2.20 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
+<style id="v0219-boss-roster-style">
+
+    /* V0.2.20 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    #bossModal .detail-stat-roster{
+      appearance:none!important;
+      -webkit-appearance:none!important;
+      width:100%!important;
+      font:inherit!important;
+      cursor:pointer!important;
+      box-shadow:none!important;
+    }
+    #bossModal .detail-stat-roster:active{
+      transform:scale(.985)!important;
+      filter:brightness(.97)!important;
+    }
+    #bossModal .detail-stat-roster::after{
+      content:"명단 보기";
+      display:block!important;
+      margin-top:1px!important;
+      font-size:8.3px!important;
+      line-height:1!important;
+      font-weight:900!important;
+      opacity:.72!important;
+      white-space:nowrap!important;
+    }
+    #bossRosterModal{z-index:85!important;}
+    #bossRosterModal.open{
+      align-items:center!important;
+      justify-content:center!important;
+      padding:18px 0!important;
+    }
+    #bossRosterModal .boss-roster-modal{
+      width:278px!important;
+      max-width:278px!important;
+      min-height:390px!important;
+      max-height:76dvh!important;
+      transform-origin:center center!important;
+      border-radius:18px!important;
+      background:#fbfaff!important;
+      box-shadow:0 18px 48px rgba(34,23,65,.34)!important;
+    }
+    #bossRosterModal .modal-head{
+      height:52px!important;
+      min-height:52px!important;
+      padding:0 11px 0 14px!important;
+    }
+    #bossRosterModal .modal-title{
+      font-size:14px!important;
+      line-height:1.1!important;
+      font-weight:950!important;
+    }
+    #bossRosterModal .modal-body{
+      padding:10px 11px 12px!important;
+      overflow-y:auto!important;
+    }
+    #bossRosterModal .modal-actions{
+      padding:8px 11px 11px!important;
+    }
+    #bossRosterModal .modal-actions .action-btn{width:100%!important;}
+    .boss-roster-summary{
+      border:1px solid #ded6ed!important;
+      border-radius:12px!important;
+      background:#fff!important;
+      padding:9px 10px!important;
+      margin-bottom:8px!important;
+      text-align:center!important;
+    }
+    .boss-roster-summary b{
+      display:block!important;
+      font-size:12.5px!important;
+      line-height:1.15!important;
+      font-weight:950!important;
+      color:#3b2f58!important;
+    }
+    .boss-roster-summary span{
+      display:block!important;
+      margin-top:4px!important;
+      font-size:9px!important;
+      line-height:1.2!important;
+      font-weight:850!important;
+      color:#877c9c!important;
+    }
+    .boss-roster-list{
+      border:1px solid #dfd8eb!important;
+      border-radius:12px!important;
+      overflow:hidden!important;
+      background:#fff!important;
+    }
+    .boss-roster-row{
+      min-height:43px!important;
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) auto!important;
+      align-items:center!important;
+      gap:8px!important;
+      padding:7px 11px!important;
+      border-bottom:1px solid #eeeaf4!important;
+    }
+    .boss-roster-row:last-child{border-bottom:0!important;}
+    .boss-roster-rank{
+      display:inline-flex!important;
+      align-items:center!important;
+      gap:7px!important;
+      min-width:0!important;
+    }
+    .boss-roster-no{
+      flex:0 0 auto!important;
+      width:22px!important;
+      height:22px!important;
+      border-radius:7px!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      background:#f0ebfb!important;
+      color:#7056b7!important;
+      font-size:9px!important;
+      font-weight:950!important;
+      font-variant-numeric:tabular-nums!important;
+    }
+    .boss-roster-name{
+      min-width:0!important;
+      font-size:11.8px!important;
+      line-height:1.1!important;
+      font-weight:950!important;
+      color:#32284a!important;
+      white-space:nowrap!important;
+      overflow:hidden!important;
+      text-overflow:ellipsis!important;
+    }
+    .boss-roster-score{
+      font-size:11.3px!important;
+      line-height:1!important;
+      font-weight:950!important;
+      color:#5d438f!important;
+      font-variant-numeric:tabular-nums!important;
+      white-space:nowrap!important;
+    }
+    .boss-roster-list.joined .boss-roster-row:first-child .boss-roster-no{
+      background:#fff2c8!important;
+      color:#9b6b05!important;
+    }
+    .boss-roster-list.missing .boss-roster-no{
+      background:#fff0f3!important;
+      color:#c64d62!important;
+    }
+    .boss-roster-empty{
+      min-height:120px!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      padding:18px!important;
+      color:#92889f!important;
+      font-size:10.5px!important;
+      font-weight:850!important;
+      text-align:center!important;
+      line-height:1.45!important;
+    }
+</style>
 </head>
 <body>
   <div id="shell">
@@ -1715,7 +1872,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.18</b><br>
+        <b>Created by 돗돔 · V0.2.20</b><br>
         <span class="footer-build-date">2026.10.03</span>
       </div>
     </main>
@@ -1765,6 +1922,16 @@
     </div>
   </div>
 
+
+
+  <div class="modal-backdrop" id="bossRosterModal">
+    <div class="modal boss-roster-modal">
+      <div class="modal-head"><div class="modal-title" id="bossRosterModalTitle">참여인원 명단</div><button class="close-btn" data-close="bossRosterModal">×</button></div>
+      <div class="modal-body" id="bossRosterModalBody"></div>
+      <div class="modal-actions"><button class="action-btn" data-close="bossRosterModal">닫기</button></div>
+    </div>
+  </div>
+
   <div class="modal-backdrop" id="memberModal">
     <div class="modal">
       <div class="modal-head"><div class="modal-title">길드원 상세</div><button class="close-btn" data-close="memberModal">×</button></div>
@@ -1796,14 +1963,14 @@
     serverKill:6,
     members:{
       "돗돔":{base:191.6,z1:0,z2:5,z3:0,field:{wolf:13,pirate:22,cat:22,food:6,galaxy:0}},
-      "매콤갈비":{base:142.5,z1:5,z2:5,z3:0,field:{wolf:8,pirate:8,cat:8,food:8,galaxy:0}},
+      "매콤갈비":{base:159.5,z1:5,z2:5,z3:0,field:{wolf:8,pirate:8,cat:8,food:8,galaxy:0}},
       "사마엘":{base:129.5,z1:0,z2:5,z3:0,field:{wolf:13,pirate:13,cat:13,food:13,galaxy:0}},
       "혀녕":{base:93.8,z1:0,z2:5,z3:0,field:{wolf:24,pirate:22,cat:22,food:22,galaxy:0}},
       "데이다라":{base:93,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "XIGN":{base:87,z1:0,z2:5,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "뱅수띠":{base:64,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "승부왕":{base:60.8,z1:0,z2:0,z3:0,field:{wolf:0,pirate:1,cat:0,food:1,galaxy:0}},
-      "진니":{base:57.5,z1:0,z2:5,z3:0,field:{wolf:7,pirate:6,cat:6,food:6,galaxy:0}},
+      "진니":{base:69.2,z1:0,z2:5,z3:0,field:{wolf:7,pirate:6,cat:6,food:6,galaxy:0}},
       "토시살":{base:60,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "페르시안":{base:57,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "하니엘":{base:45,z1:0,z2:0,z3:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
@@ -1892,6 +2059,20 @@
   function currentBoss(){ return bossById(state.round?.currentBossId); }
   function participantCount(b){ return b ? Object.keys(b.participants||{}).length : 0; }
   function bossScore(b){ return b ? Object.values(b.participants||{}).reduce((a,p)=>a+(Number(p.score)||0),0) : 0; }
+  function participantNamesByScore(b){
+    if(!b) return [];
+    const baseIndex=new Map(MEMBER_ORDER.map((n,i)=>[n,i]));
+    return MEMBER_ORDER.filter(n=>!!b.participants?.[n]).sort((a,c)=>{
+      const sa=Number(b.participants?.[a]?.score)||0;
+      const sc=Number(b.participants?.[c]?.score)||0;
+      if(sc!==sa) return sc-sa;
+      return (baseIndex.get(a)||0)-(baseIndex.get(c)||0);
+    });
+  }
+  function nonParticipantNamesForBoss(b){
+    return b ? MEMBER_ORDER.filter(n=>!b.participants?.[n]) : [...MEMBER_ORDER];
+  }
+
   function bossParticipationCountForRound(round,name){ return (round?.bosses||[]).reduce((a,b)=>a+(b.participants&&b.participants[name]?1:0),0); }
   function bossUsedSecondsForRound(round,name){ return (round?.bosses||[]).reduce((a,b)=>a+(Number(b.participants?.[name]?.usedSeconds)||0),0); }
   function memberRemainingForRound(round,name){
@@ -2269,15 +2450,37 @@
     if(await persistRound(r)){closeModal("addBossModal");showToast(`#${order} Lv.${bossLevelValue} 보스를 등록했습니다.`);}
   };
 
+  function openBossRosterModal(id,type){
+    const b=bossById(id); if(!b)return;
+    const meta=BOSS_META[b.area]||{name:b.area};
+    const joined=type==="joined";
+    const names=joined?participantNamesByScore(b):nonParticipantNamesForBoss(b);
+    const statusLabel=b.id===state.round?.currentBossId?"현재":"소멸";
+    const title=joined?`참여인원 ${names.length}명`:`불참인원 ${names.length}명`;
+    document.getElementById("bossRosterModalTitle").textContent=title;
+    const summary=`<div class="boss-roster-summary"><b>#${Number(b.order)||'-'} ${b.bossLevel?`Lv.${b.bossLevel}`:'Lv.-'} ${meta.name}</b><span>${statusLabel}${joined?' · 스코어 높은 순':' · 길드원 명단'}</span></div>`;
+    let list="";
+    if(!names.length){
+      list=`<div class="boss-roster-list ${joined?'joined':'missing'}"><div class="boss-roster-empty">${joined?'참여 기록이 없습니다.':'불참 길드원이 없습니다.'}</div></div>`;
+    }else{
+      list=`<div class="boss-roster-list ${joined?'joined':'missing'}">${names.map((name,i)=>{
+        const score=Number(b.participants?.[name]?.score)||0;
+        return `<div class="boss-roster-row"><div class="boss-roster-rank"><span class="boss-roster-no">${i+1}</span><span class="boss-roster-name">${name}</span></div>${joined?`<span class="boss-roster-score">${fmtNum(score)}</span>`:''}</div>`;
+      }).join("")}</div>`;
+    }
+    document.getElementById("bossRosterModalBody").innerHTML=summary+list;
+    openModal("bossRosterModal");
+  }
+
   function openBossModal(id,edit=false){
     const b=bossById(id); if(!b)return; state.selectedBossId=id; state.editingBoss=edit;
     const meta=BOSS_META[b.area];
     document.getElementById("bossModalTitle").textContent=`#${b.order} ${b.bossLevel?`Lv.${b.bossLevel} `:""}${meta.name} 보스`;
     const body=document.getElementById("bossModalBody"), actions=document.getElementById("bossModalActions");
     const rankText=b.status==="current"?"진행 중":(Number(b.rank)>0?`${Number(b.rank)}위`:"미입력");
-    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${meta.name} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><div class="detail-stat join">참여인원<b>${participantCount(b)}명</b></div><div class="detail-stat missing">불참인원<b>${Math.max(0,MEMBER_ORDER.length-participantCount(b))}명</b></div><div class="detail-stat score">점수합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat state">${b.status==="current"?"상태":"최종 등수"}<b>${rankText}</b></div></div></div></div>`;
+    const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${meta.name} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><button type="button" class="detail-stat join detail-stat-roster" data-roster-type="joined" aria-label="참여인원 명단 보기">참여인원<b>${participantCount(b)}명</b></button><button type="button" class="detail-stat missing detail-stat-roster" data-roster-type="missing" aria-label="불참인원 명단 보기">불참인원<b>${Math.max(0,MEMBER_ORDER.length-participantCount(b))}명</b></button><div class="detail-stat score">점수합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat state">${b.status==="current"?"상태":"최종 등수"}<b>${rankText}</b></div></div></div></div>`;
     if(!edit){
-      const parts=MEMBER_ORDER.filter(n=>b.participants?.[n]);
+      const parts=participantNamesByScore(b);
       const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>참여 길드원</div><div>스코어</div></div>${parts.map(n=>{const p=b.participants[n];return `<div class="participant-row"><div class="pname">${n}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
       body.innerHTML=hero+list;
       actions.classList.remove("confirming-delete");
@@ -2298,6 +2501,9 @@
       document.getElementById("cancelBossEditBtn").onclick=()=>openBossModal(id,false);
       document.getElementById("saveBossEditBtn").onclick=saveBossParticipants;
     }
+    body.querySelectorAll("[data-roster-type]").forEach(btn=>{
+      btn.onclick=()=>openBossRosterModal(id,btn.dataset.rosterType);
+    });
     openModal("bossModal");
   }
 
