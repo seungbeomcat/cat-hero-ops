@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.20</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.21</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1601,7 +1601,7 @@
     }
 
 
-    /* V0.2.20 — latest layout refinements */
+    /* V0.2.21 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,12 +1663,12 @@
     }
 
 
-    /* V0.2.20 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.2.21 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.2.20 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.2.21 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1823,6 +1823,182 @@
       line-height:1.45!important;
     }
 </style>
+
+<style id="v0221-boss-detail-roster-polish">
+/* V0.2.21 — cross-platform typography lock + boss roster UI polish.
+   Fixed px type; responsive behavior must not shrink typography. */
+
+/* Current and expired boss detail summary buttons: same typography and box language. */
+#bossModal .detail-stat-roster{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:58px!important;
+  padding:6px 6px!important;
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:10.5px!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+  letter-spacing:-.12px!important;
+  text-align:center!important;
+  -webkit-font-smoothing:antialiased!important;
+}
+#bossModal .detail-stat-roster b{
+  display:block!important;
+  margin-top:4px!important;
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:13.2px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.1px!important;
+  font-variant-numeric:tabular-nums!important;
+}
+#bossModal .detail-stat-roster::after{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:8.3px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  margin-top:4px!important;
+}
+/* 참여인원: click functionality remains, but no redundant helper copy. */
+#bossModal .detail-stat-roster[data-roster-type="joined"]::after{
+  content:none!important;
+  display:none!important;
+}
+/* 불참인원: keep the explicit helper. */
+#bossModal .detail-stat-roster[data-roster-type="missing"]::after{
+  content:"명단 보기"!important;
+  display:block!important;
+}
+
+/* Boss score table becomes a real three-column centered ranking table. */
+#bossModal .participant-head,
+#bossModal .participant-row{
+  display:grid!important;
+  grid-template-columns:54px minmax(0,1fr) 122px!important;
+  align-items:stretch!important;
+  gap:0!important;
+  padding:0!important;
+  text-align:center!important;
+}
+#bossModal .participant-head{
+  min-height:34px!important;
+}
+#bossModal .participant-head>div,
+#bossModal .participant-row>.prank,
+#bossModal .participant-row>.pname,
+#bossModal .participant-row>.pscore{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:0!important;
+  padding:0 7px!important;
+  text-align:center!important;
+  border-left:1px solid #e7e1f0!important;
+  box-sizing:border-box!important;
+}
+#bossModal .participant-head>div:first-child,
+#bossModal .participant-row>.prank{
+  border-left:0!important;
+}
+#bossModal .participant-row{
+  min-height:42px!important;
+}
+#bossModal .participant-row .prank{
+  color:#7358b4!important;
+  font-size:10.8px!important;
+  font-weight:950!important;
+  font-variant-numeric:tabular-nums!important;
+}
+#bossModal .participant-row .pname{
+  color:#332a4a!important;
+  font-size:11.8px!important;
+  font-weight:950!important;
+}
+#bossModal .participant-row .pscore{
+  color:#54446f!important;
+  font-size:11.8px!important;
+  font-weight:950!important;
+  font-variant-numeric:tabular-nums!important;
+}
+
+/* Slim roster popup: remove the wide empty-space feel. */
+#bossRosterModal .boss-roster-modal{
+  width:244px!important;
+  max-width:calc(100vw - 34px)!important;
+  min-height:0!important;
+  max-height:76dvh!important;
+}
+#bossRosterModal .modal-head{
+  height:48px!important;
+  min-height:48px!important;
+  padding:0 9px 0 12px!important;
+}
+#bossRosterModal .modal-title{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:13px!important;
+  line-height:1.1!important;
+  font-weight:950!important;
+  letter-spacing:-.12px!important;
+}
+#bossRosterModal .modal-body{
+  padding:8px 9px 10px!important;
+}
+#bossRosterModal .modal-actions{
+  padding:7px 9px 9px!important;
+}
+#bossRosterModal .boss-roster-summary{
+  padding:8px 8px!important;
+  margin-bottom:7px!important;
+}
+#bossRosterModal .boss-roster-summary b{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:11.7px!important;
+}
+#bossRosterModal .boss-roster-summary span{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:8.6px!important;
+}
+#bossRosterModal .boss-roster-row{
+  min-height:40px!important;
+  gap:5px!important;
+  padding:6px 8px!important;
+}
+#bossRosterModal .boss-roster-rank{
+  gap:6px!important;
+}
+#bossRosterModal .boss-roster-no{
+  width:21px!important;
+  height:21px!important;
+  border-radius:7px!important;
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:8.8px!important;
+  font-weight:950!important;
+}
+#bossRosterModal .boss-roster-name{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:11.1px!important;
+  line-height:1.05!important;
+  font-weight:950!important;
+}
+#bossRosterModal .boss-roster-score{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:10.7px!important;
+  line-height:1!important;
+  font-weight:950!important;
+}
+/* 불참 명단에는 스코어 열이 없으므로 내용 자체를 가운데 묶어 빈 오른쪽 공간 제거. */
+#bossRosterModal .boss-roster-list.missing .boss-roster-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-rank{
+  justify-content:center!important;
+}
+</style>
+
 </head>
 <body>
   <div id="shell">
@@ -1872,7 +2048,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.20</b><br>
+        <b>Created by 돗돔 · V0.2.21</b><br>
         <span class="footer-build-date">2026.10.03</span>
       </div>
     </main>
@@ -2481,7 +2657,7 @@
     const hero=`<div class="boss-detail-hero">${bossImageMarkup(b.area,"")}<div><div class="boss-detail-name">#${b.order} ${b.bossLevel?`Lv.${b.bossLevel}`:"Lv.-"} ${meta.name} ${b.id===state.round.currentBossId?'<span style="color:#7556c9;font-size:11px">· 현재</span>':''}</div><div class="boss-detail-stats"><button type="button" class="detail-stat join detail-stat-roster" data-roster-type="joined" aria-label="참여인원 명단 보기">참여인원<b>${participantCount(b)}명</b></button><button type="button" class="detail-stat missing detail-stat-roster" data-roster-type="missing" aria-label="불참인원 명단 보기">불참인원<b>${Math.max(0,MEMBER_ORDER.length-participantCount(b))}명</b></button><div class="detail-stat score">점수합계<b>${fmtNum(bossScore(b))}</b></div><div class="detail-stat state">${b.status==="current"?"상태":"최종 등수"}<b>${rankText}</b></div></div></div></div>`;
     if(!edit){
       const parts=participantNamesByScore(b);
-      const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>참여 길드원</div><div>스코어</div></div>${parts.map(n=>{const p=b.participants[n];return `<div class="participant-row"><div class="pname">${n}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
+      const list=parts.length?`<div class="participant-list"><div class="participant-head"><div>순위</div><div>참여 길드원</div><div>스코어</div></div>${parts.map((n,i)=>{const p=b.participants[n];return `<div class="participant-row"><div class="prank">${i+1}위</div><div class="pname">${n}</div><div class="pscore">${fmtNum(p.score)}</div></div>`;}).join("")}</div>`:`<div class="participant-list"><div class="participant-empty">아직 참여 기록이 없습니다.</div></div>`;
       body.innerHTML=hero+list;
       actions.classList.remove("confirming-delete");
       actions.innerHTML=`<button class="action-btn danger" id="deleteBossBtn">삭제</button><button class="action-btn" data-boss-close>닫기</button><button class="action-btn primary" id="editBossBtn">참여 기록 수정</button>`;
