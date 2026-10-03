@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.22</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.23</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1601,7 +1601,7 @@
     }
 
 
-    /* V0.2.22 — latest layout refinements */
+    /* V0.2.23 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,12 +1663,12 @@
     }
 
 
-    /* V0.2.22 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.2.23 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.2.22 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.2.23 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1825,7 +1825,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.2.22 — cross-platform typography lock + boss roster UI polish.
+/* V0.2.23 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -2001,7 +2001,7 @@
 
 
 <style id="v0222-boss-roster-final-polish">
-/* V0.2.22 — current/expired boss detail polish
+/* V0.2.23 — current/expired boss detail polish
    Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
 
 /* Participation / non-participation summary cards:
@@ -2152,6 +2152,126 @@
 }
 </style>
 
+
+<style id="v0223-final-roster-and-score-columns">
+/* V0.2.23 — final compact roster / score-table proportions.
+   Pretendard Variable and fixed px typography remain mandatory. */
+
+/* Boss detail score table:
+   순위 < 닉네임 < 스코어, with the score column deliberately widest. */
+#bossModal .participant-head,
+#bossModal .participant-row{
+  display:grid!important;
+  grid-template-columns:15% 35% 50%!important;
+  gap:0!important;
+  padding:0!important;
+  align-items:stretch!important;
+  text-align:center!important;
+}
+#bossModal .participant-head>div,
+#bossModal .participant-row>.prank,
+#bossModal .participant-row>.pname,
+#bossModal .participant-row>.pscore{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+  padding-left:5px!important;
+  padding-right:5px!important;
+  text-align:center!important;
+}
+#bossModal .participant-row>.pname{
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+#bossModal .participant-row>.pscore{
+  white-space:nowrap!important;
+}
+
+/* Missing roster popup:
+   title + nickname list + close only. No boss summary card. */
+#bossRosterModal .boss-roster-modal.missing{
+  width:164px!important;
+  max-width:calc(100vw - 32px)!important;
+  min-height:0!important;
+}
+#bossRosterModal .boss-roster-modal.missing .modal-head{
+  height:44px!important;
+  min-height:44px!important;
+  padding-left:10px!important;
+  padding-right:7px!important;
+}
+#bossRosterModal .boss-roster-modal.missing .modal-title{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:13.4px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.12px!important;
+}
+#bossRosterModal .boss-roster-modal.missing .modal-body{
+  padding:6px 7px 7px!important;
+}
+#bossRosterModal .boss-roster-modal.missing .boss-roster-summary{
+  display:none!important;
+}
+#bossRosterModal .boss-roster-list.missing{
+  border-radius:10px!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-row{
+  min-height:31px!important;
+  height:31px!important;
+  padding:0 5px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-rank{
+  width:100%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:0!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-no{
+  display:none!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-name{
+  width:100%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:13px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.1px!important;
+  white-space:nowrap!important;
+}
+#bossRosterModal .boss-roster-modal.missing .modal-actions{
+  padding:6px 7px 7px!important;
+}
+#bossRosterModal .boss-roster-modal.missing .modal-actions .action-btn{
+  min-height:38px!important;
+}
+
+/* Never shrink the requested typography on narrow screens. */
+@media (max-width:390px){
+  #bossModal .participant-head,
+  #bossModal .participant-row{
+    grid-template-columns:15% 35% 50%!important;
+  }
+  #bossRosterModal .boss-roster-modal.missing{
+    width:164px!important;
+  }
+  #bossRosterModal .boss-roster-list.missing .boss-roster-name{
+    font-size:13px!important;
+  }
+}
+</style>
+
 </head>
 <body>
   <div id="shell">
@@ -2201,7 +2321,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.22</b><br>
+        <b>Created by 돗돔 · V0.2.23</b><br>
         <span class="footer-build-date">2026.10.03</span>
       </div>
     </main>
@@ -2789,7 +2909,7 @@
     const statusLabel=b.id===state.round?.currentBossId?"현재":"소멸";
     const title=joined?`참여인원 ${names.length}명`:`불참인원 ${names.length}명`;
     document.getElementById("bossRosterModalTitle").textContent=title;
-    const summary=`<div class="boss-roster-summary"><b>#${Number(b.order)||'-'} ${b.bossLevel?`Lv.${b.bossLevel}`:'Lv.-'} ${meta.name}</b><span>${statusLabel}${joined?' · 스코어 높은 순':' · 길드원 명단'}</span></div>`;
+    const summary=joined?`<div class="boss-roster-summary"><b>#${Number(b.order)||'-'} ${b.bossLevel?`Lv.${b.bossLevel}`:'Lv.-'} ${meta.name}</b><span>${statusLabel} · 스코어 높은 순</span></div>`:"";
     let list="";
     if(!names.length){
       list=`<div class="boss-roster-list ${joined?'joined':'missing'}"><div class="boss-roster-empty">${joined?'참여 기록이 없습니다.':'불참 길드원이 없습니다.'}</div></div>`;
