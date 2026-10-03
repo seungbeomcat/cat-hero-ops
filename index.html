@@ -7,7 +7,23 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.17</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.18</title>
+  <!-- KakaoTalk / social link preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="도살자 길드" />
+  <meta property="og:title" content="균격 · 은하 관리" />
+  <meta property="og:description" content="도살자 길드 균열·은하 초대형 보스 및 참여현황 관리" />
+  <meta property="og:url" content="https://seungbeomcat.github.io/cat-hero-ops/" />
+  <meta property="og:image" content="https://seungbeomcat.github.io/cat-hero-ops/assets/ops-share-preview.jpg" />
+  <meta property="og:image:secure_url" content="https://seungbeomcat.github.io/cat-hero-ops/assets/ops-share-preview.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="균격 · 은하 관리" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="균격 · 은하 관리" />
+  <meta name="twitter:description" content="도살자 길드 균열·은하 초대형 보스 및 참여현황 관리" />
+  <meta name="twitter:image" content="https://seungbeomcat.github.io/cat-hero-ops/assets/ops-share-preview.jpg" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
@@ -1585,7 +1601,7 @@
     }
 
 
-    /* V0.2.17 — latest layout refinements */
+    /* V0.2.18 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1646,7 +1662,10 @@
       padding:2px 3px!important;
     }
 
-</style>
+
+    /* V0.2.18 share preview + build-date rule. Typography remains fixed in px. */
+    .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
+  </style>
 </head>
 <body>
   <div id="shell">
@@ -1696,7 +1715,8 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.17</b>
+        <b>Created by 돗돔 · V0.2.18</b><br>
+        <span class="footer-build-date">2026.10.03</span>
       </div>
     </main>
   </div>
