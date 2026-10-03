@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.21</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.22</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1601,7 +1601,7 @@
     }
 
 
-    /* V0.2.21 — latest layout refinements */
+    /* V0.2.22 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,12 +1663,12 @@
     }
 
 
-    /* V0.2.21 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.2.22 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.2.21 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.2.22 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1825,7 +1825,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.2.21 — cross-platform typography lock + boss roster UI polish.
+/* V0.2.22 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -1999,6 +1999,159 @@
 }
 </style>
 
+
+<style id="v0222-boss-roster-final-polish">
+/* V0.2.22 — current/expired boss detail polish
+   Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
+
+/* Participation / non-participation summary cards:
+   identical type hierarchy, no helper copy, click behavior retained. */
+#bossModal .detail-stat-roster{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:62px!important;
+  padding:7px 6px!important;
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:12.2px!important;
+  line-height:1.05!important;
+  font-weight:950!important;
+  letter-spacing:-.14px!important;
+  text-align:center!important;
+  -webkit-font-smoothing:antialiased!important;
+}
+#bossModal .detail-stat-roster b{
+  display:block!important;
+  margin-top:5px!important;
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:15.6px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.12px!important;
+  font-variant-numeric:tabular-nums!important;
+}
+#bossModal .detail-stat-roster::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Slim roster popup common shell. */
+#bossRosterModal .boss-roster-modal{
+  min-height:0!important;
+  max-height:76dvh!important;
+}
+#bossRosterModal .modal-head{
+  height:46px!important;
+  min-height:46px!important;
+  padding:0 8px 0 11px!important;
+}
+#bossRosterModal .modal-title{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:12.7px!important;
+  line-height:1.1!important;
+  font-weight:950!important;
+  letter-spacing:-.1px!important;
+}
+#bossRosterModal .modal-body{
+  padding:7px 8px 9px!important;
+}
+#bossRosterModal .modal-actions{
+  padding:7px 8px 8px!important;
+}
+#bossRosterModal .boss-roster-summary{
+  padding:7px 7px!important;
+  margin-bottom:6px!important;
+}
+#bossRosterModal .boss-roster-summary b{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:11.4px!important;
+}
+#bossRosterModal .boss-roster-summary span{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:8.5px!important;
+}
+#bossRosterModal .boss-roster-row{
+  min-height:38px!important;
+  padding:5px 7px!important;
+}
+#bossRosterModal .boss-roster-name{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:11.2px!important;
+  line-height:1!important;
+  font-weight:950!important;
+}
+#bossRosterModal .boss-roster-score{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;
+  font-size:10.6px!important;
+  line-height:1!important;
+  font-weight:950!important;
+}
+
+/* Joined popup: compact but still wide enough for rank/name/score. */
+#bossRosterModal .boss-roster-modal.joined{
+  width:248px!important;
+  max-width:calc(100vw - 32px)!important;
+}
+
+/* Missing popup: much narrower, nickname-only, no numeric badges. */
+#bossRosterModal .boss-roster-modal.missing{
+  width:188px!important;
+  max-width:calc(100vw - 32px)!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding-left:8px!important;
+  padding-right:8px!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-rank{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  gap:0!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-no{
+  display:none!important;
+}
+#bossRosterModal .boss-roster-list.missing .boss-roster-name{
+  width:100%!important;
+  text-align:center!important;
+  justify-content:center!important;
+  font-size:11.5px!important;
+}
+
+/* Keep participant ranking table polished and centered. */
+#bossModal .participant-head,
+#bossModal .participant-row{
+  text-align:center!important;
+}
+#bossModal .participant-head>div,
+#bossModal .participant-row>.prank,
+#bossModal .participant-row>.pname,
+#bossModal .participant-row>.pscore{
+  text-align:center!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+
+/* No font shrinking on narrow screens. */
+@media (max-width:390px){
+  #bossModal .detail-stat-roster{
+    min-height:62px!important;
+    padding:7px 5px!important;
+  }
+  #bossRosterModal .boss-roster-modal.joined{
+    width:248px!important;
+  }
+  #bossRosterModal .boss-roster-modal.missing{
+    width:188px!important;
+  }
+}
+</style>
+
 </head>
 <body>
   <div id="shell">
@@ -2048,7 +2201,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.21</b><br>
+        <b>Created by 돗돔 · V0.2.22</b><br>
         <span class="footer-build-date">2026.10.03</span>
       </div>
     </main>
@@ -2627,6 +2780,8 @@
   };
 
   function openBossRosterModal(id,type){
+  bossRosterModal?.querySelector(".boss-roster-modal")?.classList.remove("joined","missing");
+  bossRosterModal?.querySelector(".boss-roster-modal")?.classList.add(type==="missing"?"missing":"joined");
     const b=bossById(id); if(!b)return;
     const meta=BOSS_META[b.area]||{name:b.area};
     const joined=type==="joined";
@@ -2870,5 +3025,57 @@
   window.__guildOps={getState:()=>deepClone(state.round),reference:INTERNAL_REFERENCE};
 })();
 </script>
+
+<script id="v0222-boss-modal-scroll-reset">
+(function(){
+  function resetBossDetailScroll(){
+    const modal=document.getElementById("bossModal");
+    if(!modal)return;
+    const scrollers=[
+      modal.querySelector(".modal-body"),
+      modal.querySelector(".boss-modal-body"),
+      modal.querySelector(".modal-card"),
+      modal.querySelector(".boss-detail-content"),
+      modal
+    ].filter(Boolean);
+    const apply=()=>{
+      scrollers.forEach(el=>{
+        try{ el.scrollTop=0; }catch(_){}
+        try{ el.scrollTo({top:0,left:0,behavior:"auto"}); }catch(_){}
+      });
+    };
+    apply();
+    requestAnimationFrame(()=>{apply();requestAnimationFrame(apply);});
+    setTimeout(apply,40);
+    setTimeout(apply,120);
+    setTimeout(apply,240);
+  }
+
+  /* Any boss-detail trigger should open from the very top, current or expired. */
+  document.addEventListener("click",function(e){
+    const trigger=e.target.closest?.(
+      "[data-open-boss],[data-boss-id],.boss-card,.history-boss-card,.expired-boss-card,.current-boss-card"
+    );
+    if(!trigger)return;
+    setTimeout(resetBossDetailScroll,0);
+    setTimeout(resetBossDetailScroll,70);
+  },true);
+
+  /* Also watch the modal itself becoming visible, covering programmatic opens. */
+  const modal=document.getElementById("bossModal");
+  if(modal && "MutationObserver" in window){
+    const obs=new MutationObserver(()=>{
+      const visible=modal.classList.contains("open") ||
+                    modal.getAttribute("aria-hidden")==="false" ||
+                    getComputedStyle(modal).display!=="none";
+      if(visible)resetBossDetailScroll();
+    });
+    obs.observe(modal,{attributes:true,attributeFilter:["class","aria-hidden","style"]});
+  }
+
+  window.resetBossDetailScroll=resetBossDetailScroll;
+})();
+</script>
+
 </body>
 </html>
