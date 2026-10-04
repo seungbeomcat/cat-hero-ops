@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.2.26</title>
+  <title>균열 · 은하 길드 운영현황 V0.2.27</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1601,7 +1601,7 @@
     }
 
 
-    /* V0.2.26 — latest layout refinements */
+    /* V0.2.27 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,12 +1663,12 @@
     }
 
 
-    /* V0.2.26 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.2.27 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.2.26 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.2.27 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1825,7 +1825,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.2.26 — cross-platform typography lock + boss roster UI polish.
+/* V0.2.27 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -2001,7 +2001,7 @@
 
 
 <style id="v0222-boss-roster-final-polish">
-/* V0.2.26 — current/expired boss detail polish
+/* V0.2.27 — current/expired boss detail polish
    Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
 
 /* Participation / non-participation summary cards:
@@ -2154,7 +2154,7 @@
 
 
 <style id="v0223-final-roster-and-score-columns">
-/* V0.2.26 — final compact roster / score-table proportions.
+/* V0.2.27 — final compact roster / score-table proportions.
    Pretendard Variable and fixed px typography remain mandatory. */
 
 /* Boss detail score table:
@@ -2274,7 +2274,7 @@
 
 
 <style id="v0224-compact-member-resource-table">
-/* V0.2.26 — compact main member resource rows.
+/* V0.2.27 — compact main member resource rows.
    Keep all existing typography and graphics sizes; reduce only vertical whitespace. */
 .member-table tbody td{
   height:48px!important;
@@ -2308,6 +2308,16 @@
 }
 </style>
 
+
+<style id="v0227-firebase-timeout-recovery">
+.boot-loader{min-height:180px!important;height:auto!important;padding:28px 18px!important;text-align:center!important}
+.boot-loader-note{display:block!important;max-width:300px!important;color:#8b829d!important;font-size:10.5px!important;line-height:1.45!important;font-weight:750!important;letter-spacing:-.08px!important}
+.boot-retry-btn{height:34px!important;margin-top:4px!important;padding:0 16px!important;border:1.5px solid #7556ca!important;border-radius:9px!important;background:linear-gradient(180deg,#8264d4,#6f50c2)!important;color:#fff!important;font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;font-size:11px!important;line-height:1!important;font-weight:900!important;box-shadow:0 4px 12px rgba(93,66,157,.14)!important}
+.boot-retry-btn:disabled{opacity:.5!important}
+.boot-spinner[hidden],.boot-retry-btn[hidden]{display:none!important}
+@media (max-width:390px){.boot-loader-note{font-size:10.5px!important}.boot-retry-btn{font-size:11px!important}}
+</style>
+
 </head>
 <body>
   <div id="shell">
@@ -2329,7 +2339,12 @@
         </div>
       </div>
 
-      <div class="boot-loader" id="bootLoader"><span class="boot-spinner"></span><b>현재 회차 데이터를 불러오는 중</b></div>
+      <div class="boot-loader" id="bootLoader">
+        <span class="boot-spinner" id="bootSpinner"></span>
+        <b id="bootLoaderTitle">현재 회차 데이터를 불러오는 중</b>
+        <span class="boot-loader-note" id="bootLoaderNote">연결 상태에 따라 몇 초 정도 걸릴 수 있습니다.</span>
+        <button type="button" class="boot-retry-btn" id="firebaseRetryBtn" hidden>연결 다시 시도</button>
+      </div>
 
       <section class="section-card boss-dashboard-card">
         <div class="current-boss-panel" id="currentBossSlot"></div>
@@ -2357,7 +2372,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.2.26</b><br>
+        <b>Created by 돗돔 · V0.2.27</b><br>
         <span class="footer-build-date">2026.10.04</span>
       </div>
     </main>
@@ -2537,8 +2552,9 @@
     r.isDraft=!r.id; return r;
   }
 
-  let state={round:null,firebase:null,firebaseError:null,connected:false,loading:true,adminUnlockedUntil:0,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null};
+  let state={round:null,firebase:null,firebaseError:null,connected:false,loading:true,connectionStalled:false,adminUnlockedUntil:0,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null,unsubscribeActive:null};
   let firebaseReadyPromise=null;
+  let firebaseInitAttempt=0;
 
   function bossById(id){ return state.round?.bosses?.find(b=>b.id===id)||null; }
   function currentBoss(){ return bossById(state.round?.currentBossId); }
@@ -2674,15 +2690,27 @@
     document.getElementById("periodText").textContent=r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"진행기간 : 10월3일(토) 09:00부터 10월5일(월) 08:45까지";
     const syncText=document.getElementById("syncText");
     if(state.loading) syncText.textContent="데이터 불러오는 중";
+    else if(state.connectionStalled) syncText.textContent="연결 지연 · 재시도 필요";
     else if(r?.isDraft) syncText.textContent="실제 회차 미설정";
     else if(state.connected) syncText.textContent="실시간 동기화";
     else if(state.firebaseError) syncText.textContent="Firebase 연결 오류";
     else syncText.textContent="연결 대기";
     const updated=r?.resourceUpdatedAtServer||r?.resourceUpdatedAt;
     document.getElementById("updatedAt").textContent=fmtResourceUpdate(updated);
-    document.getElementById("app").classList.toggle("booting",!!state.loading);
-    document.getElementById("roundSetupBtn").disabled=!!state.loading;
-    document.getElementById("addBossBtn").disabled=!!state.loading;
+
+    const blocked=!!state.loading||!!state.connectionStalled;
+    document.getElementById("app").classList.toggle("booting",blocked);
+    document.getElementById("roundSetupBtn").disabled=blocked;
+    document.getElementById("addBossBtn").disabled=blocked;
+
+    const spinner=document.getElementById("bootSpinner");
+    const loaderTitle=document.getElementById("bootLoaderTitle");
+    const loaderNote=document.getElementById("bootLoaderNote");
+    const retryBtn=document.getElementById("firebaseRetryBtn");
+    if(spinner) spinner.hidden=!!state.connectionStalled;
+    if(loaderTitle) loaderTitle.textContent=state.connectionStalled?"실시간 데이터 연결이 지연되고 있습니다":"현재 회차 데이터를 불러오는 중";
+    if(loaderNote) loaderNote.textContent=state.connectionStalled?"네트워크 또는 브라우저 연결 상태를 확인한 뒤 다시 시도해주세요.":"연결 상태에 따라 몇 초 정도 걸릴 수 있습니다.";
+    if(retryBtn) retryBtn.hidden=!state.connectionStalled;
   }
 
   function renderAll(){ renderHeader(); renderBossRail(); renderMembers(); syncCanvasScale(); }
@@ -2850,15 +2878,55 @@
     return true;
   }
 
+  function timeoutError(label,ms){
+    const err=new Error(`${label} 시간이 초과되었습니다.`);
+    err.code="client-timeout";
+    err.timeoutMs=ms;
+    return err;
+  }
+  function withTimeout(promise,ms,label){
+    let timer=null;
+    return Promise.race([
+      Promise.resolve(promise),
+      new Promise((_,reject)=>{timer=setTimeout(()=>reject(timeoutError(label,ms)),ms);})
+    ]).finally(()=>{if(timer)clearTimeout(timer);});
+  }
+  function cleanupFirebaseListeners(){
+    if(state.unsubscribeRound){try{state.unsubscribeRound();}catch(_){} state.unsubscribeRound=null;}
+    if(state.unsubscribeActive){try{state.unsubscribeActive();}catch(_){} state.unsubscribeActive=null;}
+  }
+  function markFirebaseStalled(err){
+    cleanupFirebaseListeners();
+    state.firebaseError=err||timeoutError("Firebase 연결",10000);
+    state.connected=false;
+    state.loading=false;
+    state.connectionStalled=true;
+    renderAll();
+  }
+  function assertCurrentFirebaseAttempt(attempt){
+    if(attempt!==firebaseInitAttempt){
+      const err=new Error("이전 Firebase 연결 시도가 취소되었습니다.");
+      err.code="stale-init";
+      throw err;
+    }
+  }
+
   function firebaseErrorMessage(err){
     const code=String(err?.code||"");
+    if(code.includes("client-timeout")) return "Firebase 연결 시간이 초과되었습니다. 연결 다시 시도를 눌러주세요.";
     if(code.includes("permission-denied")) return "Firebase 권한 오류입니다. Firestore 규칙을 확인하세요.";
     if(code.includes("unavailable")||code.includes("network")) return "네트워크 또는 Firebase 연결을 확인하세요.";
     return err?.message?`저장 오류: ${String(err.message).slice(0,70)}`:"Firebase 저장 중 오류가 발생했습니다.";
   }
   async function ensureFirebaseReady(){
     if(state.firebase) return true;
-    if(firebaseReadyPromise) await firebaseReadyPromise;
+    if(state.connectionStalled){
+      showToast("실시간 연결을 먼저 다시 시도해주세요.");
+      return false;
+    }
+    if(firebaseReadyPromise){
+      try{await withTimeout(firebaseReadyPromise,12000,"Firebase 준비");}catch(_){}
+    }
     if(state.firebase) return true;
     showToast(state.firebaseError?firebaseErrorMessage(state.firebaseError):"Firebase 연결에 실패했습니다.");
     return false;
@@ -3112,35 +3180,76 @@
   if(window.ResizeObserver) new ResizeObserver(syncCanvasScale).observe(document.getElementById("app"));
 
   async function initFirebase(){
+    const attempt=++firebaseInitAttempt;
+    cleanupFirebaseListeners();
+    state.loading=true;
+    state.connectionStalled=false;
+    state.connected=false;
+    state.firebaseError=null;
+    state.firebase=null;
+    renderAll();
+
     try{
-      const [appMod,authMod,fsMod]=await Promise.all([
+      const modulePromise=Promise.all([
         import("https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js"),
         import("https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js"),
         import("https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js")
       ]);
+      const [appMod,authMod,fsMod]=await withTimeout(modulePromise,9000,"Firebase 모듈 불러오기");
+      assertCurrentFirebaseAttempt(attempt);
+
       const firebaseConfig={apiKey:"AIzaSyBKJT7idO3z4uBvL645uNl2XSFa8mq7IO4",authDomain:"cat-hero-boss.firebaseapp.com",projectId:"cat-hero-boss",storageBucket:"cat-hero-boss.firebasestorage.app",messagingSenderId:"1065873409630",appId:"1:1065873409630:web:109f8edbe6a818833bd6cf",measurementId:"G-4QJSQ5DFDT"};
-      const app=appMod.initializeApp(firebaseConfig), auth=authMod.getAuth(app), db=fsMod.getFirestore(app);
-      if(!auth.currentUser) await authMod.signInAnonymously(auth);
+      const app=appMod.getApps().length?appMod.getApp():appMod.initializeApp(firebaseConfig);
+      const auth=authMod.getAuth(app), db=fsMod.getFirestore(app);
+
+      if(!auth.currentUser) await withTimeout(authMod.signInAnonymously(auth),8000,"익명 로그인");
+      assertCurrentFirebaseAttempt(attempt);
+
       const activeRef=fsMod.doc(db,"riftGalaxyOps","active");
-      const finishLoad=(round)=>{state.round=round;state.connected=true;state.loading=false;state.firebaseError=null;renderAll();};
+      const loadRoundOnce=async(roundId)=>{
+        if(!roundId) return makeDraftRound();
+        const ref=fsMod.doc(db,"riftGalaxyRounds",roundId);
+        const snap=await withTimeout(fsMod.getDoc(ref),8000,"현재 회차 데이터 조회");
+        assertCurrentFirebaseAttempt(attempt);
+        return snap.exists()?normalizeRound(snap.data(),snap.id):makeDraftRound();
+      };
+
+      const activeSnap=await withTimeout(fsMod.getDoc(activeRef),8000,"활성 회차 조회");
+      assertCurrentFirebaseAttempt(attempt);
+      const initialRoundId=activeSnap.exists()?activeSnap.data().roundId:null;
+      const initialRound=await loadRoundOnce(initialRoundId||null);
+      assertCurrentFirebaseAttempt(attempt);
+
+      const finishLoad=(round)=>{
+        if(attempt!==firebaseInitAttempt) return;
+        state.round=round;
+        state.connected=true;
+        state.loading=false;
+        state.connectionStalled=false;
+        state.firebaseError=null;
+        renderAll();
+      };
+
       const subscribeRound=(roundId)=>{
-        if(state.unsubscribeRound){state.unsubscribeRound();state.unsubscribeRound=null;}
+        if(attempt!==firebaseInitAttempt) return;
+        if(state.unsubscribeRound){try{state.unsubscribeRound();}catch(_){} state.unsubscribeRound=null;}
         if(!roundId){finishLoad(makeDraftRound());return;}
         state.unsubscribeRound=fsMod.onSnapshot(fsMod.doc(db,"riftGalaxyRounds",roundId),snap=>{
+          if(attempt!==firebaseInitAttempt) return;
           if(snap.exists()) finishLoad(normalizeRound(snap.data(),snap.id));
           else finishLoad(makeDraftRound());
         },err=>{
-          console.error(err);state.firebaseError=err;state.connected=false;state.loading=false;
-          if(!state.round) state.round=makeDraftRound(); renderAll();
+          if(attempt!==firebaseInitAttempt) return;
+          console.error(err);
+          state.firebaseError=err;
+          state.connected=false;
+          state.loading=false;
+          state.connectionStalled=false;
+          if(!state.round) state.round=makeDraftRound();
+          renderAll();
         });
       };
-      fsMod.onSnapshot(activeRef,snap=>{
-        const id=snap.exists()?snap.data().roundId:null;
-        subscribeRound(id||null);
-      },err=>{
-        console.error(err);state.firebaseError=err;state.connected=false;state.loading=false;
-        if(!state.round) state.round=makeDraftRound(); renderAll();
-      });
+
       state.firebase={
         async saveRound(round,resourceChanged=false){
           const payload=deepClone(round); delete payload.updatedAtServer; delete payload.resourceUpdatedAtServer; delete payload.isDraft;
@@ -3153,7 +3262,7 @@
             const oldResourceDate=toDateSafe(round.resourceUpdatedAtServer||round.resourceUpdatedAt);
             if(oldResourceDate) payload.resourceUpdatedAtServer=fsMod.Timestamp.fromDate(oldResourceDate);
           }
-          await fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false});
+          await withTimeout(fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false}),10000,"회차 저장");
         },
         async createRound(round){
           const payload=deepClone(round); delete payload.updatedAtServer; delete payload.resourceUpdatedAtServer; delete payload.isDraft;
@@ -3164,20 +3273,52 @@
           const batch=fsMod.writeBatch(db);
           batch.set(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false});
           batch.set(activeRef,{roundId:round.id,updatedAt:new Date().toISOString(),updatedAtServer:fsMod.serverTimestamp()},{merge:false});
-          await batch.commit();
+          await withTimeout(batch.commit(),10000,"새 회차 저장");
         }
       };
-      state.firebaseError=null;
-      renderHeader();
+
+      finishLoad(initialRound);
+      subscribeRound(initialRoundId||null);
+
+      state.unsubscribeActive=fsMod.onSnapshot(activeRef,snap=>{
+        if(attempt!==firebaseInitAttempt) return;
+        const id=snap.exists()?snap.data().roundId:null;
+        const currentId=state.round?.id||null;
+        if((id||null)!==currentId) subscribeRound(id||null);
+      },err=>{
+        if(attempt!==firebaseInitAttempt) return;
+        console.error(err);
+        state.firebaseError=err;
+        state.connected=false;
+        state.loading=false;
+        state.connectionStalled=false;
+        renderAll();
+      });
+      return true;
     }catch(err){
-      console.warn("Firebase connection error",err);state.firebaseError=err;state.connected=false;state.loading=false;
-      if(!state.round) state.round=makeDraftRound(); renderAll();
+      if(attempt!==firebaseInitAttempt || String(err?.code||"")==="stale-init") return false;
+      console.warn("Firebase connection error",err);
+      markFirebaseStalled(err);
+      return false;
     }
   }
 
+  function startFirebaseInit(){
+    firebaseReadyPromise=initFirebase();
+    return firebaseReadyPromise;
+  }
+
   renderAll();
-  if(location.protocol!=="file:") firebaseReadyPromise=initFirebase();
-  else { state.round=makeDraftRound(); state.loading=false; renderAll(); }
+  if(location.protocol!=="file:") startFirebaseInit();
+  else { state.round=makeDraftRound(); state.loading=false; state.connectionStalled=false; renderAll(); }
+  const firebaseRetryBtn=document.getElementById("firebaseRetryBtn");
+  if(firebaseRetryBtn) firebaseRetryBtn.addEventListener("click",()=>{
+    firebaseRetryBtn.disabled=true;
+    startFirebaseInit().finally(()=>{firebaseRetryBtn.disabled=false;});
+  });
+  window.addEventListener("online",()=>{
+    if(state.connectionStalled) startFirebaseInit();
+  },{passive:true});
   window.__guildOps={getState:()=>deepClone(state.round),reference:INTERNAL_REFERENCE};
 })();
 </script>
