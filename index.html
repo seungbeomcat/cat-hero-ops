@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.3.5</title>
+  <title>균열 · 은하 길드 운영현황 V0.3.6</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -29,7 +29,6 @@
   <style>
     :root{
       --canvas:430px;
-      --ui-scale:1;
       --bg:#f3effc;
       --panel:#ffffff;
       --panel2:#f8f6ff;
@@ -168,12 +167,12 @@
     .footer{text-align:center;color:#9a91ab;font-size:9.5px;font-weight:700;margin-top:16px;line-height:1.6}
     .footer b{color:#7156b8}
 
-    .toast{position:fixed;transform-origin:bottom center;z-index:70;left:50%;bottom:22px;transform:translate(-50%,18px) scale(var(--ui-scale));opacity:0;pointer-events:none;background:#30264b;color:#fff;border-radius:10px;padding:9px 13px;font-size:11px;font-weight:800;box-shadow:0 8px 24px rgba(31,22,53,.28);transition:.2s ease;white-space:nowrap}
-    .toast.show{opacity:1;transform:translate(-50%,0) scale(var(--ui-scale))}
+    .toast{position:fixed;transform-origin:bottom center;z-index:70;left:50%;bottom:22px;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#30264b;color:#fff;border-radius:10px;padding:9px 13px;font-size:11px;font-weight:800;box-shadow:0 8px 24px rgba(31,22,53,.28);transition:.2s ease;white-space:nowrap}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
 
     .modal-backdrop{position:fixed;z-index:60;inset:0;background:rgba(31,23,48,.43);display:none;align-items:flex-end;justify-content:center;padding:0}
     .modal-backdrop.open{display:flex}
-    .modal{width:430px;max-height:91vh;transform:scale(var(--ui-scale));transform-origin:bottom center;background:#f8f6fd;border-radius:18px 18px 0 0;box-shadow:0 -14px 40px rgba(34,23,65,.24);border:1px solid #d6cdec;overflow:hidden;display:flex;flex-direction:column}
+    .modal{width:min(calc(100vw - 16px),520px);max-width:520px;max-height:91vh;transform:none;transform-origin:initial;background:#f8f6fd;border-radius:18px 18px 0 0;box-shadow:0 -14px 40px rgba(34,23,65,.24);border:1px solid #d6cdec;overflow:hidden;display:flex;flex-direction:column}
     .modal.tall{max-height:94vh}
     .modal-head{height:53px;min-height:53px;background:#fff;border-bottom:1px solid #e1daef;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
     .modal-title{font-size:15px;font-weight:950;color:#332751;letter-spacing:-.2px}
@@ -1601,7 +1600,7 @@
     }
 
 
-    /* V0.3.5 — latest layout refinements */
+    /* V0.3.6 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,12 +1662,12 @@
     }
 
 
-    /* V0.3.5 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.3.6 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.3.5 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.3.6 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1825,7 +1824,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.3.5 — cross-platform typography lock + boss roster UI polish.
+/* V0.3.6 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -2001,7 +2000,7 @@
 
 
 <style id="v0222-boss-roster-final-polish">
-/* V0.3.5 — current/expired boss detail polish
+/* V0.3.6 — current/expired boss detail polish
    Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
 
 /* Participation / non-participation summary cards:
@@ -2154,7 +2153,7 @@
 
 
 <style id="v0223-final-roster-and-score-columns">
-/* V0.3.5 — final compact roster / score-table proportions.
+/* V0.3.6 — final compact roster / score-table proportions.
    Pretendard Variable and fixed px typography remain mandatory. */
 
 /* Boss detail score table:
@@ -2274,7 +2273,7 @@
 
 
 <style id="v0224-compact-member-resource-table">
-/* V0.3.5 — compact main member resource rows.
+/* V0.3.6 — compact main member resource rows.
    Keep all existing typography and graphics sizes; reduce only vertical whitespace. */
 .member-table tbody td{
   height:48px!important;
@@ -2320,7 +2319,7 @@
 
 
 <style id="v0300-archive-results">
-/* V0.3.5 — completed-round archive/results page. Fixed px typography is preserved. */
+/* V0.3.6 — completed-round archive/results page. Fixed px typography is preserved. */
 .archive-entry-section{padding:0!important;overflow:hidden!important}
 .archive-entry-btn{position:relative;width:100%;min-height:70px;border:1.5px solid #d1ad55;border-radius:13px;background:linear-gradient(135deg,#315d66 0%,#274f58 100%);color:#fff;display:flex;align-items:center;text-align:left;padding:12px 46px 12px 15px;box-shadow:0 6px 16px rgba(39,79,88,.13)}
 .archive-entry-btn:active{transform:translateY(1px)}
@@ -2429,7 +2428,7 @@
 
 
 <style id="v0301-explicit-round-completion">
-/* V0.3.5 — explicit authenticated round completion + official archive only. */
+/* V0.3.6 — explicit authenticated round completion + official archive only. */
 .archive-entry-upper{margin-bottom:8px!important}
 .mini-btn.finish{
   border-color:#d6ae55!important;
@@ -2580,7 +2579,7 @@
 
 
 <style id="v0303-guild-reward-distribution">
-/* V0.3.5 — archived guild-ranking reward recipient record. */
+/* V0.3.6 — archived guild-ranking reward recipient record. */
 .archive-reward-card{
   width:100%;
   min-height:52px;
@@ -2638,7 +2637,7 @@
 
 
 <style id="v0304-readability-pass">
-/* V0.3.5 — readability pass.
+/* V0.3.6 — readability pass.
    Layout/visual language stays unchanged; only undersized text and a few row heights are raised.
    Typography remains fixed in px on all screen widths. */
 
@@ -2777,7 +2776,7 @@
 </style>
 
 <style id="v0305-fluid-responsive-final">
-/* V0.3.5 — remove the 430px logical-canvas scaling model.
+/* V0.3.6 — remove the 430px logical-canvas scaling model.
    The UI now uses actual CSS pixels at every device width. */
 html,body{width:100%!important;min-width:0!important;max-width:none!important;overflow-x:clip!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
 #shell{width:min(100%,560px)!important;max-width:560px!important;min-width:0!important;height:auto!important;margin:0 auto!important;overflow:visible!important;}
@@ -2893,6 +2892,20 @@ html,body{width:100%!important;min-width:0!important;max-width:none!important;ov
   .member-table col:nth-child(1){width:21%!important}.member-table col:nth-child(2){width:17%!important}.member-table col:nth-child(3){width:20%!important}.member-table col:nth-child(4){width:26%!important}.member-table col:nth-child(5){width:16%!important}
 }
 </style>
+
+<style id="v0306-platform-hardening-final">
+/* V0.3.6 — no logical canvas scaling anywhere in the live UI. */
+html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
+body{width:100%!important;min-width:0!important;margin:0!important;overflow-x:clip!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+#shell{width:100%!important;max-width:560px!important;min-width:0!important;margin-inline:auto!important;transform:none!important;zoom:1!important;}
+#app{width:100%!important;max-width:560px!important;min-width:0!important;transform:none!important;zoom:1!important;}
+#app>*{min-width:0!important;max-width:100%!important;}
+.modal{width:min(calc(100vw - 16px),520px)!important;max-width:520px!important;transform:none!important;}
+button,input,select,textarea{font:inherit;}
+@media (max-width:390px){#app{padding-left:8px!important;padding-right:8px!important;}}
+@media (min-width:391px) and (max-width:560px){#app{padding-left:12px!important;padding-right:12px!important;}}
+</style>
+
 </head>
 <body>
   <div id="shell">
@@ -2965,7 +2978,7 @@ html,body{width:100%!important;min-width:0!important;max-width:none!important;ov
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.3.5</b><br>
+        <b>Created by 돗돔 · V0.3.6</b><br>
         <span class="footer-build-date">2026.10.05</span>
       </div>
     </main>
@@ -3097,7 +3110,7 @@ html,body{width:100%!important;min-width:0!important;max-width:none!important;ov
       "매콤갈비":{base:159.5,z1:5,z2:5,z3:0,minScore:0,field:{wolf:8,pirate:8,cat:8,food:8,galaxy:0}},
       "사마엘":{base:129.5,z1:0,z2:5,z3:0,minScore:0,field:{wolf:22,pirate:22,cat:22,food:22,galaxy:0}},
       "혀녕":{base:93.8,z1:0,z2:5,z3:0,minScore:1500,field:{wolf:24,pirate:22,cat:22,food:22,galaxy:0}},
-      "데이다라":{base:93,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "데이다라":{base:100,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "XIGN":{base:87,z1:0,z2:5,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "뱅수띠":{base:64,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "승부왕":{base:60.8,z1:0,z2:0,z3:0,minScore:1000,field:{wolf:0,pirate:1,cat:0,food:1,galaxy:0}},
@@ -4125,7 +4138,6 @@ html,body{width:100%!important;min-width:0!important;max-width:none!important;ov
     const shell=document.getElementById("shell"), app=document.getElementById("app");
     if(!shell||!app) return;
     app.style.transform="none";
-    document.documentElement.style.setProperty("--ui-scale","1");
     shell.style.width="100%";
     shell.style.height="auto";
   }
