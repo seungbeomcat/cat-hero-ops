@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.3.2</title>
+  <title>균열 · 은하 길드 운영현황 V0.3.3</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1601,7 +1601,7 @@
     }
 
 
-    /* V0.3.2 — latest layout refinements */
+    /* V0.3.3 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,12 +1663,12 @@
     }
 
 
-    /* V0.3.2 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.3.3 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.3.2 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.3.3 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1825,7 +1825,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.3.2 — cross-platform typography lock + boss roster UI polish.
+/* V0.3.3 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -2001,7 +2001,7 @@
 
 
 <style id="v0222-boss-roster-final-polish">
-/* V0.3.2 — current/expired boss detail polish
+/* V0.3.3 — current/expired boss detail polish
    Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
 
 /* Participation / non-participation summary cards:
@@ -2154,7 +2154,7 @@
 
 
 <style id="v0223-final-roster-and-score-columns">
-/* V0.3.2 — final compact roster / score-table proportions.
+/* V0.3.3 — final compact roster / score-table proportions.
    Pretendard Variable and fixed px typography remain mandatory. */
 
 /* Boss detail score table:
@@ -2274,7 +2274,7 @@
 
 
 <style id="v0224-compact-member-resource-table">
-/* V0.3.2 — compact main member resource rows.
+/* V0.3.3 — compact main member resource rows.
    Keep all existing typography and graphics sizes; reduce only vertical whitespace. */
 .member-table tbody td{
   height:48px!important;
@@ -2320,7 +2320,7 @@
 
 
 <style id="v0300-archive-results">
-/* V0.3.2 — completed-round archive/results page. Fixed px typography is preserved. */
+/* V0.3.3 — completed-round archive/results page. Fixed px typography is preserved. */
 .archive-entry-section{padding:0!important;overflow:hidden!important}
 .archive-entry-btn{position:relative;width:100%;min-height:70px;border:1.5px solid #d1ad55;border-radius:13px;background:linear-gradient(135deg,#315d66 0%,#274f58 100%);color:#fff;display:flex;align-items:center;text-align:left;padding:12px 46px 12px 15px;box-shadow:0 6px 16px rgba(39,79,88,.13)}
 .archive-entry-btn:active{transform:translateY(1px)}
@@ -2429,7 +2429,7 @@
 
 
 <style id="v0301-explicit-round-completion">
-/* V0.3.2 — explicit authenticated round completion + official archive only. */
+/* V0.3.3 — explicit authenticated round completion + official archive only. */
 .archive-entry-upper{margin-bottom:8px!important}
 .mini-btn.finish{
   border-color:#d6ae55!important;
@@ -2578,6 +2578,64 @@
 }
 </style>
 
+
+<style id="v0303-guild-reward-distribution">
+/* V0.3.3 — archived guild-ranking reward recipient record. */
+.archive-reward-card{
+  width:100%;
+  min-height:52px;
+  margin:0 0 8px 0;
+  padding:0 14px;
+  border:1px solid #ded5ec;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 3px 10px rgba(80,59,120,.04);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto 14px;
+  align-items:center;
+  column-gap:8px;
+  text-align:left;
+  font-family:inherit;
+}
+.archive-reward-card:active{background:#faf8ff}
+.archive-reward-label{min-width:0}
+.archive-reward-label b{display:block;color:#473663;font-size:10.5px;font-weight:950;line-height:1.25}
+.archive-reward-label span{display:block;margin-top:2px;color:#958aa5;font-size:8.5px;font-weight:750;line-height:1.25}
+.archive-reward-recipient{color:#7354c7;font-size:11px;font-weight:950;white-space:nowrap}
+.archive-reward-recipient.empty{color:#9b94a7}
+.archive-reward-chevron{color:#9b88c4;font-size:21px;font-weight:800;line-height:1;text-align:right}
+.archive-reward-modal{max-width:390px!important}
+.archive-reward-note{
+  margin-bottom:9px;
+  padding:9px 10px;
+  border:1px solid #e4dcef;
+  border-radius:9px;
+  background:#faf8ff;
+  color:#746985;
+  font-size:9.5px;
+  font-weight:800;
+  line-height:1.45;
+}
+.archive-reward-member-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.archive-reward-member-btn{
+  height:38px;
+  padding:0 4px;
+  border:1px solid #ddd5eb;
+  border-radius:9px;
+  background:#fff;
+  color:#4b405f;
+  font-family:inherit;
+  font-size:10.5px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.archive-reward-member-btn.selected{background:#7354c7;color:#fff;border-color:#7354c7;box-shadow:0 3px 9px rgba(93,67,158,.14)}
+@media (max-width:390px){
+  .archive-reward-card{min-height:50px;padding-left:12px;padding-right:12px}
+  .archive-reward-member-btn{font-size:10.5px}
+}
+</style>
+
 </head>
 <body>
   <div id="shell">
@@ -2586,7 +2644,7 @@
         <a class="calculator-back-link" href="https://seungbeomcat.github.io/dosalja/" aria-label="도살자 격전지 계산기로 돌아가기">계산기로 돌아가기</a>
         <div class="period-card" aria-label="진행기간">
           <div class="period-copy">
-            <div class="subhead" id="periodText">진행기간 : 10월3일(토) 09:00부터 10월5일(월) 08:45까지</div>
+            <div class="subhead" id="periodText">진행기간 : 현재 회차 미진행</div>
           </div>
         </div>
       </div>
@@ -2650,7 +2708,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.3.2</b><br>
+        <b>Created by 돗돔 · V0.3.3</b><br>
         <span class="footer-build-date">2026.10.05</span>
       </div>
     </main>
@@ -2753,6 +2811,17 @@
     </div>
   </div>
 
+  <div class="modal-backdrop" id="archiveRewardModal">
+    <div class="modal archive-reward-modal">
+      <div class="modal-head"><div class="modal-title">길드순위 보상 분배</div><button class="close-btn" data-close="archiveRewardModal">×</button></div>
+      <div class="modal-body">
+        <div class="archive-reward-note">해당 회차의 길드 창고 보상을 실제 수령한 길드원을 선택하세요.</div>
+        <div class="archive-reward-member-grid" id="archiveRewardMemberGrid"></div>
+      </div>
+      <div class="modal-actions"><button class="action-btn" data-close="archiveRewardModal">취소</button><button class="action-btn primary" id="saveArchiveRewardBtn">수령자 저장</button></div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
 <script>
@@ -2816,7 +2885,7 @@
     return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   };
   const fmtPeriod = (start,end) => {
-    const a=toDateSafe(start), b=toDateSafe(end); if(!a||!b) return "진행기간 : 10월3일(토) 09:00부터 10월5일(월) 08:45까지";
+    const a=toDateSafe(start), b=toDateSafe(end); if(!a||!b) return "진행기간 : 현재 회차 미진행";
     const days=["일","월","화","수","목","금","토"];
     const md=d=>`${d.getMonth()+1}월${d.getDate()}일(${days[d.getDay()]})`;
     const hm=d=>`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
@@ -2875,6 +2944,7 @@
     r.members=r.members&&typeof r.members==="object"?r.members:{};
     r.memberOrderSnapshot=Array.isArray(r.memberOrderSnapshot)?[...r.memberOrderSnapshot]:Object.keys(r.members);
     r.overallGuildRank=Number(r.overallGuildRank)>0?Math.floor(Number(r.overallGuildRank)):null;
+    r.guildRewardRecipient=String(r.guildRewardRecipient||"").trim()||null;
     r.bosses=Array.isArray(r.bosses)?r.bosses.map((b,i)=>{
       const x={...b,order:Number(b.order)||i+1,participants:{...(b.participants||{})}};
       if(x.participants["별제븝"]&&!x.participants["벨제붑"]) x.participants["벨제붑"]=x.participants["별제븝"];
@@ -2950,12 +3020,13 @@
       endAt:round?.endAt||completedAt,
       completedAtClient:completedAt,
       overallGuildRank:Number(overallGuildRank)>0?Math.floor(Number(overallGuildRank)):null,
+      guildRewardRecipient:null,
       memberOrderSnapshot:archiveMemberNames(round),
       bosses
     };
   }
 
-  let state={round:null,firebase:null,firebaseError:null,connected:false,loading:true,connectionStalled:false,adminUnlockedUntil:0,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null,unsubscribeActive:null,archiveIds:[],archiveRounds:[],archiveLoading:false,archiveError:null,archiveOpen:false,archiveRoundId:null,archiveTab:"members"};
+  let state={round:null,firebase:null,firebaseError:null,connected:false,loading:true,connectionStalled:false,adminUnlockedUntil:0,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null,unsubscribeActive:null,archiveIds:[],archiveRounds:[],archiveLoading:false,archiveError:null,archiveOpen:false,archiveRoundId:null,archiveTab:"members",archiveRewardSelection:null};
   let firebaseReadyPromise=null;
   let firebaseInitAttempt=0;
 
@@ -3090,11 +3161,11 @@
     const r=state.round;
     const dot=document.getElementById("syncDot");
     dot.className=`dot ${state.loading?"preview":state.connected&&r&&!r.isDraft?"online":"preview"}`;
-    document.getElementById("periodText").textContent=r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"진행기간 : 10월3일(토) 09:00부터 10월5일(월) 08:45까지";
+    document.getElementById("periodText").textContent=r?.id&&!r?.isDraft&&r?.startAt&&r?.endAt?fmtPeriod(r.startAt,r.endAt):"진행기간 : 현재 회차 미진행";
     const syncText=document.getElementById("syncText");
     if(state.loading) syncText.textContent="데이터 불러오는 중";
     else if(state.connectionStalled) syncText.textContent="연결 지연 · 재시도 필요";
-    else if(r?.isDraft) syncText.textContent="실제 회차 미설정";
+    else if(r?.isDraft) syncText.textContent="현재 회차 미진행";
     else if(state.connected) syncText.textContent="실시간 동기화";
     else if(state.firebaseError) syncText.textContent="Firebase 연결 오류";
     else syncText.textContent="연결 대기";
@@ -3169,6 +3240,29 @@
     document.getElementById("archiveBossModalBody").innerHTML=`<div class="archive-detail-hero"><div class="archive-detail-image">${bossImageMarkup(b.area,"")}</div><div><div class="archive-detail-title">#${Number(b.order)||'-'} ${b.bossLevel?`Lv.${b.bossLevel}`:'Lv.-'} ${meta.name}</div><div class="archive-detail-grid"><div class="archive-detail-stat"><span>참여인원</span><b>${joined.length}명</b></div><div class="archive-detail-stat"><span>불참인원</span><b>${missing.length}명</b></div><div class="archive-detail-stat"><span>총 합계점수</span><b>${fmtNum(bossScore(b))}</b></div><div class="archive-detail-stat"><span>최종 길드 순위</span><b>${rank}</b></div></div></div></div><div class="archive-score-table"><div class="archive-score-head"><div>순위</div><div>참여 길드원</div><div>스코어</div></div>${rows}</div>${missing.length?`<div class="archive-missing-box"><b>불참 길드원 ${missing.length}명</b><span>${missing.join(' · ')}</span></div>`:''}`;
     openModal("archiveBossModal");
   }
+  function archiveRewardMarkup(round){
+    const recipient=String(round?.guildRewardRecipient||"").trim();
+    return `<button type="button" class="archive-reward-card" id="archiveRewardCard"><span class="archive-reward-label"><b>길드순위 보상 분배</b><span>길드 창고 보상 실제 수령자 기록</span></span><span class="archive-reward-recipient ${recipient?'':'empty'}">${recipient?`수령자 ${recipient}`:'수령자 미등록'}</span><span class="archive-reward-chevron">›</span></button>`;
+  }
+  function renderArchiveRewardPicker(){
+    const round=selectedArchiveRound();
+    const grid=document.getElementById("archiveRewardMemberGrid");
+    if(!round||!grid) return;
+    const names=archiveMemberNames(round);
+    state.archiveRewardSelection=String(round.guildRewardRecipient||"").trim()||null;
+    grid.innerHTML=names.map(name=>`<button type="button" class="archive-reward-member-btn ${name===state.archiveRewardSelection?'selected':''}" data-archive-reward-member="${name}">${name}</button>`).join("");
+    grid.querySelectorAll("[data-archive-reward-member]").forEach(btn=>btn.onclick=()=>{
+      state.archiveRewardSelection=btn.dataset.archiveRewardMember;
+      grid.querySelectorAll("[data-archive-reward-member]").forEach(x=>x.classList.toggle("selected",x.dataset.archiveRewardMember===state.archiveRewardSelection));
+    });
+  }
+  function openArchiveRewardPicker(){
+    const round=selectedArchiveRound();
+    if(!round){showToast("선택한 지난 회차가 없습니다.");return;}
+    renderArchiveRewardPicker();
+    openModal("archiveRewardModal");
+  }
+
   function renderArchivePage(){
     const app=document.getElementById("app");
     app.classList.toggle("archive-open",!!state.archiveOpen);
@@ -3183,8 +3277,11 @@
     state.archiveRoundId=round.id;
     const summary=archiveSummary(round);
     const overallRankMarkup=`<div class="archive-overall-rank-card"><span>이번 회차 길드 최종 종합순위</span><b>${Number(round.overallGuildRank)>0?`${Number(round.overallGuildRank)}위`:'기록 없음'}</b></div>`;
-    body.innerHTML=`<div class="archive-period-card"><div class="archive-period-label">선택한 회차</div><button type="button" class="archive-round-picker-btn" id="archiveRoundPickerBtn">${archivePeriodLabel(round)}</button><div class="archive-save-note">회차 종료 결과 스냅샷 · 이후 격추/길드원 변경과 무관하게 당시 기록 유지</div></div>${overallRankMarkup}<div class="archive-summary-grid"><div class="archive-summary-item"><span>등장 보스</span><b>${summary.bossCount}회</b></div><div class="archive-summary-item"><span>길드 총 참여</span><b>${summary.totalParticipation}회</b></div><div class="archive-summary-item score"><span>총 합계점수</span><b>${fmtNum(summary.totalScore)}</b></div><div class="archive-summary-item win"><span>보스별 1위</span><b>${summary.wins}회</b></div></div>${archiveAreaMarkup(round)}<div class="archive-tabs"><button type="button" class="archive-tab ${state.archiveTab==='members'?'active':''}" data-archive-tab="members">길드원 결과</button><button type="button" class="archive-tab ${state.archiveTab==='bosses'?'active':''}" data-archive-tab="bosses">보스별 기록</button></div><div id="archiveTabContent">${state.archiveTab==='bosses'?archiveBossesMarkup(round):archiveMembersMarkup(round)}</div>`;
+    const rewardMarkup=archiveRewardMarkup(round);
+    body.innerHTML=`<div class="archive-period-card"><div class="archive-period-label">선택한 회차</div><button type="button" class="archive-round-picker-btn" id="archiveRoundPickerBtn">${archivePeriodLabel(round)}</button><div class="archive-save-note">회차 종료 결과 스냅샷 · 이후 격추/길드원 변경과 무관하게 당시 기록 유지</div></div>${overallRankMarkup}${rewardMarkup}<div class="archive-summary-grid"><div class="archive-summary-item"><span>등장 보스</span><b>${summary.bossCount}회</b></div><div class="archive-summary-item"><span>길드 총 참여</span><b>${summary.totalParticipation}회</b></div><div class="archive-summary-item score"><span>총 합계점수</span><b>${fmtNum(summary.totalScore)}</b></div><div class="archive-summary-item win"><span>보스별 1위</span><b>${summary.wins}회</b></div></div>${archiveAreaMarkup(round)}<div class="archive-tabs"><button type="button" class="archive-tab ${state.archiveTab==='members'?'active':''}" data-archive-tab="members">길드원 결과</button><button type="button" class="archive-tab ${state.archiveTab==='bosses'?'active':''}" data-archive-tab="bosses">보스별 기록</button></div><div id="archiveTabContent">${state.archiveTab==='bosses'?archiveBossesMarkup(round):archiveMembersMarkup(round)}</div>`;
     document.getElementById("archiveRoundPickerBtn").onclick=()=>{renderArchiveRoundPicker();openModal("archiveRoundModal");};
+    const archiveRewardCard=document.getElementById("archiveRewardCard");
+    if(archiveRewardCard) archiveRewardCard.onclick=openArchiveRewardPicker;
     body.querySelectorAll("[data-archive-tab]").forEach(btn=>btn.onclick=()=>{state.archiveTab=btn.dataset.archiveTab;renderArchivePage();});
     body.querySelectorAll("[data-archive-boss-id]").forEach(btn=>btn.onclick=()=>openArchiveBossDetail(btn.dataset.archiveBossId));
     syncCanvasScale();
@@ -3229,6 +3326,27 @@
   document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
   document.getElementById("archiveEntryBtn").onclick=()=>{state.archiveOpen=true;state.archiveTab="members";renderArchivePage();loadArchiveRounds(true);};
   document.getElementById("archiveBackBtn").onclick=()=>{state.archiveOpen=false;renderArchivePage();window.scrollTo({top:0,behavior:"auto"});};
+  document.getElementById("saveArchiveRewardBtn").onclick=async()=>{
+    const round=selectedArchiveRound();
+    const recipient=String(state.archiveRewardSelection||"").trim();
+    if(!round){showToast("선택한 지난 회차가 없습니다.");return;}
+    if(!recipient){showToast("보상을 수령한 길드원을 선택하세요.");return;}
+    if(!archiveMemberNames(round).includes(recipient)){showToast("해당 회차 길드원만 선택할 수 있습니다.");return;}
+    if(!(await ensureFirebaseReady())) return;
+    if(!verifyArchiveRewardPassword()) return;
+    const btn=document.getElementById("saveArchiveRewardBtn");
+    const old=btn.textContent; btn.disabled=true; btn.textContent="저장 중…";
+    try{
+      await state.firebase.saveArchiveRewardRecipient(round.id,recipient);
+      round.guildRewardRecipient=recipient;
+      round.guildRewardUpdatedAtClient=new Date().toISOString();
+      closeModal("archiveRewardModal");
+      renderArchivePage();
+      showToast(`길드순위 보상 수령자를 ${recipient}(으)로 기록했습니다.`);
+    }catch(err){
+      console.error(err); showToast(firebaseErrorMessage(err));
+    }finally{btn.disabled=false;btn.textContent=old;}
+  };
   document.querySelectorAll(".modal-backdrop").forEach(m=>m.addEventListener("click",e=>{if(e.target===m) closeModal(m.id);}));
 
   function fillRoundSetup(){
@@ -3374,6 +3492,13 @@
     const pin=window.prompt("이번 회차 종료 비밀번호를 입력하세요.");
     if(pin===null) return false;
     if(pin!==WRITE_PIN){showToast("종료 비밀번호가 일치하지 않습니다.");return false;}
+    return true;
+  }
+
+  function verifyArchiveRewardPassword(){
+    const pin=window.prompt("길드순위 보상 분배 기록 비밀번호를 입력하세요.");
+    if(pin===null) return false;
+    if(pin!==WRITE_PIN){showToast("보상 분배 기록 비밀번호가 일치하지 않습니다.");return false;}
     return true;
   }
 
@@ -3880,6 +4005,16 @@
           await withTimeout(batch.commit(),10000,"회차 종료 결과 저장");
           state.archiveIds=completedArchiveIds;
           return archive;
+        },
+        async saveArchiveRewardRecipient(archiveId,recipient){
+          if(!archiveId) throw new Error("지난 회차 식별값이 없습니다.");
+          const clean=String(recipient||"").trim();
+          if(!clean) throw new Error("보상 수령자를 선택하세요.");
+          await withTimeout(fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",archiveId),{
+            guildRewardRecipient:clean,
+            guildRewardUpdatedAtClient:new Date().toISOString(),
+            guildRewardUpdatedAtServer:fsMod.serverTimestamp()
+          },{merge:true}),10000,"길드순위 보상 분배 저장");
         },
         async listArchives(){
           const found=new Map();
