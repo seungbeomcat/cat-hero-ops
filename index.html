@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.3.0</title>
+  <title>균열 · 은하 길드 운영현황 V0.3.2</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1601,7 +1601,7 @@
     }
 
 
-    /* V0.3.0 — latest layout refinements */
+    /* V0.3.2 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,12 +1663,12 @@
     }
 
 
-    /* V0.3.0 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.3.2 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.3.0 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.3.2 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1825,7 +1825,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.3.0 — cross-platform typography lock + boss roster UI polish.
+/* V0.3.2 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -2001,7 +2001,7 @@
 
 
 <style id="v0222-boss-roster-final-polish">
-/* V0.3.0 — current/expired boss detail polish
+/* V0.3.2 — current/expired boss detail polish
    Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
 
 /* Participation / non-participation summary cards:
@@ -2154,7 +2154,7 @@
 
 
 <style id="v0223-final-roster-and-score-columns">
-/* V0.3.0 — final compact roster / score-table proportions.
+/* V0.3.2 — final compact roster / score-table proportions.
    Pretendard Variable and fixed px typography remain mandatory. */
 
 /* Boss detail score table:
@@ -2274,7 +2274,7 @@
 
 
 <style id="v0224-compact-member-resource-table">
-/* V0.3.0 — compact main member resource rows.
+/* V0.3.2 — compact main member resource rows.
    Keep all existing typography and graphics sizes; reduce only vertical whitespace. */
 .member-table tbody td{
   height:48px!important;
@@ -2320,7 +2320,7 @@
 
 
 <style id="v0300-archive-results">
-/* V0.3.0 — completed-round archive/results page. Fixed px typography is preserved. */
+/* V0.3.2 — completed-round archive/results page. Fixed px typography is preserved. */
 .archive-entry-section{padding:0!important;overflow:hidden!important}
 .archive-entry-btn{position:relative;width:100%;min-height:70px;border:1.5px solid #d1ad55;border-radius:13px;background:linear-gradient(135deg,#315d66 0%,#274f58 100%);color:#fff;display:flex;align-items:center;text-align:left;padding:12px 46px 12px 15px;box-shadow:0 6px 16px rgba(39,79,88,.13)}
 .archive-entry-btn:active{transform:translateY(1px)}
@@ -2427,6 +2427,157 @@
 }
 </style>
 
+
+<style id="v0301-explicit-round-completion">
+/* V0.3.2 — explicit authenticated round completion + official archive only. */
+.archive-entry-upper{margin-bottom:8px!important}
+.mini-btn.finish{
+  border-color:#d6ae55!important;
+  background:#fff7df!important;
+  color:#91620f!important;
+  padding-left:8px!important;
+  padding-right:8px!important;
+}
+.mini-btn.finish:active{background:#f9edc9!important}
+.finish-round-modal{max-width:390px!important}
+.finish-round-summary{
+  border:1px solid #ddd5ec;
+  border-radius:11px;
+  background:#faf8ff;
+  padding:10px;
+  margin-bottom:9px;
+}
+.finish-round-period{
+  color:#4a3a6b;
+  font-size:11px;
+  font-weight:950;
+  text-align:center;
+  margin-bottom:8px;
+}
+.finish-round-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+}
+.finish-round-stat{
+  min-height:46px;
+  border:1px solid #e8e1f1;
+  border-radius:8px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+}
+.finish-round-stat span{font-size:8px;color:#8d839d;font-weight:850}
+.finish-round-stat b{font-size:11px;color:#4e406c;font-weight:950;font-variant-numeric:tabular-nums}
+.finish-rank-card{
+  border:1px solid #e2d8ee;
+  border-radius:10px;
+  background:#fff;
+  padding:9px 10px;
+  margin-bottom:9px;
+}
+.finish-rank-label{font-size:10px;color:#5b4a79;font-weight:950;margin-bottom:7px}
+.finish-rank-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.finish-rank-row span{font-size:9.5px;color:#817691;font-weight:850;min-width:0}
+.finish-rank-input-wrap{display:flex;align-items:center;gap:4px;flex:0 0 auto}
+.finish-rank-input{
+  width:64px;
+  height:34px;
+  border:1.5px solid #cfc2e8;
+  border-radius:8px;
+  background:#fff;
+  text-align:center;
+  color:#433361;
+  font-size:15px;
+  font-weight:950;
+}
+.finish-rank-input-wrap em{font-style:normal;font-size:10px;color:#695b7d;font-weight:900}
+.finish-round-warning{
+  border:1px solid #f0ccd2;
+  border-radius:10px;
+  background:#fff6f7;
+  padding:9px 10px;
+  color:#a5505e;
+  font-size:9.5px;
+  line-height:1.5;
+  font-weight:800;
+}
+.finish-round-warning b{display:block;color:#c04c5d;font-size:10.5px;font-weight:950;margin-bottom:3px}
+@media (max-width:390px){
+  .top-actions{gap:4px!important}
+  .mini-btn{padding-left:7px!important;padding-right:7px!important}
+  .mini-btn.finish{padding-left:7px!important;padding-right:7px!important}
+}
+</style>
+
+
+<style id="v0302-overall-guild-rank">
+.finish-overall-rank-card{
+  border:1.5px solid #d7b04e;
+  border-radius:11px;
+  background:linear-gradient(180deg,#fffaf0,#fff6dd);
+  padding:10px;
+  margin-bottom:9px;
+  box-shadow:0 4px 12px rgba(166,119,21,.07);
+}
+.finish-overall-rank-title{
+  color:#7d5814;
+  font-size:10.5px;
+  font-weight:950;
+  margin-bottom:7px;
+}
+.finish-overall-rank-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.finish-overall-rank-row span{
+  color:#8b6c32;
+  font-size:9.5px;
+  line-height:1.4;
+  font-weight:850;
+}
+.finish-overall-rank-input-wrap{display:flex;align-items:center;gap:4px;flex:0 0 auto}
+.finish-overall-rank-input{
+  width:68px;
+  height:36px;
+  border:1.5px solid #d3a63a;
+  border-radius:8px;
+  background:#fff;
+  text-align:center;
+  color:#6c4b0f;
+  font-size:16px;
+  font-weight:950;
+  font-variant-numeric:tabular-nums;
+}
+.finish-overall-rank-input-wrap em{font-style:normal;font-size:10px;color:#7d5b1b;font-weight:950}
+.archive-overall-rank-card{
+  min-height:64px;
+  border:1.5px solid #d9b354;
+  border-radius:12px;
+  background:linear-gradient(180deg,#fffaf0,#fff6df);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:0 15px;
+  margin-bottom:8px;
+  box-shadow:0 4px 12px rgba(146,103,18,.06);
+}
+.archive-overall-rank-card span{color:#82631f;font-size:10.5px;font-weight:900}
+.archive-overall-rank-card b{color:#9a6810;font-size:22px;font-weight:950;font-variant-numeric:tabular-nums}
+.archive-round-choice em.archive-choice-rank{
+  min-width:58px;
+  text-align:right;
+  color:#a06c15;
+  font-weight:950;
+}
+</style>
+
 </head>
 <body>
   <div id="shell">
@@ -2445,8 +2596,17 @@
         <div class="top-actions">
           <button class="mini-btn" id="roundSetupBtn">회차 설정</button>
           <button class="mini-btn primary" id="addBossBtn">보스 추가</button>
+          <button class="mini-btn finish" id="finishRoundBtn">이번 회차 종료</button>
         </div>
       </div>
+
+      <section class="section-card archive-entry-section archive-entry-upper">
+        <button type="button" class="archive-entry-btn" id="archiveEntryBtn" aria-label="지난 회차 결과 보기">
+          <span class="archive-entry-copy"><b>지난 회차 결과</b><span>완료된 회차의 참여 · 스코어 · 보스 기록 보기</span></span>
+          <span class="archive-entry-count" id="archiveEntryCount">기록 보기</span>
+          <span class="archive-entry-arrow">›</span>
+        </button>
+      </section>
 
       <div class="boot-loader" id="bootLoader">
         <span class="boot-spinner" id="bootSpinner"></span>
@@ -2480,13 +2640,6 @@
         <div class="table-foot"><span>길드원을 누르면 <strong>초대형 참여 이력</strong>과 현재 자원을 확인·수정할 수 있습니다.</span></div>
       </section>
 
-      <section class="section-card archive-entry-section">
-        <button type="button" class="archive-entry-btn" id="archiveEntryBtn" aria-label="지난 회차 결과 보기">
-          <span class="archive-entry-copy"><b>지난주 결과</b><span>종료된 회차의 참여 · 스코어 · 보스 기록 보기</span></span>
-          <span class="archive-entry-count" id="archiveEntryCount">기록 보기</span>
-          <span class="archive-entry-arrow">›</span>
-        </button>
-      </section>
 
       <section class="archive-page" id="archivePage" aria-label="지난 회차 결과">
         <div class="archive-topbar">
@@ -2497,7 +2650,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.3.0</b><br>
+        <b>Created by 돗돔 · V0.3.2</b><br>
         <span class="footer-build-date">2026.10.05</span>
       </div>
     </main>
@@ -2512,13 +2665,24 @@
           <div class="field"><label>시작 날짜</label><button type="button" class="picker-display" id="setupStartDateBtn">2026.10.03.</button><input type="hidden" id="setupStartDate" /></div>
           <div class="field"><label>시작 시각</label><button type="button" class="picker-display" id="setupStartTimeBtn">09:00</button><input type="hidden" id="setupStartTime" /></div>
         </div>
-        <div class="help">기본 10칼 / 20분. 차공 시간 확장자는 20:20 ~ 22:00 범위에서 길드원별로 설정합니다. 새 회차 시작 시 직전 회차의 참여·스코어·보스 결과가 ‘지난주 결과’에 자동 보관됩니다.</div>
+        <div class="help">기본 10칼 / 20분. 차공 시간 확장자는 20:20 ~ 22:00 범위에서 길드원별로 설정합니다. 회차 결과는 상단의 ‘이번 회차 종료’를 비밀번호 인증 후 실행할 때만 ‘지난 회차 결과’로 확정 저장됩니다.</div>
         <div class="setup-list" id="setupMemberList"></div>
       </div>
       <div class="modal-actions">
         <button class="action-btn" data-close="roundModal">취소</button>
         <button class="action-btn primary" id="saveRoundSetupBtn">현재 기준값 저장</button>
         <button class="action-btn primary" id="startNewRoundBtn">새 회차 시작</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="finishRoundModal">
+    <div class="modal finish-round-modal">
+      <div class="modal-head"><div class="modal-title">이번 회차 종료</div><button class="close-btn" data-close="finishRoundModal">×</button></div>
+      <div class="modal-body" id="finishRoundModalBody"></div>
+      <div class="modal-actions">
+        <button class="action-btn" data-close="finishRoundModal">취소</button>
+        <button class="action-btn danger" id="confirmFinishRoundBtn">종료(완료)</button>
       </div>
     </div>
   </div>
@@ -2710,6 +2874,7 @@
     r.mode=r.mode||"rift";
     r.members=r.members&&typeof r.members==="object"?r.members:{};
     r.memberOrderSnapshot=Array.isArray(r.memberOrderSnapshot)?[...r.memberOrderSnapshot]:Object.keys(r.members);
+    r.overallGuildRank=Number(r.overallGuildRank)>0?Math.floor(Number(r.overallGuildRank)):null;
     r.bosses=Array.isArray(r.bosses)?r.bosses.map((b,i)=>{
       const x={...b,order:Number(b.order)||i+1,participants:{...(b.participants||{})}};
       if(x.participants["별제븝"]&&!x.participants["벨제붑"]) x.participants["벨제붑"]=x.participants["별제븝"];
@@ -2749,6 +2914,45 @@
       if(Number(b.rank)===1) wins+=1;
     }
     return {bossCount:bosses.length,totalParticipation,totalScore,wins,areaCounts};
+  }
+
+  function buildCompletedArchiveSnapshot(round,currentBossFinalRank=null,overallGuildRank=null){
+    const completedAt=new Date().toISOString();
+    const currentId=round?.currentBossId||null;
+    const bosses=(round?.bosses||[]).map((b,i)=>{
+      const participants={};
+      for(const [name,p] of Object.entries(b?.participants||{})){
+        const clean={score:Math.max(0,Number(p?.score)||0)};
+        if(typeof p?.stolen!=="undefined") clean.stolen=!!p.stolen;
+        if(typeof p?.stolenBattle!=="undefined") clean.stolenBattle=!!p.stolenBattle;
+        participants[name]=clean;
+      }
+      const wasCurrent=b.id===currentId;
+      const finalRank=wasCurrent&&Number(currentBossFinalRank)>0?Math.floor(Number(currentBossFinalRank)):(Number(b.rank)>0?Math.floor(Number(b.rank)):null);
+      return {
+        id:b.id||`boss_${i+1}`,
+        order:Number(b.order)||i+1,
+        area:b.area||"wolf",
+        bossLevel:Number.isFinite(Number(b.bossLevel))?Number(b.bossLevel):null,
+        startedAt:b.startedAt||null,
+        endedAt:b.endedAt||(wasCurrent?completedAt:null),
+        status:"ended",
+        rank:finalRank,
+        participants
+      };
+    });
+    return {
+      id:`archive_${String(round?.id||Date.now().toString(36))}`,
+      sourceRoundId:String(round?.id||""),
+      snapshotVersion:2,
+      mode:round?.mode||"rift",
+      startAt:round?.startAt||null,
+      endAt:round?.endAt||completedAt,
+      completedAtClient:completedAt,
+      overallGuildRank:Number(overallGuildRank)>0?Math.floor(Number(overallGuildRank)):null,
+      memberOrderSnapshot:archiveMemberNames(round),
+      bosses
+    };
   }
 
   let state={round:null,firebase:null,firebaseError:null,connected:false,loading:true,connectionStalled:false,adminUnlockedUntil:0,selectedBossId:null,editingBoss:false,selectedMember:null,unsubscribeRound:null,unsubscribeActive:null,archiveIds:[],archiveRounds:[],archiveLoading:false,archiveError:null,archiveOpen:false,archiveRoundId:null,archiveTab:"members"};
@@ -2901,6 +3105,8 @@
     document.getElementById("app").classList.toggle("booting",blocked);
     document.getElementById("roundSetupBtn").disabled=blocked;
     document.getElementById("addBossBtn").disabled=blocked;
+    const finishRoundBtn=document.getElementById("finishRoundBtn");
+    if(finishRoundBtn) finishRoundBtn.disabled=blocked||!state.round?.id||!!state.round?.isDraft;
 
     const spinner=document.getElementById("bootSpinner");
     const loaderTitle=document.getElementById("bootLoaderTitle");
@@ -2943,7 +3149,7 @@
   function renderArchiveRoundPicker(){
     const box=document.getElementById("archiveRoundPickerList"); if(!box)return;
     if(!state.archiveRounds.length){box.innerHTML=`<div class="archive-empty-card"><b>보관된 회차가 없습니다.</b></div>`;return;}
-    box.innerHTML=state.archiveRounds.map(r=>`<button type="button" class="archive-round-choice ${r.id===state.archiveRoundId?'active':''}" data-archive-round-choice="${r.id}"><div><b>${archivePeriodLabel(r)}</b><span>${r.mode==='galaxy'?'은하의 격전지':'균열의 격전지'}</span></div><em>${(r.bosses||[]).length}보스</em></button>`).join("");
+    box.innerHTML=state.archiveRounds.map(r=>`<button type="button" class="archive-round-choice ${r.id===state.archiveRoundId?'active':''}" data-archive-round-choice="${r.id}"><div><b>${archivePeriodLabel(r)}</b><span>${r.mode==='galaxy'?'은하의 격전지':'균열의 격전지'}</span></div><em class="archive-choice-rank">${Number(r.overallGuildRank)>0?`종합 ${Number(r.overallGuildRank)}위`:`${(r.bosses||[]).length}보스`}</em></button>`).join("");
     box.querySelectorAll("[data-archive-round-choice]").forEach(btn=>btn.onclick=()=>{state.archiveRoundId=btn.dataset.archiveRoundChoice;closeModal("archiveRoundModal");renderArchivePage();});
   }
   function openArchiveBossDetail(bossId){
@@ -2971,12 +3177,13 @@
     const body=document.getElementById("archivePageBody"); if(!body||!state.archiveOpen){syncCanvasScale();return;}
     if(state.archiveLoading){body.innerHTML=`<div class="archive-loading-card"><span class="archive-loader-spinner"></span><b>지난 회차 기록을 불러오는 중</b><span>저장된 참여·스코어·보스 기록을 확인하고 있습니다.</span></div>`;syncCanvasScale();return;}
     if(state.archiveError&&!state.archiveRounds.length){body.innerHTML=`<div class="archive-empty-card"><b>지난 회차 기록을 불러오지 못했습니다.</b><span>${firebaseErrorMessage(state.archiveError)}</span><button type="button" class="archive-inline-retry" id="archiveRetryBtn">다시 불러오기</button></div>`;document.getElementById("archiveRetryBtn").onclick=()=>loadArchiveRounds(true);syncCanvasScale();return;}
-    if(!state.archiveRounds.length){body.innerHTML=`<div class="archive-empty-card"><b>아직 보관된 지난 회차가 없습니다.</b><span>다음 새 회차를 시작하면 직전 회차 결과가 자동으로 보관됩니다.</span></div>`;syncCanvasScale();return;}
+    if(!state.archiveRounds.length){body.innerHTML=`<div class="archive-empty-card"><b>아직 완료된 지난 회차가 없습니다.</b><span>현재 회차에서 ‘이번 회차 종료’를 실행하면 결과가 여기에 확정 저장됩니다.</span></div>`;syncCanvasScale();return;}
     const round=selectedArchiveRound();
     if(!round){syncCanvasScale();return;}
     state.archiveRoundId=round.id;
     const summary=archiveSummary(round);
-    body.innerHTML=`<div class="archive-period-card"><div class="archive-period-label">선택한 회차</div><button type="button" class="archive-round-picker-btn" id="archiveRoundPickerBtn">${archivePeriodLabel(round)}</button><div class="archive-save-note">회차 종료 결과 스냅샷 · 이후 격추/길드원 변경과 무관하게 당시 기록 유지</div></div><div class="archive-summary-grid"><div class="archive-summary-item"><span>등장 보스</span><b>${summary.bossCount}회</b></div><div class="archive-summary-item"><span>길드 총 참여</span><b>${summary.totalParticipation}회</b></div><div class="archive-summary-item score"><span>총 합계점수</span><b>${fmtNum(summary.totalScore)}</b></div><div class="archive-summary-item win"><span>1위 달성</span><b>${summary.wins}회</b></div></div>${archiveAreaMarkup(round)}<div class="archive-tabs"><button type="button" class="archive-tab ${state.archiveTab==='members'?'active':''}" data-archive-tab="members">길드원 결과</button><button type="button" class="archive-tab ${state.archiveTab==='bosses'?'active':''}" data-archive-tab="bosses">보스별 기록</button></div><div id="archiveTabContent">${state.archiveTab==='bosses'?archiveBossesMarkup(round):archiveMembersMarkup(round)}</div>`;
+    const overallRankMarkup=`<div class="archive-overall-rank-card"><span>이번 회차 길드 최종 종합순위</span><b>${Number(round.overallGuildRank)>0?`${Number(round.overallGuildRank)}위`:'기록 없음'}</b></div>`;
+    body.innerHTML=`<div class="archive-period-card"><div class="archive-period-label">선택한 회차</div><button type="button" class="archive-round-picker-btn" id="archiveRoundPickerBtn">${archivePeriodLabel(round)}</button><div class="archive-save-note">회차 종료 결과 스냅샷 · 이후 격추/길드원 변경과 무관하게 당시 기록 유지</div></div>${overallRankMarkup}<div class="archive-summary-grid"><div class="archive-summary-item"><span>등장 보스</span><b>${summary.bossCount}회</b></div><div class="archive-summary-item"><span>길드 총 참여</span><b>${summary.totalParticipation}회</b></div><div class="archive-summary-item score"><span>총 합계점수</span><b>${fmtNum(summary.totalScore)}</b></div><div class="archive-summary-item win"><span>보스별 1위</span><b>${summary.wins}회</b></div></div>${archiveAreaMarkup(round)}<div class="archive-tabs"><button type="button" class="archive-tab ${state.archiveTab==='members'?'active':''}" data-archive-tab="members">길드원 결과</button><button type="button" class="archive-tab ${state.archiveTab==='bosses'?'active':''}" data-archive-tab="bosses">보스별 기록</button></div><div id="archiveTabContent">${state.archiveTab==='bosses'?archiveBossesMarkup(round):archiveMembersMarkup(round)}</div>`;
     document.getElementById("archiveRoundPickerBtn").onclick=()=>{renderArchiveRoundPicker();openModal("archiveRoundModal");};
     body.querySelectorAll("[data-archive-tab]").forEach(btn=>btn.onclick=()=>{state.archiveTab=btn.dataset.archiveTab;renderArchivePage();});
     body.querySelectorAll("[data-archive-boss-id]").forEach(btn=>btn.onclick=()=>openArchiveBossDetail(btn.dataset.archiveBossId));
@@ -3163,6 +3370,13 @@
     return true;
   }
 
+  function verifyRoundCompletionPassword(){
+    const pin=window.prompt("이번 회차 종료 비밀번호를 입력하세요.");
+    if(pin===null) return false;
+    if(pin!==WRITE_PIN){showToast("종료 비밀번호가 일치하지 않습니다.");return false;}
+    return true;
+  }
+
   function timeoutError(label,ms){
     const err=new Error(`${label} 시간이 초과되었습니다.`);
     err.code="client-timeout";
@@ -3231,6 +3445,77 @@
     catch(err){ console.error(err); state.firebaseError=err; showToast(firebaseErrorMessage(err)); return false; }
   }
 
+  function openFinishRoundModal(){
+    const r=state.round;
+    if(!r?.id||r.isDraft){showToast("종료할 실제 회차가 없습니다.");return;}
+    const bosses=[...(r.bosses||[])].sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0));
+    if(!bosses.length){showToast("등록된 보스가 없어 회차를 종료할 수 없습니다.");return;}
+
+    const currentId=r.currentBossId||null;
+    const missingEndedRanks=bosses.filter(b=>b.id!==currentId&&!(Number(b.rank)>0));
+    if(missingEndedRanks.length){
+      showToast(`${missingEndedRanks.map(b=>`#${Number(b.order)||'-'}`).join(', ')} 보스의 최종 순위를 먼저 입력하세요.`);
+      return;
+    }
+
+    const summary=archiveSummary(r);
+    const currentBoss=bosses.find(b=>b.id===currentId)||null;
+    const meta=currentBoss?(BOSS_META[currentBoss.area]||{name:currentBoss.area}):null;
+    const rankField=currentBoss?`<div class="finish-rank-card"><div class="finish-rank-label">마지막 보스 최종 순위</div><div class="finish-rank-row"><span>#${Number(currentBoss.order)||'-'} ${currentBoss.bossLevel?`Lv.${currentBoss.bossLevel} `:''}${meta.name}</span><div class="finish-rank-input-wrap"><input class="finish-rank-input" id="finishCurrentBossRank" type="number" inputmode="numeric" min="1" max="999" placeholder="순위"><em>위</em></div></div></div>`:"";
+
+    const overallRankField=`<div class="finish-overall-rank-card"><div class="finish-overall-rank-title">이번 회차 길드 최종 종합순위</div><div class="finish-overall-rank-row"><span>보스별 순위가 아닌, 이번 회차 총점 기준 우리 길드 최종 순위를 입력하세요.</span><div class="finish-overall-rank-input-wrap"><input class="finish-overall-rank-input" id="finishOverallGuildRank" type="number" inputmode="numeric" min="1" max="999" placeholder="순위"><em>위</em></div></div></div>`;
+    document.getElementById("finishRoundModalBody").innerHTML=`<div class="finish-round-summary"><div class="finish-round-period">${archivePeriodLabel(r)}</div><div class="finish-round-grid"><div class="finish-round-stat"><span>등장 보스</span><b>${summary.bossCount}회</b></div><div class="finish-round-stat"><span>길드 총 참여</span><b>${summary.totalParticipation}회</b></div><div class="finish-round-stat"><span>총 합계점수</span><b>${fmtNum(summary.totalScore)}</b></div></div></div>${overallRankField}${rankField}<div class="finish-round-warning"><b>이 회차를 완료 처리합니다.</b>종료하면 현재 참여·스코어·보스 기록과 길드 최종 종합순위가 확정 스냅샷으로 저장되고 현재 회차는 비워집니다. 칼 개수와 잔여시간은 지난 회차 결과에 저장하지 않습니다. 실행 시 비밀번호를 다시 입력해야 합니다.</div>`;
+    openModal("finishRoundModal");
+  }
+
+  document.getElementById("finishRoundBtn").onclick=openFinishRoundModal;
+  document.getElementById("confirmFinishRoundBtn").onclick=async()=>{
+    const btn=document.getElementById("confirmFinishRoundBtn");
+    const r=state.round;
+    if(!r?.id||r.isDraft){closeModal("finishRoundModal");showToast("종료할 실제 회차가 없습니다.");return;}
+    if(!(await ensureFirebaseReady())) return;
+
+    const overallRankInput=document.getElementById("finishOverallGuildRank");
+    const overallGuildRank=Math.floor(Number(overallRankInput?.value)||0);
+    if(overallGuildRank<1||overallGuildRank>999){showToast("이번 회차 길드 최종 종합순위를 입력하세요.");overallRankInput?.focus();return;}
+
+    const currentBoss=r.currentBossId?(r.bosses||[]).find(b=>b.id===r.currentBossId):null;
+    let finalRank=null;
+    if(currentBoss){
+      const input=document.getElementById("finishCurrentBossRank");
+      finalRank=Math.floor(Number(input?.value)||0);
+      if(finalRank<1||finalRank>999){showToast("마지막 보스의 최종 길드 순위를 입력하세요.");input?.focus();return;}
+    }
+
+    /* Completion always requires a fresh password, even if normal admin access is still unlocked. */
+    if(!verifyRoundCompletionPassword()) return;
+
+    const oldText=btn.textContent;
+    btn.disabled=true;
+    btn.textContent="종료 중…";
+    try{
+      const archive=await state.firebase.finishRound(r,finalRank,overallGuildRank);
+      state.archiveRounds=[normalizeArchiveRound(archive,archive.id),...state.archiveRounds.filter(x=>x.id!==archive.id)];
+      state.archiveRoundId=archive.id;
+      state.archiveTab="members";
+      state.archiveOpen=true;
+      state.round=makeDraftRound();
+      state.connected=true;
+      state.loading=false;
+      state.firebaseError=null;
+      closeModal("finishRoundModal");
+      renderAll();
+      showToast("이번 회차를 종료하고 지난 회차 결과로 저장했습니다.");
+    }catch(err){
+      console.error(err);
+      state.firebaseError=err;
+      showToast(firebaseErrorMessage(err));
+    }finally{
+      btn.disabled=false;
+      btn.textContent=oldText;
+    }
+  };
+
   document.getElementById("roundSetupBtn").onclick=async()=>{if(!(await ensureAdmin())) return;fillRoundSetup();openModal("roundModal");};
   document.getElementById("saveRoundSetupBtn").onclick=async()=>{
     if(!state.round?.id){showToast("실제 회차가 없습니다. ‘새 회차 시작’을 사용하세요.");return;}
@@ -3241,6 +3526,7 @@
   };
   document.getElementById("startNewRoundBtn").onclick=async()=>{
     const btn=document.getElementById("startNewRoundBtn");
+    if(state.round?.id&&!state.round?.isDraft){showToast("현재 회차를 먼저 ‘이번 회차 종료’로 완료해주세요.");return;}
     if(!(await ensureFirebaseReady())) return;
     if(!(await ensureAdmin())) return;
     const startIso=parseLocalDateTimeFields(document.getElementById("setupStartDate").value,document.getElementById("setupStartTime").value);
@@ -3250,7 +3536,7 @@
     const round={id:`round_${startIso.slice(0,10)}_${Date.now().toString(36)}`,mode:document.getElementById("setupMode").value,startAt:startIso,endAt:end,members:gatherSetupMembers(false),bosses:[],currentBossId:null,isDraft:false,updatedAt:nowIso,resourceUpdatedAt:nowIso};
     const oldText=btn.textContent; btn.disabled=true; btn.textContent="시작 중…";
     try{
-      await state.firebase.createRound(round,state.round);
+      await state.firebase.createRound(round);
       state.round=round; state.connected=true; state.loading=false; state.firebaseError=null; renderAll();
       closeModal("roundModal"); showToast("새 회차를 시작했습니다.");
     }catch(err){
@@ -3502,7 +3788,7 @@
       const activeSnap=await withTimeout(fsMod.getDoc(activeRef),8000,"활성 회차 조회");
       assertCurrentFirebaseAttempt(attempt);
       const initialRoundId=activeSnap.exists()?activeSnap.data().roundId:null;
-      state.archiveIds=normalizeArchiveIds(activeSnap.exists()?activeSnap.data().archiveIds:[]);
+      state.archiveIds=normalizeArchiveIds(activeSnap.exists()?activeSnap.data().completedArchiveIds:[]);
       const initialRound=await loadRoundOnce(initialRoundId||null);
       assertCurrentFirebaseAttempt(attempt);
 
@@ -3550,7 +3836,7 @@
           }
           await withTimeout(fsMod.setDoc(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false}),10000,"회차 저장");
         },
-        async createRound(round,previousRound){
+        async createRound(round){
           const payload=deepClone(round); delete payload.updatedAtServer; delete payload.resourceUpdatedAtServer; delete payload.isDraft;
           payload.updatedAt=new Date().toISOString();
           payload.updatedAtServer=fsMod.serverTimestamp();
@@ -3558,48 +3844,53 @@
           payload.resourceUpdatedAtServer=fsMod.serverTimestamp();
           payload.memberOrderSnapshot=[...MEMBER_ORDER];
 
-          let archiveIds=normalizeArchiveIds(state.archiveIds);
-          const prevId=previousRound?.id&&!previousRound?.isDraft?String(previousRound.id):null;
-          if(prevId){
-            archiveIds=[prevId,...archiveIds.filter(id=>id!==prevId)].slice(0,60);
-          }
+          const batch=fsMod.writeBatch(db);
+          batch.set(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false});
+          batch.set(activeRef,{
+            roundId:round.id,
+            completedArchiveIds:normalizeArchiveIds(state.archiveIds),
+            updatedAt:new Date().toISOString(),
+            updatedAtServer:fsMod.serverTimestamp()
+          },{merge:true});
+          await withTimeout(batch.commit(),10000,"새 회차 저장");
+        },
+        async finishRound(round,currentBossFinalRank,overallGuildRank){
+          if(!round?.id) throw new Error("종료할 회차가 없습니다.");
+          const archive=buildCompletedArchiveSnapshot(round,currentBossFinalRank,overallGuildRank);
+          const archiveId=archive.id;
+          const archivePayload=deepClone(archive);
+          archivePayload.completedAtServer=fsMod.serverTimestamp();
+          const completedArchiveIds=[archiveId,...normalizeArchiveIds(state.archiveIds).filter(id=>id!==archiveId)].slice(0,60);
 
           const batch=fsMod.writeBatch(db);
-          if(prevId){
-            batch.set(fsMod.doc(db,"riftGalaxyRounds",prevId),{
-              archivedAtClient:new Date().toISOString(),
-              archivedAtServer:fsMod.serverTimestamp(),
-              memberOrderSnapshot:archiveMemberNames(previousRound)
-            },{merge:true});
-          }
-          batch.set(fsMod.doc(db,"riftGalaxyRounds",round.id),payload,{merge:false});
-          batch.set(activeRef,{roundId:round.id,archiveIds,updatedAt:new Date().toISOString(),updatedAtServer:fsMod.serverTimestamp()},{merge:false});
-          await withTimeout(batch.commit(),10000,"새 회차 저장 및 이전 결과 보관");
-          state.archiveIds=archiveIds;
+          batch.set(fsMod.doc(db,"riftGalaxyRounds",archiveId),archivePayload,{merge:false});
+          batch.set(fsMod.doc(db,"riftGalaxyRounds",round.id),{
+            status:"completed",
+            completedAtClient:archive.completedAtClient,
+            completedAtServer:fsMod.serverTimestamp(),
+            overallGuildRank:archive.overallGuildRank,
+            resultArchiveId:archiveId
+          },{merge:true});
+          batch.set(activeRef,{
+            roundId:null,
+            completedArchiveIds,
+            updatedAt:new Date().toISOString(),
+            updatedAtServer:fsMod.serverTimestamp()
+          },{merge:true});
+          await withTimeout(batch.commit(),10000,"회차 종료 결과 저장");
+          state.archiveIds=completedArchiveIds;
+          return archive;
         },
         async listArchives(){
           const found=new Map();
-          const activeId=state.round?.id||null;
           const knownIds=normalizeArchiveIds(state.archiveIds);
-
           await Promise.all(knownIds.map(async id=>{
-            if(!id||id===activeId) return;
+            if(!id) return;
             try{
               const snap=await withTimeout(fsMod.getDoc(fsMod.doc(db,"riftGalaxyRounds",id)),8000,"지난 회차 조회");
               if(snap.exists()) found.set(snap.id,normalizeArchiveRound(snap.data(),snap.id));
-            }catch(err){console.warn("archive doc load failed",id,err);}
+            }catch(err){console.warn("completed archive load failed",id,err);}
           }));
-
-          /* Best-effort legacy discovery: older inactive round docs created before V0.3.0. */
-          try{
-            const q=fsMod.query(fsMod.collection(db,"riftGalaxyRounds"),fsMod.orderBy("startAt","desc"),fsMod.limit(30));
-            const snaps=await withTimeout(fsMod.getDocs(q),9000,"이전 회차 목록 조회");
-            snaps.forEach(snap=>{
-              if(snap.id===activeId) return;
-              if(!found.has(snap.id)) found.set(snap.id,normalizeArchiveRound(snap.data(),snap.id));
-            });
-          }catch(err){console.warn("legacy archive discovery unavailable",err);}
-
           return [...found.values()].sort((a,b)=>{
             const ad=toDateSafe(a.startAt)?.getTime()||0, bd=toDateSafe(b.startAt)?.getTime()||0;
             return bd-ad;
@@ -3614,7 +3905,7 @@
         if(attempt!==firebaseInitAttempt) return;
         const data=snap.exists()?snap.data():{};
         const id=data?.roundId||null;
-        state.archiveIds=normalizeArchiveIds(data?.archiveIds||[]);
+        state.archiveIds=normalizeArchiveIds(data?.completedArchiveIds||[]);
         const currentId=state.round?.id||null;
         if((id||null)!==currentId) subscribeRound(id||null);
       },err=>{
