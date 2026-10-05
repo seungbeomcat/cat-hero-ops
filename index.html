@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.3.6</title>
+  <title>균열 · 은하 길드 운영현황 V0.3.7</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1600,7 +1600,7 @@
     }
 
 
-    /* V0.3.6 — latest layout refinements */
+    /* V0.3.7 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1662,12 +1662,12 @@
     }
 
 
-    /* V0.3.6 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.3.7 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.3.6 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.3.7 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1824,7 +1824,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.3.6 — cross-platform typography lock + boss roster UI polish.
+/* V0.3.7 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -2000,7 +2000,7 @@
 
 
 <style id="v0222-boss-roster-final-polish">
-/* V0.3.6 — current/expired boss detail polish
+/* V0.3.7 — current/expired boss detail polish
    Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
 
 /* Participation / non-participation summary cards:
@@ -2153,7 +2153,7 @@
 
 
 <style id="v0223-final-roster-and-score-columns">
-/* V0.3.6 — final compact roster / score-table proportions.
+/* V0.3.7 — final compact roster / score-table proportions.
    Pretendard Variable and fixed px typography remain mandatory. */
 
 /* Boss detail score table:
@@ -2273,7 +2273,7 @@
 
 
 <style id="v0224-compact-member-resource-table">
-/* V0.3.6 — compact main member resource rows.
+/* V0.3.7 — compact main member resource rows.
    Keep all existing typography and graphics sizes; reduce only vertical whitespace. */
 .member-table tbody td{
   height:48px!important;
@@ -2319,7 +2319,7 @@
 
 
 <style id="v0300-archive-results">
-/* V0.3.6 — completed-round archive/results page. Fixed px typography is preserved. */
+/* V0.3.7 — completed-round archive/results page. Fixed px typography is preserved. */
 .archive-entry-section{padding:0!important;overflow:hidden!important}
 .archive-entry-btn{position:relative;width:100%;min-height:70px;border:1.5px solid #d1ad55;border-radius:13px;background:linear-gradient(135deg,#315d66 0%,#274f58 100%);color:#fff;display:flex;align-items:center;text-align:left;padding:12px 46px 12px 15px;box-shadow:0 6px 16px rgba(39,79,88,.13)}
 .archive-entry-btn:active{transform:translateY(1px)}
@@ -2428,7 +2428,7 @@
 
 
 <style id="v0301-explicit-round-completion">
-/* V0.3.6 — explicit authenticated round completion + official archive only. */
+/* V0.3.7 — explicit authenticated round completion + official archive only. */
 .archive-entry-upper{margin-bottom:8px!important}
 .mini-btn.finish{
   border-color:#d6ae55!important;
@@ -2579,7 +2579,7 @@
 
 
 <style id="v0303-guild-reward-distribution">
-/* V0.3.6 — archived guild-ranking reward recipient record. */
+/* V0.3.7 — archived guild-ranking reward recipient record. */
 .archive-reward-card{
   width:100%;
   min-height:52px;
@@ -2637,7 +2637,7 @@
 
 
 <style id="v0304-readability-pass">
-/* V0.3.6 — readability pass.
+/* V0.3.7 — readability pass.
    Layout/visual language stays unchanged; only undersized text and a few row heights are raised.
    Typography remains fixed in px on all screen widths. */
 
@@ -2776,7 +2776,7 @@
 </style>
 
 <style id="v0305-fluid-responsive-final">
-/* V0.3.6 — remove the 430px logical-canvas scaling model.
+/* V0.3.7 — remove the 430px logical-canvas scaling model.
    The UI now uses actual CSS pixels at every device width. */
 html,body{width:100%!important;min-width:0!important;max-width:none!important;overflow-x:clip!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
 #shell{width:min(100%,560px)!important;max-width:560px!important;min-width:0!important;height:auto!important;margin:0 auto!important;overflow:visible!important;}
@@ -2894,7 +2894,7 @@ html,body{width:100%!important;min-width:0!important;max-width:none!important;ov
 </style>
 
 <style id="v0306-platform-hardening-final">
-/* V0.3.6 — no logical canvas scaling anywhere in the live UI. */
+/* V0.3.7 — no logical canvas scaling anywhere in the live UI. */
 html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
 body{width:100%!important;min-width:0!important;margin:0!important;overflow-x:clip!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
 #shell{width:100%!important;max-width:560px!important;min-width:0!important;margin-inline:auto!important;transform:none!important;zoom:1!important;}
@@ -2904,6 +2904,141 @@ body{width:100%!important;min-width:0!important;margin:0!important;overflow-x:cl
 button,input,select,textarea{font:inherit;}
 @media (max-width:390px){#app{padding-left:8px!important;padding-right:8px!important;}}
 @media (min-width:391px) and (max-width:560px){#app{padding-left:12px!important;padding-right:12px!important;}}
+</style>
+
+
+<style id="v0307-header-archive-final">
+/* V0.3.7 — final narrow-width header repair + shared Dark Teal/Gold navigation card. */
+
+/* Top split bar: period consumes remaining room, return link has a stable width.
+   Typography is not scaled down; only the column widths adapt. */
+.topbar{
+  width:100%!important;
+  height:56px!important;
+  min-height:56px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 148px!important;
+  gap:0!important;
+  padding:0!important;
+  margin:0 0 9px!important;
+  overflow:hidden!important;
+  border:2px solid #d7c8ed!important;
+  border-radius:16px!important;
+  background:#faf8ff!important;
+  box-shadow:none!important;
+  align-items:stretch!important;
+}
+.topbar .period-card{
+  grid-column:1!important;
+  grid-row:1!important;
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  padding:0 10px!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-right:1px solid #e1d7ef!important;
+  border-radius:0!important;
+  background:#fbfaff!important;
+  box-shadow:none!important;
+}
+.topbar .period-copy{
+  width:100%!important;
+  min-width:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.topbar .subhead{
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  color:#24558e!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.48px!important;
+  font-variant-numeric:tabular-nums!important;
+}
+.topbar .calculator-back-link{
+  grid-column:2!important;
+  grid-row:1!important;
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0 9px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#f4effc!important;
+  box-shadow:none!important;
+  color:#5b2ca4!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.35px!important;
+  white-space:nowrap!important;
+  text-decoration:none!important;
+}
+.topbar .calculator-back-link::before{content:none!important;display:none!important;}
+.topbar .calculator-back-link::after{
+  content:"›"!important;
+  display:inline-block!important;
+  flex:0 0 auto!important;
+  margin-left:4px!important;
+  font-size:19px!important;
+  line-height:1!important;
+  font-weight:950!important;
+}
+@media (max-width:390px){
+  .topbar{grid-template-columns:minmax(0,1fr) 136px!important;}
+  .topbar .period-card{padding-left:7px!important;padding-right:7px!important;}
+  .topbar .calculator-back-link{padding-left:6px!important;padding-right:6px!important;}
+}
+
+/* Match the Dosalja/Boss navigation card exactly in color/border language. */
+.archive-entry-section.archive-entry-upper{
+  padding:0!important;
+  margin-bottom:10px!important;
+  overflow:visible!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.archive-entry-section .archive-entry-btn{
+  width:100%!important;
+  min-height:76px!important;
+  padding:13px 48px 13px 16px!important;
+  border:3px solid #D9A928!important;
+  border-radius:15px!important;
+  background:#2E5D66!important;
+  background-image:none!important;
+  color:#fff!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.14)!important;
+}
+.archive-entry-section .archive-entry-btn:hover,
+.archive-entry-section .archive-entry-btn:active{
+  border-color:#D9A928!important;
+  background:#2E5D66!important;
+  box-shadow:0 5px 14px rgba(0,0,0,.17)!important;
+}
+.archive-entry-section .archive-entry-copy b{color:#fff!important;}
+.archive-entry-section .archive-entry-copy span{color:rgba(255,255,255,.86)!important;}
+.archive-entry-section .archive-entry-count{color:#F3D783!important;}
+.archive-entry-section .archive-entry-arrow{color:#E7BF54!important;}
 </style>
 
 </head>
@@ -2978,7 +3113,7 @@ button,input,select,textarea{font:inherit;}
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.3.6</b><br>
+        <b>Created by 돗돔 · V0.3.7</b><br>
         <span class="footer-build-date">2026.10.05</span>
       </div>
     </main>
@@ -3548,7 +3683,7 @@ button,input,select,textarea{font:inherit;}
     const summary=archiveSummary(round);
     const overallRankMarkup=`<div class="archive-overall-rank-card"><span>이번 회차 길드 최종 종합순위</span><b>${Number(round.overallGuildRank)>0?`${Number(round.overallGuildRank)}위`:'기록 없음'}</b></div>`;
     const rewardMarkup=archiveRewardMarkup(round);
-    body.innerHTML=`<div class="archive-period-card"><div class="archive-period-label">선택한 회차</div><button type="button" class="archive-round-picker-btn" id="archiveRoundPickerBtn">${archivePeriodLabel(round)}</button><div class="archive-save-note">회차 종료 결과 스냅샷 · 이후 격추/길드원 변경과 무관하게 당시 기록 유지</div></div>${overallRankMarkup}${rewardMarkup}<div class="archive-summary-grid"><div class="archive-summary-item"><span>등장 보스</span><b>${summary.bossCount}회</b></div><div class="archive-summary-item"><span>길드 총 참여</span><b>${summary.totalParticipation}회</b></div><div class="archive-summary-item score"><span>총 합계점수</span><b>${fmtNum(summary.totalScore)}</b></div><div class="archive-summary-item win"><span>보스별 1위</span><b>${summary.wins}회</b></div></div>${archiveAreaMarkup(round)}<div class="archive-tabs"><button type="button" class="archive-tab ${state.archiveTab==='members'?'active':''}" data-archive-tab="members">길드원 결과</button><button type="button" class="archive-tab ${state.archiveTab==='bosses'?'active':''}" data-archive-tab="bosses">보스별 기록</button></div><div id="archiveTabContent">${state.archiveTab==='bosses'?archiveBossesMarkup(round):archiveMembersMarkup(round)}</div>`;
+    body.innerHTML=`<div class="archive-period-card"><div class="archive-period-label">선택한 회차</div><button type="button" class="archive-round-picker-btn" id="archiveRoundPickerBtn">${archivePeriodLabel(round)}</button><div class="archive-save-note">회차 종료 결과 스냅샷 · 이후 격추/길드원 변경과 무관하게 당시 기록 유지</div></div>${overallRankMarkup}${rewardMarkup}<div class="archive-summary-grid"><div class="archive-summary-item"><span>등장 보스</span><b>${summary.bossCount}회</b></div><div class="archive-summary-item"><span>길드 총 참여</span><b>${summary.totalParticipation}회</b></div><div class="archive-summary-item score"><span>총 합계점수</span><b>${fmtNum(summary.totalScore)}</b></div><div class="archive-summary-item win"><span>보스별 1위</span><b>${summary.wins}회</b></div></div>${archiveAreaMarkup(round)}<div class="archive-tabs"><button type="button" class="archive-tab ${state.archiveTab==='bosses'?'active':''}" data-archive-tab="bosses">보스별 기록</button><button type="button" class="archive-tab ${state.archiveTab==='members'?'active':''}" data-archive-tab="members">길드원 결과</button></div><div id="archiveTabContent">${state.archiveTab==='bosses'?archiveBossesMarkup(round):archiveMembersMarkup(round)}</div>`;
     document.getElementById("archiveRoundPickerBtn").onclick=()=>{renderArchiveRoundPicker();openModal("archiveRoundModal");};
     const archiveRewardCard=document.getElementById("archiveRewardCard");
     if(archiveRewardCard) archiveRewardCard.onclick=openArchiveRewardPicker;
