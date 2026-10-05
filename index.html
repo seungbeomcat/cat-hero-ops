@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.3.3</title>
+  <title>균열 · 은하 길드 운영현황 V0.3.5</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1601,7 +1601,7 @@
     }
 
 
-    /* V0.3.3 — latest layout refinements */
+    /* V0.3.5 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1663,12 +1663,12 @@
     }
 
 
-    /* V0.3.3 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.3.5 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.3.3 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.3.5 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1825,7 +1825,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.3.3 — cross-platform typography lock + boss roster UI polish.
+/* V0.3.5 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -2001,7 +2001,7 @@
 
 
 <style id="v0222-boss-roster-final-polish">
-/* V0.3.3 — current/expired boss detail polish
+/* V0.3.5 — current/expired boss detail polish
    Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
 
 /* Participation / non-participation summary cards:
@@ -2154,7 +2154,7 @@
 
 
 <style id="v0223-final-roster-and-score-columns">
-/* V0.3.3 — final compact roster / score-table proportions.
+/* V0.3.5 — final compact roster / score-table proportions.
    Pretendard Variable and fixed px typography remain mandatory. */
 
 /* Boss detail score table:
@@ -2274,7 +2274,7 @@
 
 
 <style id="v0224-compact-member-resource-table">
-/* V0.3.3 — compact main member resource rows.
+/* V0.3.5 — compact main member resource rows.
    Keep all existing typography and graphics sizes; reduce only vertical whitespace. */
 .member-table tbody td{
   height:48px!important;
@@ -2320,7 +2320,7 @@
 
 
 <style id="v0300-archive-results">
-/* V0.3.3 — completed-round archive/results page. Fixed px typography is preserved. */
+/* V0.3.5 — completed-round archive/results page. Fixed px typography is preserved. */
 .archive-entry-section{padding:0!important;overflow:hidden!important}
 .archive-entry-btn{position:relative;width:100%;min-height:70px;border:1.5px solid #d1ad55;border-radius:13px;background:linear-gradient(135deg,#315d66 0%,#274f58 100%);color:#fff;display:flex;align-items:center;text-align:left;padding:12px 46px 12px 15px;box-shadow:0 6px 16px rgba(39,79,88,.13)}
 .archive-entry-btn:active{transform:translateY(1px)}
@@ -2429,7 +2429,7 @@
 
 
 <style id="v0301-explicit-round-completion">
-/* V0.3.3 — explicit authenticated round completion + official archive only. */
+/* V0.3.5 — explicit authenticated round completion + official archive only. */
 .archive-entry-upper{margin-bottom:8px!important}
 .mini-btn.finish{
   border-color:#d6ae55!important;
@@ -2580,7 +2580,7 @@
 
 
 <style id="v0303-guild-reward-distribution">
-/* V0.3.3 — archived guild-ranking reward recipient record. */
+/* V0.3.5 — archived guild-ranking reward recipient record. */
 .archive-reward-card{
   width:100%;
   min-height:52px;
@@ -2636,6 +2636,263 @@
 }
 </style>
 
+
+<style id="v0304-readability-pass">
+/* V0.3.5 — readability pass.
+   Layout/visual language stays unchanged; only undersized text and a few row heights are raised.
+   Typography remains fixed in px on all screen widths. */
+
+/* Top navigation / status */
+.topbar .subhead,.subhead{font-size:12px!important;line-height:1.32!important}
+.calculator-back-link{font-size:11.5px!important}
+.sync-state{font-size:11px!important}
+.admin-bar{height:42px!important}
+.mini-btn{height:30px!important;font-size:11.5px!important}
+.section-note{font-size:11px!important}
+.boot-loader-note{font-size:11.5px!important}
+.boot-retry-btn{font-size:11.5px!important}
+
+/* Current boss + expired boss cards */
+.current-badge,.boss-index,.current-main-badge{font-size:9.5px!important}
+.boss-title-line{font-size:11.5px!important}
+.boss-level-badge{font-size:9.5px!important}
+.boss-summary-row{font-size:9.5px!important}
+.boss-summary-row b{font-size:10.5px!important}
+.boss-summary-row.score-row span{font-size:9.2px!important}
+.boss-summary-row.score-row b{font-size:10.5px!important}
+.empty-boss,.sum-label{font-size:10px!important}
+.current-info-box span,
+#currentBossSlot .current-info-box span,
+#currentBossSlot .current-info-box.score span{font-size:10px!important}
+.current-info-box b{font-size:13px!important}
+.current-info-box.score b{font-size:16.5px!important}
+.empty-current-info span{font-size:10px!important}
+#currentBossSlot .current-participants-box>strong{font-size:11.5px!important}
+#currentBossSlot .current-participants-box span,
+#currentBossSlot .current-participants-box em,
+#currentBossSlot .current-participants-box i{font-size:10.8px!important}
+
+/* Expired history */
+.history-zone-head{font-size:11.5px!important}
+.history-seq{font-size:10.5px!important}
+.history-title strong{font-size:12.5px!important}
+.history-title span{font-size:10px!important}
+.history-stats span{font-size:9.2px!important}
+.history-stats b{font-size:10.8px!important}
+.history-stats .score b,.history-stats .rank b{font-size:10.8px!important}
+.history-empty,.history-empty-slot{font-size:10.5px!important}
+
+/* Main member/resource table */
+.member-table th{height:38px!important;font-size:10.5px!important;line-height:1.12!important}
+.member-table td{height:54px!important;font-size:11.5px!important}
+.member-name{font-size:11.7px!important}
+.participation-count,.sword-value,.time-value{font-size:11.5px!important}
+.time-used{font-size:9px!important}
+.status-pill{font-size:10.5px!important}
+.table-foot,.legend{font-size:10.5px!important}
+.resource-updated span{font-size:9.3px!important}
+.resource-updated b{font-size:10.8px!important}
+
+/* Setup/editor/detail modal typography */
+.field label{font-size:11px!important}
+.help{font-size:10.5px!important;line-height:1.45!important}
+.setup-row.head{font-size:10.5px!important}
+.detail-stat{font-size:10.5px!important}
+.participant-head,.edit-head{font-size:10.5px!important}
+.edit-row .ename{font-size:11.5px!important}
+.member-resource-edit>span{font-size:10.5px!important}
+.member-history-boss span{font-size:10px!important}
+.member-history-status{font-size:10.5px!important}
+.member-history-empty{font-size:11px!important}
+.picker-caption{font-size:10.5px!important}
+.calendar-week span{font-size:9.5px!important}
+.wheel-label{font-size:10px!important}
+
+/* Past-round entry */
+.archive-entry-copy span{font-size:11px!important}
+.archive-entry-count{font-size:10.5px!important}
+.archive-back-btn{font-size:11px!important}
+
+/* Past-round result header/summary */
+.archive-period-label{font-size:10.5px!important}
+.archive-round-picker-btn{font-size:13px!important}
+.archive-save-note{font-size:10.5px!important;line-height:1.4!important}
+.archive-loading-card span,.archive-empty-card span{font-size:11px!important}
+.archive-inline-retry{font-size:11px!important}
+.archive-summary-item{height:66px!important}
+.archive-summary-item span{font-size:10.5px!important}
+.archive-summary-item b{font-size:18px!important}
+.archive-summary-item.score b{font-size:16px!important}
+.archive-section-mini-title{font-size:11.5px!important}
+.archive-area-item{height:48px!important}
+.archive-area-item span{font-size:10.5px!important}
+.archive-area-item b{font-size:14px!important}
+.archive-tab{font-size:11.5px!important}
+
+/* Past-round member results */
+.archive-member-main{height:30px!important}
+.archive-member-rank{font-size:11px!important}
+.archive-member-name,.archive-member-total{font-size:13px!important}
+.archive-member-metric{min-height:40px!important}
+.archive-member-metric span{font-size:10px!important}
+.archive-member-metric b{font-size:11.5px!important}
+
+/* Past-round boss cards/detail */
+.archive-boss-seq{font-size:9.5px!important}
+.archive-boss-name{font-size:12.5px!important}
+.archive-boss-stat span{font-size:9.5px!important}
+.archive-boss-stat b{font-size:10.5px!important}
+.archive-round-choice b{font-size:11.5px!important}
+.archive-round-choice span,.archive-round-choice em{font-size:10px!important}
+.archive-detail-title{font-size:14px!important}
+.archive-detail-stat{min-height:42px!important}
+.archive-detail-stat span{font-size:9.5px!important}
+.archive-detail-stat b{font-size:11.5px!important}
+.archive-score-head{height:34px!important;font-size:10px!important}
+.archive-score-row{height:37px!important;font-size:11px!important}
+.archive-missing-box b,.archive-missing-box span{font-size:10px!important}
+
+/* Completion modal */
+.finish-round-stat span{font-size:9.5px!important}
+.finish-round-stat b{font-size:12px!important}
+.finish-rank-label{font-size:11px!important}
+.finish-rank-row span{font-size:10.5px!important}
+.finish-rank-input-wrap em{font-size:10.5px!important}
+.finish-round-warning{font-size:10.5px!important}
+.finish-round-warning b{font-size:11.5px!important}
+.finish-overall-rank-title{font-size:11.5px!important}
+.finish-overall-rank-row span{font-size:10.5px!important}
+.finish-overall-rank-input-wrap em{font-size:10.5px!important}
+
+/* Overall rank + reward distribution */
+.archive-overall-rank-card span{font-size:11.5px!important}
+.archive-reward-label b{font-size:11.5px!important}
+.archive-reward-label span{font-size:9.8px!important}
+.archive-reward-recipient{font-size:12px!important}
+.archive-reward-note{font-size:10.5px!important}
+.archive-reward-member-btn{font-size:11.5px!important}
+
+/* Footer */
+.footer,.footer-build-date{font-size:10.5px!important}
+</style>
+
+<style id="v0305-fluid-responsive-final">
+/* V0.3.5 — remove the 430px logical-canvas scaling model.
+   The UI now uses actual CSS pixels at every device width. */
+html,body{width:100%!important;min-width:0!important;max-width:none!important;overflow-x:clip!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
+#shell{width:min(100%,560px)!important;max-width:560px!important;min-width:0!important;height:auto!important;margin:0 auto!important;overflow:visible!important;}
+#app{width:100%!important;max-width:560px!important;min-width:0!important;min-height:100vh!important;transform:none!important;transform-origin:initial!important;padding:14px clamp(9px,2.8vw,14px) 32px!important;}
+#app>*{min-width:0!important;max-width:100%!important;}
+.toast{transform:translate(-50%,18px)!important;font-size:12px!important;}
+.toast.show{transform:translate(-50%,0)!important;}
+.modal{width:min(calc(100vw - 16px),520px)!important;max-width:520px!important;transform:none!important;transform-origin:initial!important;}
+
+/* Top/current-state readability. */
+.topbar{min-height:55px!important;margin-bottom:8px!important;}
+.subhead{font-size:12.5px!important;line-height:1.32!important;}
+.calculator-back-link{height:34px!important;font-size:12px!important;padding:0 11px!important;}
+.admin-bar{min-height:44px!important;height:auto!important;padding:5px 7px 5px 10px!important;}
+.sync-state{font-size:11.5px!important;}
+.mini-btn{height:32px!important;font-size:11.8px!important;padding:0 10px!important;}
+.archive-entry-btn{min-height:76px!important;padding-top:13px!important;padding-bottom:13px!important;}
+.archive-entry-copy b{font-size:16px!important;}
+.archive-entry-copy span{font-size:11.5px!important;}
+.archive-entry-count{font-size:11px!important;}
+
+/* Current boss + history. */
+.section-card{padding:12px!important;margin-top:10px!important;}
+.boss-dashboard-card{padding:12px!important;}
+.current-boss-panel{grid-template-columns:minmax(132px,38%) minmax(0,1fr)!important;gap:10px!important;}
+.current-boss-image-card,.current-boss-info{height:auto!important;min-height:152px!important;}
+.current-boss-identity strong,#currentBossSlot .current-boss-identity strong{font-size:20px!important;}
+#currentBossSlot .current-info-box span{font-size:11px!important;}
+#currentBossSlot .current-info-box b{font-size:14px!important;}
+#currentBossSlot .current-info-box.score b{font-size:17px!important;}
+#currentBossSlot .current-participants-box>strong{font-size:12px!important;}
+#currentBossSlot .current-participants-box span,#currentBossSlot .current-participants-box em,#currentBossSlot .current-participants-box i{font-size:11px!important;}
+.history-zone-head{font-size:12px!important;}
+.history-card{min-width:118px!important;}
+.history-seq{font-size:11px!important;}
+.history-title strong{font-size:13px!important;}
+.history-title span{font-size:10.5px!important;}
+.history-stats span{font-size:10px!important;}
+.history-stats b{font-size:11.5px!important;}
+
+/* Member/resource table — larger, stable type without scaling. */
+.members-head h2{font-size:17px!important;}
+.member-table th{height:42px!important;font-size:11.5px!important;line-height:1.15!important;}
+.member-table td{height:57px!important;font-size:12px!important;}
+.member-name{font-size:12.5px!important;padding-left:7px!important;}
+.participation-count,.sword-value,.time-value{font-size:12.5px!important;}
+.time-used{font-size:9.8px!important;}
+.status-pill{font-size:11px!important;min-width:55px!important;height:25px!important;}
+.table-foot,.legend{font-size:11px!important;line-height:1.4!important;}
+.resource-updated span{font-size:10px!important;}
+.resource-updated b{font-size:11.5px!important;}
+
+/* Past results — raise all information hierarchy one step. */
+.archive-page-head h2{font-size:20px!important;}
+.archive-back-btn{font-size:12px!important;min-height:34px!important;}
+.archive-period-label{font-size:11px!important;}
+.archive-round-picker-btn{font-size:14px!important;min-height:44px!important;}
+.archive-save-note{font-size:11px!important;}
+.archive-overall-rank-card{min-height:70px!important;}
+.archive-overall-rank-card span{font-size:12px!important;}
+.archive-overall-rank-card b{font-size:24px!important;}
+.archive-reward-card{min-height:58px!important;}
+.archive-reward-label b{font-size:12px!important;}
+.archive-reward-label span{font-size:10.5px!important;}
+.archive-reward-recipient{font-size:12.5px!important;}
+.archive-summary-item{height:72px!important;}
+.archive-summary-item span{font-size:11px!important;}
+.archive-summary-item b{font-size:19px!important;}
+.archive-summary-item.score b{font-size:17px!important;}
+.archive-section-mini-title{font-size:12px!important;}
+.archive-area-item{height:52px!important;}
+.archive-area-item span{font-size:11px!important;}
+.archive-area-item b{font-size:15px!important;}
+.archive-tab{font-size:12.5px!important;min-height:40px!important;}
+.archive-member-name,.archive-member-total{font-size:14px!important;}
+.archive-member-rank{font-size:11.5px!important;}
+.archive-member-metric span{font-size:10.5px!important;}
+.archive-member-metric b{font-size:12px!important;}
+.archive-boss-name{font-size:13.5px!important;}
+.archive-boss-stat span{font-size:10px!important;}
+.archive-boss-stat b{font-size:11.5px!important;}
+.archive-score-head{font-size:10.5px!important;}
+.archive-score-row{font-size:11.5px!important;}
+
+/* Modals/editor copy. */
+.modal-title{font-size:17px!important;}
+.field label{font-size:11.5px!important;}
+.help{font-size:11px!important;}
+.setup-row.head{font-size:11px!important;}
+.edit-row .ename{font-size:12px!important;}
+.archive-reward-note{font-size:11px!important;}
+.archive-reward-member-btn{font-size:12px!important;min-height:40px!important;}
+.finish-round-warning{font-size:11px!important;}
+.finish-round-warning b{font-size:12px!important;}
+.finish-overall-rank-title{font-size:12px!important;}
+.finish-overall-rank-row span{font-size:11px!important;}
+.footer,.footer-build-date{font-size:11px!important;}
+
+/* Wider phones use width, not page zoom. */
+@media (min-width:431px){
+  #app{padding-left:14px!important;padding-right:14px!important;}
+  .current-boss-panel{grid-template-columns:170px minmax(0,1fr)!important;}
+  .current-boss-image-card,.current-boss-info{min-height:170px!important;}
+  .history-scroll{gap:7px!important;}
+}
+/* Narrow phones alter gaps only; fonts are unchanged. */
+@media (max-width:390px){
+  #app{padding-left:8px!important;padding-right:8px!important;}
+  .section-card{padding:9px!important;}
+  .boss-dashboard-card{padding:9px!important;}
+  .current-boss-panel{grid-template-columns:minmax(122px,37%) minmax(0,1fr)!important;gap:7px!important;}
+  .current-boss-image-card,.current-boss-info{min-height:142px!important;}
+  .member-table col:nth-child(1){width:21%!important}.member-table col:nth-child(2){width:17%!important}.member-table col:nth-child(3){width:20%!important}.member-table col:nth-child(4){width:26%!important}.member-table col:nth-child(5){width:16%!important}
+}
+</style>
 </head>
 <body>
   <div id="shell">
@@ -2708,7 +2965,7 @@
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.3.3</b><br>
+        <b>Created by 돗돔 · V0.3.5</b><br>
         <span class="footer-build-date">2026.10.05</span>
       </div>
     </main>
@@ -2848,7 +3105,7 @@
       "토시살":{base:60,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "페르시안":{base:57,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "하니엘":{base:45,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
-      "벨제붑":{base:38,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
+      "벨제붑":{base:42,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "바포메트":{base:35.5,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}},
       "옥돔":{base:34.5,z1:0,z2:0,z3:0,minScore:0,field:{wolf:0,pirate:0,cat:0,food:0,galaxy:0}}
     }
@@ -3866,11 +4123,11 @@
 
   function syncCanvasScale(){
     const shell=document.getElementById("shell"), app=document.getElementById("app");
-    const scale=Math.min(1,window.innerWidth/LOGICAL_WIDTH);
-    app.style.transform=`scale(${scale})`;
-    document.documentElement.style.setProperty("--ui-scale",String(scale));
-    shell.style.width=`${LOGICAL_WIDTH*scale}px`;
-    requestAnimationFrame(()=>{shell.style.height=`${app.scrollHeight*scale}px`;});
+    if(!shell||!app) return;
+    app.style.transform="none";
+    document.documentElement.style.setProperty("--ui-scale","1");
+    shell.style.width="100%";
+    shell.style.height="auto";
   }
   window.addEventListener("resize",syncCanvasScale,{passive:true});
   if(window.ResizeObserver) new ResizeObserver(syncCanvasScale).observe(document.getElementById("app"));
