@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#6f52c8" />
+  <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.3.14</title>
+  <title>균열 · 은하 길드 운영현황 V0.3.15</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -1600,7 +1600,7 @@
     }
 
 
-    /* V0.3.14 — latest layout refinements */
+    /* V0.3.15 — latest layout refinements */
     /* Keep original width ratio, but place the wide period panel on the left. */
     .topbar{
       grid-template-columns:71% 29%!important;
@@ -1662,12 +1662,12 @@
     }
 
 
-    /* V0.3.14 share preview + build-date rule. Typography remains fixed in px. */
+    /* V0.3.15 share preview + build-date rule. Typography remains fixed in px. */
     .footer-build-date{color:#9a91ab;font-size:9.5px;font-weight:700;font-variant-numeric:tabular-nums;}
   </style>
 <style id="v0219-boss-roster-style">
 
-    /* V0.3.14 — score-ranked boss detail + narrow participant/non-participant roster popup */
+    /* V0.3.15 — score-ranked boss detail + narrow participant/non-participant roster popup */
     #bossModal .detail-stat-roster{
       appearance:none!important;
       -webkit-appearance:none!important;
@@ -1824,7 +1824,7 @@
 </style>
 
 <style id="v0221-boss-detail-roster-polish">
-/* V0.3.14 — cross-platform typography lock + boss roster UI polish.
+/* V0.3.15 — cross-platform typography lock + boss roster UI polish.
    Fixed px type; responsive behavior must not shrink typography. */
 
 /* Current and expired boss detail summary buttons: same typography and box language. */
@@ -2000,7 +2000,7 @@
 
 
 <style id="v0222-boss-roster-final-polish">
-/* V0.3.14 — current/expired boss detail polish
+/* V0.3.15 — current/expired boss detail polish
    Fixed Pretendard typography across platforms; layout may respond, fonts do not shrink. */
 
 /* Participation / non-participation summary cards:
@@ -2153,7 +2153,7 @@
 
 
 <style id="v0223-final-roster-and-score-columns">
-/* V0.3.14 — final compact roster / score-table proportions.
+/* V0.3.15 — final compact roster / score-table proportions.
    Pretendard Variable and fixed px typography remain mandatory. */
 
 /* Boss detail score table:
@@ -2273,7 +2273,7 @@
 
 
 <style id="v0224-compact-member-resource-table">
-/* V0.3.14 — compact main member resource rows.
+/* V0.3.15 — compact main member resource rows.
    Keep all existing typography and graphics sizes; reduce only vertical whitespace. */
 .member-table tbody td{
   height:48px!important;
@@ -2319,7 +2319,7 @@
 
 
 <style id="v0300-archive-results">
-/* V0.3.14 — completed-round archive/results page. Fixed px typography is preserved. */
+/* V0.3.15 — completed-round archive/results page. Fixed px typography is preserved. */
 .archive-entry-section{padding:0!important;overflow:hidden!important}
 .archive-entry-btn{position:relative;width:100%;min-height:70px;border:1.5px solid #d1ad55;border-radius:13px;background:linear-gradient(135deg,#315d66 0%,#274f58 100%);color:#fff;display:flex;align-items:center;text-align:left;padding:12px 46px 12px 15px;box-shadow:0 6px 16px rgba(39,79,88,.13)}
 .archive-entry-btn:active{transform:translateY(1px)}
@@ -2428,7 +2428,7 @@
 
 
 <style id="v0301-explicit-round-completion">
-/* V0.3.14 — explicit authenticated round completion + official archive only. */
+/* V0.3.15 — explicit authenticated round completion + official archive only. */
 .archive-entry-upper{margin-bottom:8px!important}
 .mini-btn.finish{
   border-color:#d6ae55!important;
@@ -2579,7 +2579,7 @@
 
 
 <style id="v0303-guild-reward-distribution">
-/* V0.3.14 — archived guild-ranking reward recipient record. */
+/* V0.3.15 — archived guild-ranking reward recipient record. */
 .archive-reward-card{
   width:100%;
   min-height:52px;
@@ -2637,7 +2637,7 @@
 
 
 <style id="v0304-readability-pass">
-/* V0.3.14 — readability pass.
+/* V0.3.15 — readability pass.
    Layout/visual language stays unchanged; only undersized text and a few row heights are raised.
    Typography remains fixed in px on all screen widths. */
 
@@ -2776,7 +2776,7 @@
 </style>
 
 <style id="v0305-fluid-responsive-final">
-/* V0.3.14 — remove the 430px logical-canvas scaling model.
+/* V0.3.15 — remove the 430px logical-canvas scaling model.
    The UI now uses actual CSS pixels at every device width. */
 html,body{width:100%!important;min-width:0!important;max-width:none!important;overflow-x:clip!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
 #shell{width:min(100%,560px)!important;max-width:560px!important;min-width:0!important;height:auto!important;margin:0 auto!important;overflow:visible!important;}
@@ -2894,7 +2894,7 @@ html,body{width:100%!important;min-width:0!important;max-width:none!important;ov
 </style>
 
 <style id="v0306-platform-hardening-final">
-/* V0.3.14 — no logical canvas scaling anywhere in the live UI. */
+/* V0.3.15 — no logical canvas scaling anywhere in the live UI. */
 html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
 body{width:100%!important;min-width:0!important;margin:0!important;overflow-x:clip!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
 #shell{width:100%!important;max-width:560px!important;min-width:0!important;margin-inline:auto!important;transform:none!important;zoom:1!important;}
@@ -2908,7 +2908,7 @@ button,input,select,textarea{font:inherit;}
 
 
 <style id="v0307-header-archive-final">
-/* V0.3.14 — final narrow-width header repair + shared Dark Teal/Gold navigation card. */
+/* V0.3.15 — final narrow-width header repair + shared Dark Teal/Gold navigation card. */
 
 /* Top split bar: period consumes remaining room, return link has a stable width.
    Typography is not scaled down; only the column widths adapt. */
@@ -3043,7 +3043,7 @@ button,input,select,textarea{font:inherit;}
 
 
 <style id="v0309-slim-navigation-reward-items-final">
-/* V0.3.14 — common Dark Teal + gold navigation card: same visual language, less vertical bulk. */
+/* V0.3.15 — common Dark Teal + gold navigation card: same visual language, less vertical bulk. */
 .archive-entry-section .archive-entry-btn{
   height:58px!important;
   min-height:58px!important;
@@ -3095,7 +3095,7 @@ button,input,select,textarea{font:inherit;}
 
 
 <style id="v0310-archive-summary-layout-final">
-/* V0.3.14 — archive default is boss records; compact 1:1 + 1:1:1 summary. */
+/* V0.3.15 — archive default is boss records; compact 1:1 + 1:1:1 summary. */
 .archive-primary-summary-grid{
   display:grid!important;
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
@@ -3187,7 +3187,7 @@ button,input,select,textarea{font:inherit;}
 
 
 <style id="v0311-top-order-table-roster-final">
-/* V0.3.14 — compact top stack + 16-member current OPS roster. */
+/* V0.3.15 — compact top stack + 16-member current OPS roster. */
 
 /* All three checked top boxes use the same 44px outer height. */
 .topbar{
@@ -3281,6 +3281,7 @@ button,input,select,textarea{font:inherit;}
 <link rel="preload" as="image" href="assets/boss-pirate-display.webp">
 <link rel="preload" as="image" href="assets/boss-cat-display.webp">
 <link rel="preload" as="image" href="assets/boss-food-display.webp">
+<style id="v0315-black-compact-empty-final">html,body{background:#000!important}#shell,#app{background:transparent!important}.boss-dashboard-card.compact-empty{min-height:0!important;padding:10px!important}.boss-dashboard-card.compact-empty #currentBossSlot{display:block!important;width:100%!important;min-width:0!important;height:auto!important;padding:0!important;border:0!important}.boss-dashboard-card.compact-empty .history-zone{display:none!important}.ops-empty-boss-state{width:100%;min-height:132px;padding:18px 16px;border:2px solid #d7c9eb;border-radius:14px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center}.ops-empty-boss-state b{color:#5a4577;font-size:15px;line-height:1.15;font-weight:950}.ops-empty-boss-state span{color:#91869d;font-size:11px;line-height:1.4;font-weight:750}@media(max-width:390px){.ops-empty-boss-state{min-height:120px;padding:14px 12px}}</style>
 </head>
 <body>
   <div id="shell">
@@ -3353,7 +3354,7 @@ button,input,select,textarea{font:inherit;}
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.3.14</b><br>
+        <b>Created by 돗돔 · V0.3.15</b><br>
         <span class="footer-build-date">2026.10.07</span>
       </div>
     </main>
@@ -3792,7 +3793,6 @@ button,input,select,textarea{font:inherit;}
 
   function renderBossRail(){
     const cur=currentBoss();
-    document.getElementById("currentBossSlot").innerHTML=currentBossPanelMarkup(cur);
     const history=(state.round?.bosses||[])
       .filter(b=>b.id!==state.round.currentBossId && (b.status==="ended" || b.endedAt))
       .sort((a,b)=>{
@@ -3801,7 +3801,10 @@ button,input,select,textarea{font:inherit;}
         const ad=toDateSafe(a.endedAt)?.getTime()||0, bd=toDateSafe(b.endedAt)?.getTime()||0;
         return bd-ad;
       });
-    const rail=document.getElementById("historyBossRail");
+    const dashboard=document.querySelector(".boss-dashboard-card"),slot=document.getElementById("currentBossSlot"),rail=document.getElementById("historyBossRail");
+    const compactEmpty=!cur&&!history.length; dashboard?.classList.toggle("compact-empty",compactEmpty);
+    if(compactEmpty){slot.innerHTML=`<div class="ops-empty-boss-state"><b>현재 초대형 등록 전</b><span>보스 추가에서 실제 팝업된 보스를 등록해주세요.</span></div>`;rail.innerHTML="";rail.scrollLeft=0;requestAnimationFrame(updateHistoryNextButton);return;}
+    slot.innerHTML=currentBossPanelMarkup(cur);
     rail.innerHTML=history.length?history.map((b,i)=>historyBossCardMarkup(b,i+1)).join(""):
       Array.from({length:3},()=>`<div class="history-empty-slot">현재 소멸 초대형 없음</div>`).join("");
     rail.scrollLeft=0;
