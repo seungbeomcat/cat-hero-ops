@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.3.20</title>
+  <title>균열 · 은하 길드 운영현황 V0.4.0</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -3193,8 +3193,8 @@ button,input,select,textarea{font:inherit;}
 
 
 <style id="v0311-top-order-table-roster-final">
-/* V0.3.20 — latest live combat values updated, completed archives remain unchanged.
-   V0.3.20 — current 16-member roster/nickname data update; completed archives remain historical snapshots. */
+/* V0.4.0 — latest live combat values updated, completed archives remain unchanged.
+   V0.4.0 — current 16-member roster/nickname data update; completed archives remain historical snapshots. */
 
 /* All three checked top boxes use the same 44px outer height. */
 .topbar{
@@ -3311,7 +3311,7 @@ button,input,select,textarea{font:inherit;}
 </style>
 
 <style id="v0320-resource-heading-mobile">
-/* V0.3.20: keep resource heading and abbreviated Updated timestamp on one row. */
+/* V0.4.0: keep resource heading and abbreviated Updated timestamp on one row. */
 .members-card .member-head{
   display:flex!important;
   flex-wrap:nowrap!important;
@@ -3411,7 +3411,7 @@ button,input,select,textarea{font:inherit;}
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.3.20</b><br>
+        <b>Created by 돗돔 · V0.4.0</b><br>
         <span class="footer-build-date">2026.10.10</span>
       </div>
     </main>
@@ -3539,6 +3539,26 @@ button,input,select,textarea{font:inherit;}
 
   <div class="toast" id="toast"></div>
 
+<script id="dosalja-central-loader">
+(function(){
+  "use strict";
+  var source=(location.protocol==="file:" && location.pathname.includes("/dosalja/")) ? "shared/guild-core.js" : "/dosalja/shared/guild-core.js";
+  document.write('<script src="'+source+'?rev='+Date.now()+'"><\/script>');
+})();
+</script>
+<script id="dosalja-central-fallback-warning">
+if(!window.DosaljaShared){
+  console.warn("공통 격추 데이터 연결 실패: 내장 이전 데이터를 임시로 사용합니다.");
+  document.addEventListener("DOMContentLoaded",function(){
+    var el=document.createElement("div");
+    el.textContent="공통 격추정보 연결 실패 · 임시 저장값 사용 중";
+    el.setAttribute("role","status");
+    el.style.cssText="position:relative;z-index:30;max-width:580px;margin:5px auto;padding:5px 8px;border:1px solid #dba1a1;border-radius:7px;text-align:center;font-size:11px;color:#873343;background:#fff0f0;";
+    document.body.insertBefore(el,document.body.firstChild);
+  });
+}
+</script>
+
 <script>
 (() => {
   "use strict";
@@ -3548,8 +3568,8 @@ button,input,select,textarea{font:inherit;}
   // Existing calculator reference data is kept internally for future calculations/links, but not exposed as duplicate lookup UI.
   const INTERNAL_REFERENCE = Object.freeze({
     serverKill:6,
-    members:{
-      "돗돔":{base:180.9,z1:0,z2:5,z3:0,minScore:5000,field:{wolf:23,pirate:22,cat:22,food:22,galaxy:0}},
+    members:window.DosaljaShared ? Object.fromEntries(Object.entries(window.DosaljaShared.members).map(([name,m])=>[name,{...m,z1:m.z1r,z2:m.z2r,z3:m.z3r}])) : {
+      "돗돔":{base:182.9,z1:0,z2:5,z3:0,minScore:5000,field:{wolf:23,pirate:22,cat:22,food:22,galaxy:0}},
       "매콤갈비":{base:165.2,z1:5,z2:5,z3:0,minScore:0,field:{wolf:8,pirate:8,cat:8,food:8,galaxy:0}},
       "도살장":{base:138.5,z1:0,z2:5,z3:0,minScore:0,field:{wolf:23,pirate:23,cat:23,food:23,galaxy:0}},
       "잎새주":{base:107.9,z1:0,z2:0,z3:0,minScore:0,field:{wolf:23,pirate:6,cat:6,food:6,galaxy:0}},
@@ -3576,7 +3596,7 @@ button,input,select,textarea{font:inherit;}
       .map(([name])=>name)
   );
 
-  const LIVE_NAME_MIGRATIONS = Object.freeze({"사마엘":"도살장","혀녕":"차돌","XIGN":"채끝살","뱅수띠":"대창","데이다라":"애기다라","하니엘":"생갈비"});
+  const LIVE_NAME_MIGRATIONS = window.DosaljaShared?.formerNames || Object.freeze({"사마엘":"도살장","혀녕":"차돌","XIGN":"채끝살","뱅수띠":"대창","데이다라":"애기다라","하니엘":"생갈비"});
   const activeMemberName = name => LIVE_NAME_MIGRATIONS[name]||name;
   function liveParticipantEntry(b,name){
     if(!b||!b.participants)return null;
