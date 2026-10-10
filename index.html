@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="도살자 길드 운영" />
-  <title>균열 · 은하 길드 운영현황 V0.3.19</title>
+  <title>균열 · 은하 길드 운영현황 V0.3.20</title>
   <!-- KakaoTalk / social link preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="도살자 길드" />
@@ -3193,8 +3193,8 @@ button,input,select,textarea{font:inherit;}
 
 
 <style id="v0311-top-order-table-roster-final">
-/* V0.3.19 — latest live combat values updated, completed archives remain unchanged.
-   V0.3.19 — current 16-member roster/nickname data update; completed archives remain historical snapshots. */
+/* V0.3.20 — latest live combat values updated, completed archives remain unchanged.
+   V0.3.20 — current 16-member roster/nickname data update; completed archives remain historical snapshots. */
 
 /* All three checked top boxes use the same 44px outer height. */
 .topbar{
@@ -3309,6 +3309,36 @@ button,input,select,textarea{font:inherit;}
 .archive-guild-rank-row input:focus{border-color:#7354c7;box-shadow:0 0 0 2px rgba(115,84,199,.10)}
 .archive-guild-rank-save{width:100%;height:40px;margin-top:8px;border:0;border-radius:10px;background:#7354c7;color:#fff;font-family:inherit;font-size:12px;font-weight:950}
 </style>
+
+<style id="v0320-resource-heading-mobile">
+/* V0.3.20: keep resource heading and abbreviated Updated timestamp on one row. */
+.members-card .member-head{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  column-gap:6px!important;
+}
+.members-card .member-head .section-title{
+  min-width:0;
+  flex:1 1 auto;
+  white-space:nowrap!important;
+  overflow:visible;
+}
+.members-card .member-head .resource-updated{
+  flex:0 0 auto!important;
+  min-width:0;
+  padding-left:0!important;
+  gap:5px!important;
+  white-space:nowrap!important;
+}
+@media (max-width:390px){
+  .members-card .member-head .section-title{font-size:14px!important;letter-spacing:-.3px!important}
+  .members-card .member-head .resource-updated{gap:4px!important}
+  .members-card .member-head .resource-updated span{font-size:9px!important}
+  .members-card .member-head .resource-updated b{font-size:10.8px!important}
+}
+</style>
 </head>
 <body>
   <div id="shell">
@@ -3360,10 +3390,10 @@ button,input,select,textarea{font:inherit;}
 
       <section class="section-card members-card">
         <div class="section-head member-head">
-          <div class="section-title">현재 자원 및 초대형 참여현황</div>
+          <div class="section-title">(현) 자원 및 참여현황</div>
           <div class="resource-updated"><span>Updated</span><b id="updatedAt">-</b></div>
         </div>
-        <table class="member-table" aria-label="현재 자원 및 초대형 참여현황">
+        <table class="member-table" aria-label="(현) 자원 및 참여현황">
           <colgroup><col><col><col><col><col></colgroup>
           <thead><tr><th>길드원</th><th><span>초대형<br>참여현황</span></th><th>칼(기회)</th><th>잔여 시간</th><th><span class="current-boss-head">현재<br>초대형</span></th></tr></thead>
           <tbody id="memberRows"></tbody>
@@ -3381,7 +3411,7 @@ button,input,select,textarea{font:inherit;}
       </section>
 
       <div class="footer">
-        <b>Created by 돗돔 · V0.3.19</b><br>
+        <b>Created by 돗돔 · V0.3.20</b><br>
         <span class="footer-build-date">2026.10.10</span>
       </div>
     </main>
@@ -3597,7 +3627,7 @@ button,input,select,textarea{font:inherit;}
   };
   const fmtResourceUpdate = value => {
     const d=toDateSafe(value); if(!d) return "-";
-    return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}. ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+    return `${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}. ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   };
   const formatDateField = value => { const d=toDateSafe(value)||new Date(); return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}.`; };
   const formatTimeField = value => { const d=toDateSafe(value)||new Date(); return `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`; };
